@@ -1,0 +1,13 @@
+services:
+    web:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: main
+      ports:
+        - "8080:80"
+      volumes:
+        - ./src:/usr/local/apache2/htdocs
+        - ./logs:/var/log/apache2
+      environment:
+        - APACHE_LOG_DIR=/var/log/apache2

@@ -1,0 +1,12 @@
+@import "./vars.scss";
+
+body {
+    background: $primary;
+    background: radial-gradient(circle, $primaryL 0%, $primary 75%, $primaryD 100%);
+    display: flex;
+    header {
+        height: 100%;
+        height: 30px;
+        border: 1px solid black;
+    }
+}

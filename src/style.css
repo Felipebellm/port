@@ -1,0 +1,13 @@
+/* Color Theme Swatches in Hex */
+body {
+  background: #02735E;
+  background: radial-gradient(circle, #03A678 0%, #02735E 75%, #014040 100%);
+  display: flex;
+}
+body header {
+  height: 100%;
+  height: 30px;
+  border: 1px solid black;
+}
+
+/*# sourceMappingURL=style.css.map */
