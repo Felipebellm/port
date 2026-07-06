@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "title": "Felipe Bell Marques — Full Stack Developer",
+    "description": "Full Stack Developer specializing in PHP, Laravel, and WordPress — enterprise platforms, custom frameworks, multi-database integrations, and CI/CD pipelines."
+  },
+  "ui": {
+    "langToggleAria": "Change language"
+  },
+  "hero": {
+    "role": "Full Stack Developer",
+    "name": "Felipe Bell Marques",
+    "tagline": "I build enterprise web platforms with PHP, Laravel, and WordPress — from legacy migrations to custom frameworks with full CI/CD pipelines.",
+    "resumeCta": "View Résumé",
+    "resumeHref": "#",
+    "contactCta": "Get in touch"
+  },
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "talks": "Talks & Teaching",
+    "contact": "Contact"
+  },
+  "about": {
+    "heading": "About",
+    "paragraphs": [
+      "I'm a Full Stack Developer based in Mogi Mirim, São Paulo, Brazil, with over a decade of experience spanning mainframe systems to modern web platforms. My core expertise is PHP — from WordPress and Drupal to Laravel and object-oriented architecture — combined with JavaScript, TypeScript, jQuery, and Angular on the frontend, plus Docker, CI/CD, and multi-database integration (MySQL, Oracle, PostgreSQL).",
+      "My career started in an unusual place: developing mainframe systems with COBOL, JCL, CICS, and DB2 at IBM for clients like AT&T and Bank Safra. That foundation taught me how large-scale, mission-critical systems work. I later spent five years at Stefanini building portals, plugins, and custom solutions for international clients like American Airlines, GSK, Edenred, and Sesc.",
+      "To truly master object-oriented PHP, I built my own MVC framework from scratch — and today it powers a full back-office operations platform I designed and built for a Brazilian supermarket chain with 8+ stores, complete with a Docker development environment, GitHub Actions CI/CD, RBAC, and real-time integrations with Oracle RMS and Senior ERP. I'm fluent in English, intermediate in Spanish, and passionate about sharing knowledge: I've given company-wide lectures on Docker and WordPress, and taught weekly English classes to colleagues."
+    ]
+  },
+  "experience": {
+    "heading": "Experience",
+    "resumeLink": "View Full Résumé",
+    "resumeHref": "#",
+    "roles": [
+      {
+        "period": "2024 — Present",
+        "title": "Systems Analyst & Full-Stack Developer",
+        "company": "Rede Zeferino",
+        "location": "Itapira, SP",
+        "description": "Designed and built the company's back-office operations platform end to end — architecture, infrastructure, CI/CD, and features — centralizing retail workflows across 8+ supermarket stores. Built on my own hand-rolled PHP MVC framework with a multi-database layer connecting MySQL and four Oracle connection scopes (RMS and Senior ERP), a data-driven RBAC system, and automated deployments via GitHub Actions with a self-hosted Windows runner.",
+        "pills": ["PHP 8.2", "MySQL/MariaDB", "Oracle (OCI8/PDO)", "Docker", "GitHub Actions", "Bootstrap 5", "jQuery", "SCSS", "PowerShell"]
+      },
+      {
+        "period": "2018 — 2023",
+        "title": "Full Stack Developer",
+        "company": "Stefanini",
+        "location": "Jaguariúna, SP",
+        "description": "Developed PHP web applications, WordPress plugins/themes, and Drupal solutions for international clients including American Airlines, GSK, Edenred, Sesc, EDF, and Alvarez & Marsal. Migrated legacy PHP portals to Laravel. Worked in agile teams with JavaScript and jQuery.",
+        "pills": ["PHP", "WordPress", "Laravel", "Drupal", "JavaScript", "jQuery", "Agile"]
+      },
+      {
+        "period": "2016 — 2018",
+        "title": "Field Technician",
+        "company": "HP / CTMM – Itaú",
+        "location": "",
+        "description": "Managed Data Center infrastructure for one of Brazil's largest banks.",
+        "pills": ["Data Center", "Infrastructure", "Hardware"]
+      },
+      {
+        "period": "2014 — 2016",
+        "title": "Mainframe Systems Analyst & Developer",
+        "company": "IBM",
+        "location": "Hortolândia",
+        "description": "Developed and tested mission-critical systems for AT&T's billing system and Bank Safra's main system.",
+        "pills": ["COBOL", "JCL", "CICS", "DB2"]
+      },
+      {
+        "period": "2012 — 2014",
+        "title": "Computer Technician & Private Instructor",
+        "company": "Independent",
+        "location": "",
+        "description": "Computer maintenance, operating systems management, and teaching basic computing skills.",
+        "pills": ["Hardware", "Linux", "Windows", "Teaching"]
+      }
+    ]
+  },
+  "projects": {
+    "heading": "Projects",
+    "intro": "Live products you can open and explore, plus enterprise systems built inside companies where the code stays private — shown by architecture and detail instead.",
+    "liveLabel": "Live & Public",
+    "internalLabel": "Enterprise & Internal",
+    "internalIntro": "Built inside companies or as intranet systems — the live products stay private, so these are shown through architecture, sanitized detail, and code on request.",
+    "archiveLink": "View Full Project Archive",
+    "archiveHref": "#",
+    "archiveList": "Archive: Bank Safra · AT&T · GSK · Edenred · Sesc · EDF · Red Asset · AdvanSix · Alvarez & Marsal · ScalesMapApp",
+    "live": [
+      {
+        "variant": "featured",
+        "diagram": "rbac",
+        "barLabel": "★ Featured · Live in production",
+        "title": "Rede Zeferino — Corporate Site & Careers Platform",
+        "description": "A public corporate site that doubles as two operational tools: a store-scoped careers board where each store's HR staff manage only their own openings, and a supplier/customer contact channel that routes vendor inquiries straight to the right purchasing buyer. Built on a fully custom WordPress theme with no page-builder or form-plugin dependency.",
+        "bullets": [
+          "Three-tier custom RBAC across 22 HR accounts — store-scoped \"RH\", store-agnostic \"RH Admin\", and extended Administrator caps, enforced via map_meta_cap, pre_get_posts query scoping, and admin-menu pruning",
+          "Category-based vendor routing: submissions matched against a configurable category→buyer→email map, guarded by reCAPTCHA v2, a honeypot, and a submission-timing check",
+          "Dynamic jobs board on a purpose-built custom post type, matching applications by city + role to the right store's contact email at submit time",
+          "Four custom wp-admin dashboards built without any admin-page framework, with AJAX store editing and IBGE municipality data synced via a build-time fetch script",
+          "Automated per-posting SEO metadata generation into Yoast fields, with a one-time backfill migration for existing content",
+          "Site-wide maintenance kill switch — assigning one template to the front page instantly redirects all logged-out traffic, fully reversible, no plugin required"
+        ],
+        "badges": ["In production", "19 stores / 2 distribution centers", "22 managed HR accounts", "4 custom admin dashboards"],
+        "pills": ["WordPress (custom theme)", "PHP 8.2", "MySQL 8", "JavaScript/jQuery", "SCSS/Sass", "Bootstrap 5", "Custom Post Types", "WP AJAX", "Yoast SEO", "reCAPTCHA v2", "FluentSMTP", "Docker Compose"],
+        "link": { "label": "Visit redezeferino.com.br", "href": "https://redezeferino.com.br/" },
+        "note": "Platform engineering by me · UX/UI by Leonardo Gardinali"
+      },
+      {
+        "variant": "simple",
+        "title": "BPAgenda — Shared Expense & Productivity Platform",
+        "description": "A self-hosted suite that consolidates Splitwise-style shared-expense tracking, permission-gated collaborative kanban, a reminder-driven calendar, and focus-session tools into one installable app — in active daily use with full EN/PT-BR localization.",
+        "bullets": [
+          "Automated balance engine nets four aggregated sums (bidirectional debts + settlements) into a live per-friend balance on every read — nothing cached or denormalized, so totals stay correct after edits or deletions",
+          "Three-mode splitting (equal / full / custom) with multi-month installment generation inside atomic DB transactions and a validator that cross-checks friendship, payer/participant conflicts, and split-sum overflow before persisting",
+          "Hand-rolled 4-tier permission ladder (owner/full/read-write/read) gating every kanban mutation at the controller layer, on Laravel Sanctum SPA token auth",
+          "Collaborative lists with an append-only activity log that reconstructs every add/remove/check by diffing item arrays on each save",
+          "Self-hosted CI/CD — GitHub Actions deploys to a Docker/Nginx/MySQL VPS on every push to main; frontend ships as an installable PWA with a Workbox service worker for offline-aware API caching",
+          "Self-learning categorization: a 21-category keyword-matching engine backed by a per-user \"learned icon\" table that remembers corrections and tracks usage"
+        ],
+        "badges": ["In active use", "Bilingual (EN/PT-BR)", "5 feature modules", "Solo full-stack"],
+        "pills": ["Laravel 11", "PHP 8.2", "Laravel Sanctum", "MySQL 8", "React 18", "Vite", "React Router", "Axios", "Docker", "Nginx", "GitHub Actions", "PWA (Workbox)"],
+        "link": { "label": "Open live demo", "href": "https://bpagenda.bell.vps-kinghost.net" }
+      },
+      {
+        "variant": "simple",
+        "title": "BHelper — Band Management Platform",
+        "description": "A multi-tenant Laravel API + React SPA giving each band its own isolated workspace: Kanban task boards, collaborative setlists, a song catalog auto-enriched via external music APIs, and a public band website — all under one login with invite-code onboarding.",
+        "bullets": [
+          "Header-verified multi-tenancy — every endpoint resolves the active band from a request header, checks it against verified membership server-side, and scopes every query; cross-band access returns 403 rather than trusting a client-supplied ID",
+          "OAuth (PKCE) with cross-device handoff — connect a streaming account from your phone via QR code while the desktop session polls for completion, then export a setlist directly into a new playlist",
+          "Automated metadata enrichment — new songs hydrated with BPM, key, and lyrics by orchestrating two external music APIs, with response caching to avoid redundant calls",
+          "Real-time in-browser tuner using Web Audio sampling, autocorrelation, and parabolic interpolation for sub-cent accuracy, plus a fretboard/scale visualizer covering 30+ scale types",
+          "CI/CD with deploy verification — GitHub Actions deploys on every push to main, verifying the deployed commit SHA and running a live HTTP health check before marking success",
+          "Unit-tested music-theory core — pitch detection and scale/transposition isolated into pure modules with ~390 lines of Vitest coverage, decoupled from the Web Audio/DOM layer"
+        ],
+        "badges": ["In production", "Solo full-stack", "9 feature areas", "2 external API integrations"],
+        "pills": ["Laravel 12", "PHP 8.2", "React 18", "Vite", "Laravel Sanctum", "MySQL", "Redis", "Docker", "GitHub Actions", "OAuth2 + PKCE", "Web Audio API", "Vitest"],
+        "link": { "label": "Visit bhelper.bell.vps-kinghost.net", "href": "https://bhelper.bell.vps-kinghost.net/" }
+      }
+    ],
+    "internal": [
+      {
+        "variant": "internalFlagship",
+        "diagram": "arch",
+        "barLabel": "Internal platform · no public access",
+        "title": "Rede Zeferino — Back-Office Operations Platform",
+        "description": "Internal web platform for a Brazilian supermarket chain (8+ stores), centralizing retail operations: production reports, label generation, data migrations, store monitoring, and Oracle RMS/Senior ERP integrations. Built solo, end to end, on my own hand-rolled PHP MVC framework.",
+        "bullets": [
+          "Multi-database abstraction layer: one app talking to local MySQL, centralized Arius MySQL, Oracle RMS (read/write), and Oracle Senior ERP",
+          "Data-driven RBAC: permission classes with per-user overrides, a centralized access gate in the routing layer, and a dynamic sidebar rendered from a functionality catalog",
+          "Weight management workflow (Balança CP): real-time weight recording with immediate Oracle MERGE persistence, sequential numbering, verification, and romaneio report generation — handling 100+ daily receiving operations",
+          "Real-time store monitoring: network status of scales across 8+ stores via SSH with green/yellow/red indicators",
+          "CI/CD: GitHub Actions with a self-hosted Windows runner and PowerShell-automated zero-downtime deployments",
+          "Docker dev environment with Oracle Instant Client, MariaDB, Apache, and one-command startup",
+          "Dark/light theme system (CSS custom properties + Bootstrap 5.3 data-bs-theme, localStorage persistence, OS preference detection)"
+        ],
+        "badges": ["8+ stores", "5 database connections", "100+ daily operations", "Solo full-stack + infra"],
+        "pills": ["PHP 8.2", "MVC", "MySQL", "Oracle", "OCI8/PDO", "Docker", "GitHub Actions", "RBAC", "Bootstrap 5", "jQuery", "SCSS", "PowerShell", "SFTP"],
+        "link": { "label": "GitHub showcase", "href": "https://github.com/Felipebellm" },
+        "note": "Intranet system — no live demo"
+      },
+      {
+        "variant": "compact",
+        "title": "Custom PHP MVC Framework",
+        "inlineBadge": "Built from scratch · In production",
+        "description": "Object-oriented PHP MVC framework built from scratch to master OOP best practices: centralized routing, autoloading, multi-database abstraction, Ajax support, and a Dockerized environment with automated port detection. Powers the Zeferino platform in production.",
+        "pills": ["PHP", "OOP", "MVC", "Docker", "Docker Compose", "Node.js", "Sass"],
+        "link": { "href": "https://github.com/Felipebellm" }
+      },
+      {
+        "variant": "compact",
+        "title": "American Airlines Internal Portal",
+        "inlineBadge": "Enterprise client",
+        "description": "Built a complete internal portal from a clean WordPress installation connected to SQL Server. Developed all plugins and the custom theme, including a flexible page builder, admin dashboard for user group control, slides, polls, and menus.",
+        "pills": ["WordPress", "PHP", "AngularJS", "SQL Server"]
+      },
+      {
+        "variant": "compact",
+        "title": "SourceLink Legacy Migration",
+        "inlineBadge": "Legacy → Laravel",
+        "description": "Migrated a legacy procedural PHP portal to Laravel MVC, restructuring the codebase with object-oriented principles.",
+        "pills": ["PHP", "Laravel", "MVC", "OOP"]
+      }
+    ]
+  },
+  "talks": {
+    "heading": "Talks & Teaching",
+    "items": [
+      { "kind": "Lecture", "title": "Docker & Docker Compose Lecture", "org": "Stefanini", "description": "Company-wide presentation for developers and testers on building automated environments with Docker." },
+      { "kind": "Lecture", "title": "WordPress Development Lecture", "org": "Stefanini", "description": "Presentation on why WordPress remains the largest CMS and how to develop plugins and themes with PHP." },
+      { "kind": "Teaching", "title": "English Teacher", "org": "Stefanini", "description": "Weekly one-hour sessions helping colleagues improve their English." },
+      { "kind": "Teaching", "title": "Computing Instructor", "org": "Independent", "description": "Taught basic computing skills privately." }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "heading": "Have a project in mind?",
+    "line": "I'm open to challenging full-stack opportunities — let's talk.",
+    "cta": "Say hello",
+    "email": "felipe.bell@hotmail.com",
+    "location": "Mogi Mirim, São Paulo, Brazil · +55 19 99597-8967"
+  },
+  "social": {
+    "github": "https://github.com/Felipebellm",
+    "linkedin": "https://www.linkedin.com/in/felipe-bell-marques",
+    "email": "felipe.bell@hotmail.com"
+  },
+  "footer": {
+    "credit": "Designed & built by Felipe Bell Marques."
+  }
+}

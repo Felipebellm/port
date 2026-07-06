@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "title": "Felipe Bell Marques — Desenvolvedor Full Stack",
+    "description": "Desenvolvedor Full Stack especializado em PHP, Laravel e WordPress — plataformas corporativas, frameworks sob medida, integrações multi-banco e pipelines de CI/CD."
+  },
+  "ui": {
+    "langToggleAria": "Mudar idioma"
+  },
+  "hero": {
+    "role": "Desenvolvedor Full Stack",
+    "name": "Felipe Bell Marques",
+    "tagline": "Construo plataformas web corporativas com PHP, Laravel e WordPress — de migrações de sistemas legados a frameworks sob medida com pipelines completos de CI/CD.",
+    "resumeCta": "Ver Currículo",
+    "resumeHref": "#",
+    "contactCta": "Entre em contato"
+  },
+  "nav": {
+    "about": "Sobre",
+    "experience": "Experiência",
+    "projects": "Projetos",
+    "talks": "Palestras & Ensino",
+    "contact": "Contato"
+  },
+  "about": {
+    "heading": "Sobre",
+    "paragraphs": [
+      "Sou Desenvolvedor Full Stack, morando em Mogi Mirim, São Paulo, Brasil, com mais de uma década de experiência que vai de sistemas mainframe a plataformas web modernas. Minha principal especialidade é PHP — de WordPress e Drupal a Laravel e arquitetura orientada a objetos — combinada com JavaScript, TypeScript, jQuery e Angular no frontend, além de Docker, CI/CD e integração multi-banco (MySQL, Oracle, PostgreSQL).",
+      "Minha carreira começou em um lugar incomum: desenvolvendo sistemas mainframe com COBOL, JCL, CICS e DB2 na IBM para clientes como AT&T e Banco Safra. Essa base me ensinou como funcionam sistemas críticos de larga escala. Depois passei cinco anos na Stefanini construindo portais, plugins e soluções sob medida para clientes internacionais como American Airlines, GSK, Edenred e Sesc.",
+      "Para dominar de verdade o PHP orientado a objetos, criei meu próprio framework MVC do zero — e hoje ele sustenta uma plataforma completa de operações de back-office que projetei e desenvolvi para uma rede de supermercados brasileira com mais de 8 lojas, com ambiente de desenvolvimento em Docker, CI/CD com GitHub Actions, RBAC e integrações em tempo real com Oracle RMS e Senior ERP. Sou fluente em inglês, tenho espanhol intermediário e gosto de compartilhar conhecimento: já dei palestras para toda a empresa sobre Docker e WordPress e ensinei aulas semanais de inglês para colegas."
+    ]
+  },
+  "experience": {
+    "heading": "Experiência",
+    "resumeLink": "Ver currículo completo",
+    "resumeHref": "#",
+    "roles": [
+      {
+        "period": "2024 — Atual",
+        "title": "Analista de Sistemas & Desenvolvedor Full-Stack",
+        "company": "Rede Zeferino",
+        "location": "Itapira, SP",
+        "description": "Projetei e construí a plataforma de operações de back-office da empresa de ponta a ponta — arquitetura, infraestrutura, CI/CD e funcionalidades — centralizando os fluxos de varejo em mais de 8 lojas de supermercado. Construída sobre meu próprio framework PHP MVC feito à mão, com uma camada multi-banco conectando MySQL e quatro escopos de conexão Oracle (RMS e Senior ERP), um sistema de RBAC orientado a dados e deploys automatizados via GitHub Actions com um runner Windows auto-hospedado.",
+        "pills": ["PHP 8.2", "MySQL/MariaDB", "Oracle (OCI8/PDO)", "Docker", "GitHub Actions", "Bootstrap 5", "jQuery", "SCSS", "PowerShell"]
+      },
+      {
+        "period": "2018 — 2023",
+        "title": "Desenvolvedor Full Stack",
+        "company": "Stefanini",
+        "location": "Jaguariúna, SP",
+        "description": "Desenvolvi aplicações web em PHP, plugins/temas WordPress e soluções Drupal para clientes internacionais como American Airlines, GSK, Edenred, Sesc, EDF e Alvarez & Marsal. Migrei portais PHP legados para Laravel. Atuei em times ágeis com JavaScript e jQuery.",
+        "pills": ["PHP", "WordPress", "Laravel", "Drupal", "JavaScript", "jQuery", "Ágil"]
+      },
+      {
+        "period": "2016 — 2018",
+        "title": "Técnico de Campo",
+        "company": "HP / CTMM – Itaú",
+        "location": "",
+        "description": "Gerenciei a infraestrutura de Data Center de um dos maiores bancos do Brasil.",
+        "pills": ["Data Center", "Infraestrutura", "Hardware"]
+      },
+      {
+        "period": "2014 — 2016",
+        "title": "Analista e Desenvolvedor de Sistemas Mainframe",
+        "company": "IBM",
+        "location": "Hortolândia",
+        "description": "Desenvolvi e testei sistemas críticos para o sistema de faturamento da AT&T e o sistema principal do Banco Safra.",
+        "pills": ["COBOL", "JCL", "CICS", "DB2"]
+      },
+      {
+        "period": "2012 — 2014",
+        "title": "Técnico de Informática & Instrutor Particular",
+        "company": "Autônomo",
+        "location": "",
+        "description": "Manutenção de computadores, gerenciamento de sistemas operacionais e ensino de informática básica.",
+        "pills": ["Hardware", "Linux", "Windows", "Ensino"]
+      }
+    ]
+  },
+  "projects": {
+    "heading": "Projetos",
+    "intro": "Produtos online que você pode abrir e explorar, além de sistemas corporativos construídos dentro de empresas onde o código permanece privado — apresentados por arquitetura e detalhes.",
+    "liveLabel": "Online & Público",
+    "internalLabel": "Corporativo & Interno",
+    "internalIntro": "Construídos dentro de empresas ou como sistemas de intranet — os produtos em produção permanecem privados, então são apresentados por arquitetura, detalhes higienizados e código sob solicitação.",
+    "archiveLink": "Ver arquivo completo de projetos",
+    "archiveHref": "#",
+    "archiveList": "Arquivo: Banco Safra · AT&T · GSK · Edenred · Sesc · EDF · Red Asset · AdvanSix · Alvarez & Marsal · ScalesMapApp",
+    "live": [
+      {
+        "variant": "featured",
+        "diagram": "rbac",
+        "barLabel": "★ Destaque · Em produção",
+        "title": "Rede Zeferino — Site Corporativo & Plataforma de Carreiras",
+        "description": "Um site corporativo público que também funciona como duas ferramentas operacionais: um mural de vagas com escopo por loja, onde a equipe de RH de cada loja gerencia apenas as próprias vagas, e um canal de contato de fornecedores/clientes que direciona as solicitações direto ao comprador correto. Construído sobre um tema WordPress totalmente sob medida, sem dependência de page-builder ou plugin de formulário.",
+        "bullets": [
+          "RBAC de três níveis sob medida para 22 contas de RH — perfil \"RH\" com escopo por loja, perfil \"RH Admin\" sem escopo de loja e capacidades estendidas de Administrador, aplicados via map_meta_cap, escopo de queries com pre_get_posts e poda do menu admin",
+          "Roteamento de fornecedores por categoria: submissões cruzadas com um mapa configurável categoria→comprador→e-mail, protegidas por reCAPTCHA v2, honeypot e verificação de tempo de envio",
+          "Mural de vagas dinâmico sobre um custom post type dedicado, associando candidaturas por cidade + cargo ao e-mail de contato da loja certa no momento do envio",
+          "Quatro painéis wp-admin sob medida, construídos sem nenhum framework de página administrativa, com edição de lojas via AJAX e dados de municípios do IBGE sincronizados por um script de fetch em tempo de build",
+          "Geração automática de metadados de SEO por vaga nos campos do Yoast, com uma migração única de backfill para o conteúdo existente",
+          "Chave geral de manutenção — atribuir um template à página inicial redireciona instantaneamente todo o tráfego deslogado, totalmente reversível, sem plugin"
+        ],
+        "badges": ["Em produção", "19 lojas / 2 centros de distribuição", "22 contas de RH gerenciadas", "4 painéis administrativos sob medida"],
+        "pills": ["WordPress (tema sob medida)", "PHP 8.2", "MySQL 8", "JavaScript/jQuery", "SCSS/Sass", "Bootstrap 5", "Custom Post Types", "WP AJAX", "Yoast SEO", "reCAPTCHA v2", "FluentSMTP", "Docker Compose"],
+        "link": { "label": "Acessar redezeferino.com.br", "href": "https://redezeferino.com.br/" },
+        "note": "Engenharia da plataforma por mim · UX/UI por Leonardo Gardinali"
+      },
+      {
+        "variant": "simple",
+        "title": "BPAgenda — Plataforma de Despesas Compartilhadas & Produtividade",
+        "description": "Uma suíte auto-hospedada que reúne controle de despesas compartilhadas no estilo Splitwise, kanban colaborativo com permissões, um calendário orientado a lembretes e ferramentas de foco em um único app instalável — em uso diário, com localização completa em EN/PT-BR.",
+        "bullets": [
+          "Motor de saldo automático que soma quatro agregações (dívidas bidirecionais + acertos) em um saldo por amigo calculado a cada leitura — nada em cache ou desnormalizado, então os totais permanecem corretos após edições ou exclusões",
+          "Divisão em três modos (igual / valor total / personalizada) com geração de parcelas de múltiplos meses dentro de transações atômicas e um validador que checa amizade, conflitos entre pagador/participantes e estouro da soma da divisão antes de persistir",
+          "Escada de permissões de 4 níveis feita à mão (owner/full/read-write/read) protegendo toda mutação do kanban na camada de controller, sobre autenticação por token SPA do Laravel Sanctum",
+          "Listas colaborativas com log de atividades append-only que reconstrói cada adição/remoção/marcação comparando os arrays de itens a cada salvamento",
+          "CI/CD auto-hospedado — GitHub Actions faz deploy em um VPS Docker/Nginx/MySQL a cada push na main; o frontend é entregue como PWA instalável, com service worker Workbox para cache de API com suporte offline",
+          "Categorização auto-aprendiz: um motor de correspondência por palavras-chave com 21 categorias, apoiado por uma tabela de \"ícone aprendido\" por usuário que lembra correções e registra o uso"
+        ],
+        "badges": ["Em uso ativo", "Bilíngue (EN/PT-BR)", "5 módulos", "Full-stack solo"],
+        "pills": ["Laravel 11", "PHP 8.2", "Laravel Sanctum", "MySQL 8", "React 18", "Vite", "React Router", "Axios", "Docker", "Nginx", "GitHub Actions", "PWA (Workbox)"],
+        "link": { "label": "Abrir demo online", "href": "https://bpagenda.bell.vps-kinghost.net" }
+      },
+      {
+        "variant": "simple",
+        "title": "BHelper — Plataforma de Gestão de Bandas",
+        "description": "Uma API Laravel + SPA React multi-tenant que dá a cada banda seu próprio espaço isolado: quadros Kanban de tarefas, setlists colaborativas, um catálogo de músicas enriquecido automaticamente via APIs externas de música e um site público da banda — tudo em um único login, com onboarding por código de convite.",
+        "bullets": [
+          "Multi-tenancy verificado por header — cada endpoint resolve a banda ativa a partir de um header da requisição, valida contra a associação verificada no servidor e escopa toda query; acesso entre bandas retorna 403 em vez de confiar em um ID enviado pelo cliente",
+          "OAuth (PKCE) com transferência entre dispositivos — conecte uma conta de streaming pelo celular via QR code enquanto a sessão do desktop faz polling até concluir, e depois exporte uma setlist direto para uma nova playlist",
+          "Enriquecimento automático de metadados — novas músicas recebem BPM, tom e letra orquestrando duas APIs externas de música, com cache de respostas para evitar chamadas redundantes",
+          "Afinador em tempo real no navegador usando amostragem via Web Audio, autocorrelação e interpolação parabólica com precisão de sub-cent, além de um visualizador de braço/escalas cobrindo mais de 30 tipos de escala",
+          "CI/CD com verificação de deploy — GitHub Actions faz deploy a cada push na main, verificando o SHA do commit implantado e rodando um health check HTTP ao vivo antes de considerar o deploy bem-sucedido",
+          "Núcleo de teoria musical testado — detecção de pitch e escala/transposição isolados em módulos puros com ~390 linhas de cobertura Vitest, desacoplados da camada Web Audio/DOM"
+        ],
+        "badges": ["Em produção", "Full-stack solo", "9 áreas de funcionalidade", "2 integrações de API externas"],
+        "pills": ["Laravel 12", "PHP 8.2", "React 18", "Vite", "Laravel Sanctum", "MySQL", "Redis", "Docker", "GitHub Actions", "OAuth2 + PKCE", "Web Audio API", "Vitest"],
+        "link": { "label": "Acessar bhelper.bell.vps-kinghost.net", "href": "https://bhelper.bell.vps-kinghost.net/" }
+      }
+    ],
+    "internal": [
+      {
+        "variant": "internalFlagship",
+        "diagram": "arch",
+        "barLabel": "Plataforma interna · sem acesso público",
+        "title": "Rede Zeferino — Plataforma de Operações de Back-Office",
+        "description": "Plataforma web interna para uma rede de supermercados brasileira (mais de 8 lojas), centralizando as operações de varejo: relatórios de produção, geração de etiquetas, migrações de dados, monitoramento de lojas e integrações com Oracle RMS/Senior ERP. Construída sozinho, de ponta a ponta, sobre meu próprio framework PHP MVC feito à mão.",
+        "bullets": [
+          "Camada de abstração multi-banco: um app conversando com MySQL local, MySQL centralizado Arius, Oracle RMS (leitura/escrita) e Oracle Senior ERP",
+          "RBAC orientado a dados: classes de permissão com overrides por usuário, um portão de acesso centralizado na camada de roteamento e uma sidebar dinâmica renderizada a partir de um catálogo de funcionalidades",
+          "Fluxo de gestão de pesagem (Balança CP): registro de peso em tempo real com persistência imediata via MERGE no Oracle, numeração sequencial, verificação e geração de romaneio — atendendo 100+ operações de recebimento por dia",
+          "Monitoramento de lojas em tempo real: status de rede das balanças em mais de 8 lojas via SSH com indicadores verde/amarelo/vermelho",
+          "CI/CD: GitHub Actions com runner Windows auto-hospedado e deploys sem downtime automatizados por PowerShell",
+          "Ambiente de desenvolvimento Docker com Oracle Instant Client, MariaDB, Apache e inicialização em um comando",
+          "Sistema de tema claro/escuro (CSS custom properties + data-bs-theme do Bootstrap 5.3, persistência via localStorage, detecção da preferência do SO)"
+        ],
+        "badges": ["8+ lojas", "5 conexões de banco", "100+ operações diárias", "Full-stack solo + infra"],
+        "pills": ["PHP 8.2", "MVC", "MySQL", "Oracle", "OCI8/PDO", "Docker", "GitHub Actions", "RBAC", "Bootstrap 5", "jQuery", "SCSS", "PowerShell", "SFTP"],
+        "link": { "label": "Repositório no GitHub", "href": "https://github.com/Felipebellm" },
+        "note": "Sistema de intranet — sem demo online"
+      },
+      {
+        "variant": "compact",
+        "title": "Framework PHP MVC Próprio",
+        "inlineBadge": "Feito do zero · Em produção",
+        "description": "Framework PHP MVC orientado a objetos, construído do zero para dominar boas práticas de OOP: roteamento centralizado, autoloading, abstração multi-banco, suporte a Ajax e um ambiente Dockerizado com detecção automática de portas. Sustenta a plataforma Zeferino em produção.",
+        "pills": ["PHP", "OOP", "MVC", "Docker", "Docker Compose", "Node.js", "Sass"],
+        "link": { "href": "https://github.com/Felipebellm" }
+      },
+      {
+        "variant": "compact",
+        "title": "Portal Interno da American Airlines",
+        "inlineBadge": "Cliente corporativo",
+        "description": "Construí um portal interno completo a partir de uma instalação limpa do WordPress conectada ao SQL Server. Desenvolvi todos os plugins e o tema sob medida, incluindo um page builder flexível, painel administrativo para controle de grupos de usuários, slides, enquetes e menus.",
+        "pills": ["WordPress", "PHP", "AngularJS", "SQL Server"]
+      },
+      {
+        "variant": "compact",
+        "title": "Migração de Legado SourceLink",
+        "inlineBadge": "Legado → Laravel",
+        "description": "Migrei um portal PHP procedural legado para Laravel MVC, reestruturando a base de código com princípios de orientação a objetos.",
+        "pills": ["PHP", "Laravel", "MVC", "OOP"]
+      }
+    ]
+  },
+  "talks": {
+    "heading": "Palestras & Ensino",
+    "items": [
+      { "kind": "Palestra", "title": "Palestra sobre Docker & Docker Compose", "org": "Stefanini", "description": "Apresentação para toda a empresa, voltada a desenvolvedores e testers, sobre a criação de ambientes automatizados com Docker." },
+      { "kind": "Palestra", "title": "Palestra de Desenvolvimento WordPress", "org": "Stefanini", "description": "Apresentação sobre por que o WordPress continua sendo o maior CMS e como desenvolver plugins e temas com PHP." },
+      { "kind": "Ensino", "title": "Professor de Inglês", "org": "Stefanini", "description": "Sessões semanais de uma hora ajudando colegas a melhorar o inglês." },
+      { "kind": "Ensino", "title": "Instrutor de Informática", "org": "Autônomo", "description": "Ensino de informática básica de forma particular." }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "heading": "Tem um projeto em mente?",
+    "line": "Estou aberto a oportunidades desafiadoras de full-stack — vamos conversar.",
+    "cta": "Diga olá",
+    "email": "felipe.bell@hotmail.com",
+    "location": "Mogi Mirim, São Paulo, Brasil · +55 19 99597-8967"
+  },
+  "social": {
+    "github": "https://github.com/Felipebellm",
+    "linkedin": "https://www.linkedin.com/in/felipe-bell-marques",
+    "email": "felipe.bell@hotmail.com"
+  },
+  "footer": {
+    "credit": "Projetado & desenvolvido por Felipe Bell Marques."
+  }
+}
