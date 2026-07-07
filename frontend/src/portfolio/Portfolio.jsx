@@ -21,6 +21,7 @@ body{margin:0;background:#000000;overflow-x:hidden;}
 .fbm-left::-webkit-scrollbar{display:none;}
 .fbm-right{width:56%;padding:96px 0 96px;}
 .fbm-mobilehead{display:none;}
+.fbm-nav{width:240px;flex-shrink:0;}
 .fbm-navline{width:26px;height:2px;background:#560072;flex-shrink:0;transition:width .3s ease,background .3s ease,box-shadow .3s ease;}
 .fbm-navtext{font-family:'Space Grotesk';font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:#B8A8C8;transition:color .3s ease,letter-spacing .3s ease,font-weight .3s ease;}
 .fbm-navlink:hover .fbm-navtext{color:#F5F0F7;letter-spacing:.22em;font-weight:700;}
