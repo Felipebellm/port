@@ -31,7 +31,7 @@ body{margin:0;background:#000000;overflow-x:hidden;}
 .fbm-navlink.active .fbm-navline{width:52px;background:linear-gradient(90deg,#2A0048,#A90072,#D50048);}
 .fbm-explist:hover .fbm-card{opacity:.5;}
 .fbm-explist .fbm-card:hover{opacity:1;}
-.fbm-card{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease,background .3s ease,opacity .3s ease;}
+.fbm-card{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,background .15s ease,opacity .15s ease;}
 .fbm-card:hover{transform:translateY(-4px);border-color:rgba(169,0,114,.55)!important;box-shadow:0 16px 48px rgba(169,0,114,.18);background:rgba(42,0,72,.32)!important;}
 .fbm-pill{transition:background .25s ease,color .25s ease,border-color .25s ease;}
 .fbm-pill:hover{background:#800080;color:#F5F0F7;border-color:#800080;}

@@ -1,0 +1,53 @@
+name: Deploy to __ENVIRONMENT__
+
+on:
+  push:
+    branches: [__BRANCH__]
+
+env:
+  IMAGE_NAME: ghcr.io/__GITHUB_OWNER__/__PROJECT_NAME__
+  CONTAINER_NAME: __PROJECT_NAME__-__ENVIRONMENT__
+  CONTAINER_PORT: __CONTAINER_PORT__
+  HOST_PORT: __HOST_PORT__
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:__ENVIRONMENT__-${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:__ENVIRONMENT__-latest
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull ${{ env.IMAGE_NAME }}:__ENVIRONMENT__-latest
+            docker stop ${{ env.CONTAINER_NAME }} || true
+            docker rm ${{ env.CONTAINER_NAME }} || true
+            docker run -d \
+              --name ${{ env.CONTAINER_NAME }} \
+              --restart unless-stopped \
+              -p 127.0.0.1:${{ env.HOST_PORT }}:${{ env.CONTAINER_PORT }} \
+              ${{ env.IMAGE_NAME }}:__ENVIRONMENT__-latest
+            docker image prune -f
