@@ -1,7 +1,16 @@
 # __PROJECT_NAME__ - __ENVIRONMENT__
+# Reverse proxy to a backend container. If the project also has a static
+# frontend, that's normally served directly via nginx `root` (see
+# nginx-static-site.conf.template) rather than routed through this proxy -
+# only the backend needs a container/port here.
 server {
     listen 80;
     server_name __DOMAIN__;
+
+    # If this VPS has shared snippets from other projects (security headers,
+    # ACME-challenge handling), reuse them here instead of duplicating:
+    # include snippets/acme-challenge.conf;
+    # include snippets/security-headers.conf;
 
     location / {
         proxy_pass http://127.0.0.1:__HOST_PORT__;

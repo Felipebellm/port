@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_DIR="__APP_DIR__"
+cd "$APP_DIR"
+
+echo "==> [1/3] Syncing to latest __BRANCH__ (discarding any local drift)..."
+git fetch origin __BRANCH__
+git reset --hard origin/__BRANCH__
+git clean -fd
+
+echo "==> [2/3] Rebuilding and restarting containers..."
+docker compose -f __COMPOSE_FILE__ up -d --build --remove-orphans
+
+echo "==> [3/3] Waiting for __HEALTHCHECK_CONTAINER__ to be healthy..."
+for i in $(seq 1 15); do
+  if docker exec __HEALTHCHECK_CONTAINER__ true 2>/dev/null; then
+    break
+  fi
+  echo "    Waiting... ($i/15)"
+  sleep 2
+done
+
+# Add any project-specific post-deploy commands here (migrations, cache
+# clears, etc.) - these vary per project, don't assume a stack. See
+# an existing project's deploy script on this VPS for a worked example
+# (e.g. `php artisan migrate --force`, `php artisan config:cache`).
