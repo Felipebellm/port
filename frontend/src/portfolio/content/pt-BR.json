@@ -89,7 +89,10 @@
       {
         "variant": "featured",
         "diagram": "rbac",
-        "image": { "src": "/images/projects/Rede_zeferino.png", "alt": "Rede Zeferino corporate homepage with featured product banner and company history timeline" },
+        "images": [
+          { "src": "/images/projects/Rede_zeferino.png", "alt": "Rede Zeferino corporate homepage with featured product banner and company history timeline" },
+          { "src": "/images/projects/Rede_zeferino_Vagas.png", "alt": "Rede Zeferino careers page listing open store positions" }
+        ],
         "barLabel": "★ Destaque · Em produção",
         "title": "Rede Zeferino — Site Corporativo & Plataforma de Carreiras",
         "description": "Um site corporativo público que também funciona como duas ferramentas operacionais: um mural de vagas com escopo por loja, onde a equipe de RH de cada loja gerencia apenas as próprias vagas, e um canal de contato de fornecedores/clientes que direciona as solicitações direto ao comprador correto. Construído sobre um tema WordPress totalmente sob medida, sem dependência de page-builder ou plugin de formulário.",
@@ -108,7 +111,13 @@
       },
       {
         "variant": "simple",
-        "image": { "src": "/images/projects/BPAgenda.png", "alt": "BPAgenda dashboard showing feature modules and monthly expense summary" },
+        "images": [
+          { "src": "/images/projects/BPAgenda.png", "alt": "BPAgenda dashboard showing feature modules and monthly expense summary" },
+          { "src": "/images/projects/BPAgenda_Kanban.png", "alt": "BPAgenda Kanban board with task columns and permissions" },
+          { "src": "/images/projects/BPAgenda_pomodoro.png", "alt": "BPAgenda Super Pomodoro focus timer with presets and routines" },
+          { "src": "/images/projects/BPAgenda_praticSession.png", "alt": "BPAgenda practice session tracker for study and exercise routines" },
+          { "src": "/images/projects/BPAgenda_despesas.png", "alt": "BPAgenda shared expense list with balances and settlements" }
+        ],
         "title": "BPAgenda — Plataforma de Despesas Compartilhadas & Produtividade",
         "description": "Uma suíte auto-hospedada que reúne controle de despesas compartilhadas no estilo Splitwise, kanban colaborativo com permissões, um calendário orientado a lembretes e ferramentas de foco em um único app instalável — em uso diário, com localização completa em EN/PT-BR.",
         "bullets": [
@@ -125,7 +134,12 @@
       },
       {
         "variant": "simple",
-        "image": { "src": "/images/projects/BHelper_mainPage.png", "alt": "BHelper dashboard listing the user's bands" },
+        "images": [
+          { "src": "/images/projects/BHelper_mainPage.png", "alt": "BHelper dashboard listing the user's bands" },
+          { "src": "/images/projects/BHelper_Escalas.png", "alt": "BHelper fretboard scale visualizer with harmonic field breakdown" },
+          { "src": "/images/projects/BHelper_clicleof5s.png", "alt": "BHelper circle of fifths tool with chord progression suggestions" },
+          { "src": "/images/projects/BHelper_afinador.png", "alt": "BHelper real-time instrument tuner" }
+        ],
         "title": "BHelper — Plataforma de Gestão de Bandas",
         "description": "Uma API Laravel + SPA React multi-tenant que dá a cada banda seu próprio espaço isolado: quadros Kanban de tarefas, setlists colaborativas, um catálogo de músicas enriquecido automaticamente via APIs externas de música e um site público da banda — tudo em um único login, com onboarding por código de convite.",
         "bullets": [
@@ -145,7 +159,9 @@
       {
         "variant": "internalFlagship",
         "diagram": "arch",
-        "image": { "src": "/images/projects/Zeferino_interno.png", "alt": "Rede Zeferino internal back-office system quick-access dashboard" },
+        "images": [
+          { "src": "/images/projects/Zeferino_interno.png", "alt": "Rede Zeferino internal back-office system quick-access dashboard" }
+        ],
         "barLabel": "Plataforma interna · sem acesso público",
         "title": "Rede Zeferino — Plataforma de Operações de Back-Office",
         "description": "Plataforma web interna para uma rede de supermercados brasileira (mais de 8 lojas), centralizando as operações de varejo: relatórios de produção, geração de etiquetas, migrações de dados, monitoramento de lojas e integrações com Oracle RMS/Senior ERP. Construída sozinho, de ponta a ponta, sobre meu próprio framework PHP MVC feito à mão.",

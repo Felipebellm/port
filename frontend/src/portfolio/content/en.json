@@ -89,7 +89,10 @@
       {
         "variant": "featured",
         "diagram": "rbac",
-        "image": { "src": "/images/projects/Rede_zeferino.png", "alt": "Rede Zeferino corporate homepage with featured product banner and company history timeline" },
+        "images": [
+          { "src": "/images/projects/Rede_zeferino.png", "alt": "Rede Zeferino corporate homepage with featured product banner and company history timeline" },
+          { "src": "/images/projects/Rede_zeferino_Vagas.png", "alt": "Rede Zeferino careers page listing open store positions" }
+        ],
         "barLabel": "★ Featured · Live in production",
         "title": "Rede Zeferino — Corporate Site & Careers Platform",
         "description": "A public corporate site that doubles as two operational tools: a store-scoped careers board where each store's HR staff manage only their own openings, and a supplier/customer contact channel that routes vendor inquiries straight to the right purchasing buyer. Built on a fully custom WordPress theme with no page-builder or form-plugin dependency.",
@@ -108,7 +111,13 @@
       },
       {
         "variant": "simple",
-        "image": { "src": "/images/projects/BPAgenda.png", "alt": "BPAgenda dashboard showing feature modules and monthly expense summary" },
+        "images": [
+          { "src": "/images/projects/BPAgenda.png", "alt": "BPAgenda dashboard showing feature modules and monthly expense summary" },
+          { "src": "/images/projects/BPAgenda_Kanban.png", "alt": "BPAgenda Kanban board with task columns and permissions" },
+          { "src": "/images/projects/BPAgenda_pomodoro.png", "alt": "BPAgenda Super Pomodoro focus timer with presets and routines" },
+          { "src": "/images/projects/BPAgenda_praticSession.png", "alt": "BPAgenda practice session tracker for study and exercise routines" },
+          { "src": "/images/projects/BPAgenda_despesas.png", "alt": "BPAgenda shared expense list with balances and settlements" }
+        ],
         "title": "BPAgenda — Shared Expense & Productivity Platform",
         "description": "A self-hosted suite that consolidates Splitwise-style shared-expense tracking, permission-gated collaborative kanban, a reminder-driven calendar, and focus-session tools into one installable app — in active daily use with full EN/PT-BR localization.",
         "bullets": [
@@ -125,7 +134,12 @@
       },
       {
         "variant": "simple",
-        "image": { "src": "/images/projects/BHelper_mainPage.png", "alt": "BHelper dashboard listing the user's bands" },
+        "images": [
+          { "src": "/images/projects/BHelper_mainPage.png", "alt": "BHelper dashboard listing the user's bands" },
+          { "src": "/images/projects/BHelper_Escalas.png", "alt": "BHelper fretboard scale visualizer with harmonic field breakdown" },
+          { "src": "/images/projects/BHelper_clicleof5s.png", "alt": "BHelper circle of fifths tool with chord progression suggestions" },
+          { "src": "/images/projects/BHelper_afinador.png", "alt": "BHelper real-time instrument tuner" }
+        ],
         "title": "BHelper — Band Management Platform",
         "description": "A multi-tenant Laravel API + React SPA giving each band its own isolated workspace: Kanban task boards, collaborative setlists, a song catalog auto-enriched via external music APIs, and a public band website — all under one login with invite-code onboarding.",
         "bullets": [
@@ -145,7 +159,9 @@
       {
         "variant": "internalFlagship",
         "diagram": "arch",
-        "image": { "src": "/images/projects/Zeferino_interno.png", "alt": "Rede Zeferino internal back-office system quick-access dashboard" },
+        "images": [
+          { "src": "/images/projects/Zeferino_interno.png", "alt": "Rede Zeferino internal back-office system quick-access dashboard" }
+        ],
         "barLabel": "Internal platform · no public access",
         "title": "Rede Zeferino — Back-Office Operations Platform",
         "description": "Internal web platform for a Brazilian supermarket chain (8+ stores), centralizing retail operations: production reports, label generation, data migrations, store monitoring, and Oracle RMS/Senior ERP integrations. Built solo, end to end, on my own hand-rolled PHP MVC framework.",

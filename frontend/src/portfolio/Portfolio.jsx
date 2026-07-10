@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useLocale from "./useLocale";
 
 /*
@@ -140,33 +140,70 @@ function ArchDiagram() {
   );
 }
 
+function ImageSlider({ images }) {
+  const [idx, setIdx] = useState(0);
+  if (!images || images.length === 0) return null;
+  const img = images[idx];
+  const multi = images.length > 1;
+  const navBtnStyle = { position: "absolute", top: "50%", transform: "translateY(-50%)", width: 34, height: 34, borderRadius: "50%", border: "1px solid rgba(245,240,247,.3)", background: "rgba(10,2,18,.55)", backdropFilter: "blur(4px)", color: "#F5F0F7", fontSize: 18, lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" };
+  return (
+    <div style={{ position: "relative", background: "#0A0212", borderBottom: "1px solid #560072" }}>
+      <img src={img.src} alt={img.alt} style={{ display: "block", width: "100%", maxHeight: 460, objectFit: "contain", background: "#0A0212" }} />
+      {multi && (
+        <>
+          <button type="button" aria-label="Previous image" onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)} style={{ ...navBtnStyle, left: 12 }}>‹</button>
+          <button type="button" aria-label="Next image" onClick={() => setIdx((i) => (i + 1) % images.length)} style={{ ...navBtnStyle, right: 12 }}>›</button>
+          <div style={{ position: "absolute", bottom: 12, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 6 }}>
+            {images.map((_, i) => (
+              <button key={i} type="button" aria-label={`Show image ${i + 1} of ${images.length}`} onClick={() => setIdx(i)}
+                style={{ width: i === idx ? 18 : 7, height: 7, padding: 0, borderRadius: 999, border: "none", cursor: "pointer", background: i === idx ? "#D50048" : "rgba(245,240,247,.4)", transition: "width .25s ease,background .25s ease" }} />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 /* ---------- project cards ---------- */
+function HeroCardBody({ card }) {
+  return (
+    <div>
+      <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 20, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
+      <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
+      {card.bullets && (
+        <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
+          {card.bullets.map((b, i) => <Bullet key={i} color="#D50048">{b}</Bullet>)}
+        </ul>
+      )}
+      {card.badges && <div style={{ ...rowWrap, marginBottom: 16 }}>{card.badges.map((b, i) => <span key={i} style={badgeStyle}>{b}</span>)}</div>}
+      {card.pills && <div style={{ ...pillWrap, marginBottom: 18 }}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
+      <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+        {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
+        {card.note && <span style={{ fontSize: 12, color: "#800080", fontStyle: "italic" }}>{card.note}</span>}
+      </div>
+    </div>
+  );
+}
+
 function HeroCard({ card }) {
+  const hasImages = card.images && card.images.length > 0;
   return (
     <article className="fbm-card fbm-reveal" style={{ border: "1px solid rgba(86,0,114,.6)", borderRadius: 18, padding: 0, overflow: "hidden", background: "rgba(42,0,72,.22)", marginBottom: 14 }}>
       <div style={{ padding: "8px 20px", background: "linear-gradient(90deg,#2A0048,#A90072,#D50048)", display: "flex", alignItems: "center", gap: 8 }}>
         <span style={{ fontFamily: "'Space Grotesk'", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", fontWeight: 700, color: "#F5F0F7" }}>{card.barLabel}</span>
       </div>
-      <div className="fbm-cardgrid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 26, padding: 26 }}>
-        {card.image ? (
-          <img src={card.image.src} alt={card.image.alt} style={{ width: "100%", height: 170, borderRadius: 12, border: "1px solid #560072", objectFit: "cover" }} />
-        ) : card.diagram === "rbac" ? <RbacDiagram /> : <ArchDiagram />}
-        <div>
-          <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 20, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
-          <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
-          {card.bullets && (
-            <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
-              {card.bullets.map((b, i) => <Bullet key={i} color="#D50048">{b}</Bullet>)}
-            </ul>
-          )}
-          {card.badges && <div style={{ ...rowWrap, marginBottom: 16 }}>{card.badges.map((b, i) => <span key={i} style={badgeStyle}>{b}</span>)}</div>}
-          {card.pills && <div style={{ ...pillWrap, marginBottom: 18 }}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
-          <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
-            {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
-            {card.note && <span style={{ fontSize: 12, color: "#800080", fontStyle: "italic" }}>{card.note}</span>}
-          </div>
+      {hasImages ? (
+        <>
+          <ImageSlider images={card.images} />
+          <div style={{ padding: 26 }}><HeroCardBody card={card} /></div>
+        </>
+      ) : (
+        <div className="fbm-cardgrid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 26, padding: 26 }}>
+          {card.diagram === "rbac" ? <RbacDiagram /> : <ArchDiagram />}
+          <HeroCardBody card={card} />
         </div>
-      </div>
+      )}
     </article>
   );
 }
@@ -174,9 +211,7 @@ function HeroCard({ card }) {
 function SimpleCard({ card }) {
   return (
     <article className="fbm-card fbm-reveal" style={{ border: "1px solid rgba(86,0,114,.5)", borderRadius: 16, padding: 0, overflow: "hidden", background: "rgba(42,0,72,.16)", marginBottom: 14 }}>
-      {card.image && (
-        <img src={card.image.src} alt={card.image.alt} style={{ display: "block", width: "100%", aspectRatio: "16/9", objectFit: "cover", borderBottom: "1px solid #560072" }} />
-      )}
+      {card.images && card.images.length > 0 && <ImageSlider images={card.images} />}
       <div style={{ padding: 26 }}>
         <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 19, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
         <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
@@ -204,9 +239,9 @@ function CompactCard({ card }) {
   );
   return (
     <article className="fbm-card fbm-reveal" style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: 20, padding: 22, borderRadius: 14, border: "1px solid transparent" }}>
-      <div className="fbm-cardgrid-hide" style={{ borderRadius: 10, border: "1px solid #560072", overflow: "hidden", background: card.image ? undefined : "repeating-linear-gradient(135deg,rgba(86,0,114,.16) 0 8px,rgba(42,0,72,.26) 8px 16px)", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 70 }}>
-        {card.image ? (
-          <img src={card.image.src} alt={card.image.alt} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      <div className="fbm-cardgrid-hide" style={{ borderRadius: 10, border: "1px solid #560072", overflow: "hidden", background: card.images?.[0] ? undefined : "repeating-linear-gradient(135deg,rgba(86,0,114,.16) 0 8px,rgba(42,0,72,.26) 8px 16px)", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 70 }}>
+        {card.images?.[0] ? (
+          <img src={card.images[0].src} alt={card.images[0].alt} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         ) : (
           <div style={{ width: 26, height: 26, borderRadius: 7, background: "linear-gradient(120deg,#A90072,#D50048)" }} />
         )}
