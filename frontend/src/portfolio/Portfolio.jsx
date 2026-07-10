@@ -148,7 +148,9 @@ function HeroCard({ card }) {
         <span style={{ fontFamily: "'Space Grotesk'", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", fontWeight: 700, color: "#F5F0F7" }}>{card.barLabel}</span>
       </div>
       <div className="fbm-cardgrid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 26, padding: 26 }}>
-        {card.diagram === "rbac" ? <RbacDiagram /> : <ArchDiagram />}
+        {card.image ? (
+          <img src={card.image.src} alt={card.image.alt} style={{ width: "100%", height: 170, borderRadius: 12, border: "1px solid #560072", objectFit: "cover" }} />
+        ) : card.diagram === "rbac" ? <RbacDiagram /> : <ArchDiagram />}
         <div>
           <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 20, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
           <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
@@ -171,17 +173,22 @@ function HeroCard({ card }) {
 
 function SimpleCard({ card }) {
   return (
-    <article className="fbm-card fbm-reveal" style={{ border: "1px solid rgba(86,0,114,.5)", borderRadius: 16, padding: 26, background: "rgba(42,0,72,.16)", marginBottom: 14 }}>
-      <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 19, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
-      <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
-      {card.bullets && (
-        <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
-          {card.bullets.map((b, i) => <Bullet key={i} color="#A90072">{b}</Bullet>)}
-        </ul>
+    <article className="fbm-card fbm-reveal" style={{ border: "1px solid rgba(86,0,114,.5)", borderRadius: 16, padding: 0, overflow: "hidden", background: "rgba(42,0,72,.16)", marginBottom: 14 }}>
+      {card.image && (
+        <img src={card.image.src} alt={card.image.alt} style={{ display: "block", width: "100%", aspectRatio: "16/9", objectFit: "cover", borderBottom: "1px solid #560072" }} />
       )}
-      {card.badges && <div style={{ ...rowWrap, marginBottom: 16 }}>{card.badges.map((b, i) => <span key={i} style={badgeStyle}>{b}</span>)}</div>}
-      {card.pills && <div style={{ ...pillWrap, marginBottom: 18 }}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
-      {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
+      <div style={{ padding: 26 }}>
+        <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 19, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
+        <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
+        {card.bullets && (
+          <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
+            {card.bullets.map((b, i) => <Bullet key={i} color="#A90072">{b}</Bullet>)}
+          </ul>
+        )}
+        {card.badges && <div style={{ ...rowWrap, marginBottom: 16 }}>{card.badges.map((b, i) => <span key={i} style={badgeStyle}>{b}</span>)}</div>}
+        {card.pills && <div style={{ ...pillWrap, marginBottom: 18 }}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
+        {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
+      </div>
     </article>
   );
 }
@@ -197,8 +204,12 @@ function CompactCard({ card }) {
   );
   return (
     <article className="fbm-card fbm-reveal" style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: 20, padding: 22, borderRadius: 14, border: "1px solid transparent" }}>
-      <div className="fbm-cardgrid-hide" style={{ borderRadius: 10, border: "1px solid #560072", background: "repeating-linear-gradient(135deg,rgba(86,0,114,.16) 0 8px,rgba(42,0,72,.26) 8px 16px)", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 70 }}>
-        <div style={{ width: 26, height: 26, borderRadius: 7, background: "linear-gradient(120deg,#A90072,#D50048)" }} />
+      <div className="fbm-cardgrid-hide" style={{ borderRadius: 10, border: "1px solid #560072", overflow: "hidden", background: card.image ? undefined : "repeating-linear-gradient(135deg,rgba(86,0,114,.16) 0 8px,rgba(42,0,72,.26) 8px 16px)", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 70 }}>
+        {card.image ? (
+          <img src={card.image.src} alt={card.image.alt} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        ) : (
+          <div style={{ width: 26, height: 26, borderRadius: 7, background: "linear-gradient(120deg,#A90072,#D50048)" }} />
+        )}
       </div>
       <div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: 8 }}>
