@@ -1,5 +1,11 @@
 # Deploy pipeline status (for picking this up on another machine)
 
+> **Update (July 2026)**: custom domain `felipebell.com` purchased at KingHost.
+> New nginx site file: `nginx-felipebell.com.conf` (serves felipebell.com +
+> www; old subdomain becomes a 301 redirect). Production health check in
+> `deploy-production.yml` now targets https://felipebell.com/ — don't push
+> that change until DNS + certbot for the new domain are live on the VPS.
+
 No secrets/keys/passwords are in this file — only what's already public in the repo or generic facts.
 
 ## What's live right now
