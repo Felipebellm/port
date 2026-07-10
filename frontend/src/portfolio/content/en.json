@@ -90,8 +90,11 @@
         "variant": "featured",
         "diagram": "rbac",
         "images": [
-          { "src": "/images/projects/Rede_zeferino.png", "alt": "Rede Zeferino corporate homepage with featured product banner and company history timeline" },
-          { "src": "/images/projects/Rede_zeferino_Vagas.png", "alt": "Rede Zeferino careers page listing open store positions" }
+          { "src": "/images/projects/Rede_zeferino_sec1.png", "alt": "Rede Zeferino homepage hero banner and company history section" },
+          { "src": "/images/projects/Rede_zeferino_sec2.png", "alt": "Rede Zeferino store units section with per-brand store listings" },
+          { "src": "/images/projects/Rede_zeferino_sec3.png", "alt": "Rede Zeferino supplier and customer contact form" },
+          { "src": "/images/projects/Rede_zeferino_Vagas_sec1.png", "alt": "Rede Zeferino careers page listing open store positions" },
+          { "src": "/images/projects/Rede_zeferino_Vagas_sec2.png", "alt": "Rede Zeferino careers page with job pagination and résumé submission form" }
         ],
         "barLabel": "★ Featured · Live in production",
         "title": "Rede Zeferino — Corporate Site & Careers Platform",

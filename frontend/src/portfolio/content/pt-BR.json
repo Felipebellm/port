@@ -90,8 +90,11 @@
         "variant": "featured",
         "diagram": "rbac",
         "images": [
-          { "src": "/images/projects/Rede_zeferino.png", "alt": "Rede Zeferino corporate homepage with featured product banner and company history timeline" },
-          { "src": "/images/projects/Rede_zeferino_Vagas.png", "alt": "Rede Zeferino careers page listing open store positions" }
+          { "src": "/images/projects/Rede_zeferino_sec1.png", "alt": "Página inicial da Rede Zeferino com banner principal e seção de história da empresa" },
+          { "src": "/images/projects/Rede_zeferino_sec2.png", "alt": "Seção de unidades da Rede Zeferino com lojas listadas por bandeira" },
+          { "src": "/images/projects/Rede_zeferino_sec3.png", "alt": "Formulário de contato de fornecedores e clientes da Rede Zeferino" },
+          { "src": "/images/projects/Rede_zeferino_Vagas_sec1.png", "alt": "Página de vagas da Rede Zeferino listando posições abertas nas lojas" },
+          { "src": "/images/projects/Rede_zeferino_Vagas_sec2.png", "alt": "Página de vagas da Rede Zeferino com paginação e formulário de envio de currículo" }
         ],
         "barLabel": "★ Destaque · Em produção",
         "title": "Rede Zeferino — Site Corporativo & Plataforma de Carreiras",
