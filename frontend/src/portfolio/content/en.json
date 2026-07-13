@@ -122,11 +122,12 @@
           { "src": "/images/projects/BPAgenda_despesas.png", "alt": "BPAgenda shared expense list with balances and settlements" }
         ],
         "title": "BPAgenda — Shared Expense & Productivity Platform",
-        "description": "A self-hosted suite that consolidates Splitwise-style shared-expense tracking, permission-gated collaborative kanban, a reminder-driven calendar, and focus-session tools into one installable app — in active daily use with full EN/PT-BR localization.",
+        "description": "Born when I outgrew Splitwise's free tier: I wanted expense splitting that also handled installments, recurring bills, and ready-made monthly totals — so I built it. From that expenses core it grew into a personal-organization suite I share with the people around me: permission-gated collaborative kanban, a Super Pomodoro with preset or fully custom schemes, timed practice routines, and an agenda that links to all of it — in active daily use with full EN/PT-BR localization.",
         "bullets": [
           "Automated balance engine nets four aggregated sums (bidirectional debts + settlements) into a live per-friend balance on every read — nothing cached or denormalized, so totals stay correct after edits or deletions",
-          "Three-mode splitting (equal / full / custom) with multi-month installment generation inside atomic DB transactions and a validator that cross-checks friendship, payer/participant conflicts, and split-sum overflow before persisting",
+          "Three-mode splitting (equal / full / custom) with multi-month installments and recurring monthly expenses generated inside atomic DB transactions, plus per-month totals and a validator that cross-checks friendship, payer/participant conflicts, and split-sum overflow before persisting",
           "Hand-rolled 4-tier permission ladder (owner/full/read-write/read) gating every kanban mutation at the controller layer, on Laravel Sanctum SPA token auth",
+          "Practice routines with custom timed segments — split an hour of guitar study into scales, harmonics, and improvisation blocks — alongside preset or custom Pomodoro schemes and agenda events that link to kanban cards and routines",
           "Collaborative lists with an append-only activity log that reconstructs every add/remove/check by diffing item arrays on each save",
           "Self-hosted CI/CD — GitHub Actions deploys to a Docker/Nginx/MySQL VPS on every push to main; frontend ships as an installable PWA with a Workbox service worker for offline-aware API caching",
           "Self-learning categorization: a 21-category keyword-matching engine backed by a per-user \"learned icon\" table that remembers corrections and tracks usage"
@@ -144,7 +145,7 @@
           { "src": "/images/projects/BHelper_afinador.png", "alt": "BHelper real-time instrument tuner" }
         ],
         "title": "BHelper — Band Management Platform",
-        "description": "A multi-tenant Laravel API + React SPA giving each band its own isolated workspace: Kanban task boards, collaborative setlists, a song catalog auto-enriched via external music APIs, and a public band website — all under one login with invite-code onboarding.",
+        "description": "Built to solve my own problem as a musician playing in several bands: setlists, songs I needed to focus on, and rehearsal routines were scattered everywhere. BHelper is a multi-tenant Laravel API + React SPA that gives each band an isolated workspace — Kanban boards, collaborative setlists, a song catalog auto-enriched via external music APIs, and a public band site — now used by my friends' bands too, and evolving through their feedback.",
         "bullets": [
           "Header-verified multi-tenancy — every endpoint resolves the active band from a request header, checks it against verified membership server-side, and scopes every query; cross-band access returns 403 rather than trusting a client-supplied ID",
           "OAuth (PKCE) with cross-device handoff — connect a streaming account from your phone via QR code while the desktop session polls for completion, then export a setlist directly into a new playlist",
@@ -209,8 +210,8 @@
   "talks": {
     "heading": "Talks & Teaching",
     "items": [
-      { "kind": "Lecture", "title": "Docker & Docker Compose Lecture", "org": "Stefanini", "description": "Company-wide presentation for developers and testers on building automated environments with Docker." },
-      { "kind": "Lecture", "title": "WordPress Development Lecture", "org": "Stefanini", "description": "Presentation on why WordPress remains the largest CMS and how to develop plugins and themes with PHP." },
+      { "kind": "Lecture", "title": "Docker & Docker Compose", "org": "Stefanini", "description": "Company-wide presentation for developers and testers on building automated environments with Docker." },
+      { "kind": "Lecture", "title": "WordPress Development", "org": "Stefanini", "description": "Presentation on why WordPress remains the largest CMS and how to develop plugins and themes with PHP." },
       { "kind": "Teaching", "title": "English Teacher", "org": "Stefanini", "description": "Weekly one-hour sessions helping colleagues improve their English." },
       { "kind": "Teaching", "title": "Computing Instructor", "org": "Independent", "description": "Taught basic computing skills privately." }
     ]

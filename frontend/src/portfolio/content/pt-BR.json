@@ -25,7 +25,7 @@
     "heading": "Sobre",
     "paragraphs": [
       "Sou Desenvolvedor Full Stack, morando em Mogi Mirim, São Paulo, Brasil, com mais de uma década de experiência que vai de sistemas mainframe a plataformas web modernas. Minha principal especialidade é PHP — de WordPress e Drupal a Laravel e arquitetura orientada a objetos — combinada com JavaScript, TypeScript, jQuery e Angular no frontend, além de Docker, CI/CD e integração multi-banco (MySQL, Oracle, PostgreSQL).",
-      "Minha carreira começou em um lugar incomum: desenvolvendo sistemas mainframe com COBOL, JCL, CICS e DB2 na IBM para clientes como AT&T e Banco Safra. Essa base me ensinou como funcionam sistemas críticos de larga escala. Depois passei cinco anos na Stefanini construindo portais, plugins e soluções sob medida para clientes internacionais como American Airlines, GSK, Edenred e Sesc.",
+      "Minha carreira começou em um lugar incomum: desenvolvendo sistemas mainframe com COBOL, JCL, CICS e DB2 na IBM para clientes como AT&T e Banco Safra. Essa base me ensinou como funcionam sistemas críticos em larga escala. Depois passei cinco anos na Stefanini construindo portais, plugins e soluções sob medida para clientes internacionais como American Airlines, GSK, Edenred e Sesc.",
       "Para dominar de verdade o PHP orientado a objetos, criei meu próprio framework MVC do zero — e hoje ele sustenta uma plataforma completa de operações de back-office que projetei e desenvolvi para uma rede de supermercados brasileira com mais de 8 lojas, com ambiente de desenvolvimento em Docker, CI/CD com GitHub Actions, RBAC e integrações em tempo real com Oracle RMS e Senior ERP. Sou fluente em inglês, tenho espanhol intermediário e gosto de compartilhar conhecimento: já dei palestras para toda a empresa sobre Docker e WordPress e ensinei aulas semanais de inglês para colegas."
     ]
   },
@@ -36,10 +36,10 @@
     "roles": [
       {
         "period": "2024 — Atual",
-        "title": "Analista de Sistemas & Desenvolvedor Full-Stack",
+        "title": "Analista de Sistemas & Desenvolvedor Full Stack",
         "company": "Rede Zeferino",
         "location": "Itapira, SP",
-        "description": "Projetei e construí a plataforma de operações de back-office da empresa de ponta a ponta — arquitetura, infraestrutura, CI/CD e funcionalidades — centralizando os fluxos de varejo em mais de 8 lojas de supermercado. Construída sobre meu próprio framework PHP MVC feito à mão, com uma camada multi-banco conectando MySQL e quatro escopos de conexão Oracle (RMS e Senior ERP), um sistema de RBAC orientado a dados e deploys automatizados via GitHub Actions com um runner Windows auto-hospedado.",
+        "description": "Projetei e construí a plataforma de operações de back-office da empresa de ponta a ponta — arquitetura, infraestrutura, CI/CD e funcionalidades — centralizando os fluxos de varejo em mais de 8 lojas de supermercado. Construída sobre meu próprio framework PHP MVC, criado do zero, com uma camada multi-banco conectando MySQL e quatro escopos de conexão Oracle (RMS e Senior ERP), um sistema de RBAC orientado a dados e deploys automatizados via GitHub Actions com um runner Windows self-hosted.",
         "pills": ["PHP 8.2", "MySQL/MariaDB", "Oracle (OCI8/PDO)", "Docker", "GitHub Actions", "Bootstrap 5", "jQuery", "SCSS", "PowerShell"]
       },
       {
@@ -48,7 +48,7 @@
         "company": "Stefanini",
         "location": "Jaguariúna, SP",
         "description": "Desenvolvi aplicações web em PHP, plugins/temas WordPress e soluções Drupal para clientes internacionais como American Airlines, GSK, Edenred, Sesc, EDF e Alvarez & Marsal. Migrei portais PHP legados para Laravel. Atuei em times ágeis com JavaScript e jQuery.",
-        "pills": ["PHP", "WordPress", "Laravel", "Drupal", "JavaScript", "jQuery", "Ágil"]
+        "pills": ["PHP", "WordPress", "Laravel", "Drupal", "JavaScript", "jQuery", "Agile"]
       },
       {
         "period": "2016 — 2018",
@@ -78,10 +78,10 @@
   },
   "projects": {
     "heading": "Projetos",
-    "intro": "Produtos online que você pode abrir e explorar, além de sistemas corporativos construídos dentro de empresas onde o código permanece privado — apresentados por arquitetura e detalhes.",
+    "intro": "Produtos online que você pode abrir e explorar, além de sistemas corporativos construídos dentro de empresas onde o código permanece privado — apresentados aqui pela arquitetura e pelos detalhes técnicos.",
     "liveLabel": "Online & Público",
     "internalLabel": "Corporativo & Interno",
-    "internalIntro": "Construídos dentro de empresas ou como sistemas de intranet — os produtos em produção permanecem privados, então são apresentados por arquitetura, detalhes higienizados e código sob solicitação.",
+    "internalIntro": "Construídos dentro de empresas ou como sistemas de intranet — os produtos em produção permanecem privados, então são apresentados pela arquitetura, por detalhes sem dados sensíveis e com código disponível mediante solicitação.",
     "archiveLink": "Ver arquivo completo de projetos",
     "archiveHref": "#",
     "archiveList": "Arquivo: Banco Safra · AT&T · GSK · Edenred · Sesc · EDF · Red Asset · AdvanSix · Alvarez & Marsal · ScalesMapApp",
@@ -100,12 +100,12 @@
         "title": "Rede Zeferino — Site Corporativo & Plataforma de Carreiras",
         "description": "Um site corporativo público que também funciona como duas ferramentas operacionais: um mural de vagas com escopo por loja, onde a equipe de RH de cada loja gerencia apenas as próprias vagas, e um canal de contato de fornecedores/clientes que direciona as solicitações direto ao comprador correto. Construído sobre um tema WordPress totalmente sob medida, sem dependência de page-builder ou plugin de formulário.",
         "bullets": [
-          "RBAC de três níveis sob medida para 22 contas de RH — perfil \"RH\" com escopo por loja, perfil \"RH Admin\" sem escopo de loja e capacidades estendidas de Administrador, aplicados via map_meta_cap, escopo de queries com pre_get_posts e poda do menu admin",
-          "Roteamento de fornecedores por categoria: submissões cruzadas com um mapa configurável categoria→comprador→e-mail, protegidas por reCAPTCHA v2, honeypot e verificação de tempo de envio",
+          "RBAC de três níveis sob medida para 22 contas de RH — perfil \"RH\" com escopo por loja, perfil \"RH Admin\" sem escopo de loja e permissões estendidas de Administrador, aplicados via map_meta_cap, filtragem de queries com pre_get_posts e ocultação de itens do menu admin",
+          "Direcionamento de fornecedores por categoria: cada envio é comparado com um mapa configurável categoria→comprador→e-mail, com proteção por reCAPTCHA v2, honeypot e verificação do tempo de envio",
           "Mural de vagas dinâmico sobre um custom post type dedicado, associando candidaturas por cidade + cargo ao e-mail de contato da loja certa no momento do envio",
           "Quatro painéis wp-admin sob medida, construídos sem nenhum framework de página administrativa, com edição de lojas via AJAX e dados de municípios do IBGE sincronizados por um script de fetch em tempo de build",
-          "Geração automática de metadados de SEO por vaga nos campos do Yoast, com uma migração única de backfill para o conteúdo existente",
-          "Chave geral de manutenção — atribuir um template à página inicial redireciona instantaneamente todo o tráfego deslogado, totalmente reversível, sem plugin"
+          "Geração automática de metadados de SEO por vaga nos campos do Yoast, com backfill único para o conteúdo já existente",
+          "Modo de manutenção instantâneo — basta atribuir um template à página inicial para redirecionar todos os visitantes não autenticados; totalmente reversível e sem depender de plugin"
         ],
         "badges": ["Em produção", "19 lojas / 2 centros de distribuição", "22 contas de RH gerenciadas", "4 painéis administrativos sob medida"],
         "pills": ["WordPress (tema sob medida)", "PHP 8.2", "MySQL 8", "JavaScript/jQuery", "SCSS/Sass", "Bootstrap 5", "Custom Post Types", "WP AJAX", "Yoast SEO", "reCAPTCHA v2", "FluentSMTP", "Docker Compose"],
@@ -115,21 +115,22 @@
       {
         "variant": "simple",
         "images": [
-          { "src": "/images/projects/BPAgenda.png", "alt": "BPAgenda dashboard showing feature modules and monthly expense summary" },
-          { "src": "/images/projects/BPAgenda_Kanban.png", "alt": "BPAgenda Kanban board with task columns and permissions" },
-          { "src": "/images/projects/BPAgenda_pomodoro.png", "alt": "BPAgenda Super Pomodoro focus timer with presets and routines" },
-          { "src": "/images/projects/BPAgenda_praticSession.png", "alt": "BPAgenda practice session tracker for study and exercise routines" },
-          { "src": "/images/projects/BPAgenda_despesas.png", "alt": "BPAgenda shared expense list with balances and settlements" }
+          { "src": "/images/projects/BPAgenda.png", "alt": "Dashboard do BPAgenda com os módulos do app e o resumo de despesas do mês" },
+          { "src": "/images/projects/BPAgenda_Kanban.png", "alt": "Quadro Kanban do BPAgenda com colunas de tarefas e permissões" },
+          { "src": "/images/projects/BPAgenda_pomodoro.png", "alt": "Timer Super Pomodoro do BPAgenda com presets e rotinas" },
+          { "src": "/images/projects/BPAgenda_praticSession.png", "alt": "Sessões de prática do BPAgenda para rotinas de estudo e exercício" },
+          { "src": "/images/projects/BPAgenda_despesas.png", "alt": "Lista de despesas compartilhadas do BPAgenda com saldos e acertos" }
         ],
         "title": "BPAgenda — Plataforma de Despesas Compartilhadas & Produtividade",
-        "description": "Uma suíte auto-hospedada que reúne controle de despesas compartilhadas no estilo Splitwise, kanban colaborativo com permissões, um calendário orientado a lembretes e ferramentas de foco em um único app instalável — em uso diário, com localização completa em EN/PT-BR.",
+        "description": "Nasceu quando a versão gratuita do Splitwise ficou pequena para mim: eu queria divisão de despesas que também suportasse parcelamento, contas recorrentes e o total do mês já calculado — então construí o meu. Do módulo de despesas, cresceu e virou um app completo de organização pessoal que compartilho com as pessoas ao meu redor: kanban colaborativo com permissões, um Super Pomodoro com presets prontos ou ciclos totalmente personalizados, rotinas de prática cronometradas e uma agenda que se conecta a tudo isso — em uso diário e totalmente bilíngue (EN/PT-BR).",
         "bullets": [
-          "Motor de saldo automático que soma quatro agregações (dívidas bidirecionais + acertos) em um saldo por amigo calculado a cada leitura — nada em cache ou desnormalizado, então os totais permanecem corretos após edições ou exclusões",
-          "Divisão em três modos (igual / valor total / personalizada) com geração de parcelas de múltiplos meses dentro de transações atômicas e um validador que checa amizade, conflitos entre pagador/participantes e estouro da soma da divisão antes de persistir",
-          "Escada de permissões de 4 níveis feita à mão (owner/full/read-write/read) protegendo toda mutação do kanban na camada de controller, sobre autenticação por token SPA do Laravel Sanctum",
+          "Cálculo automático de saldos que combina quatro agregações (dívidas nos dois sentidos + acertos) em um saldo por amigo gerado a cada leitura — nada em cache ou desnormalizado, então os totais continuam corretos após edições ou exclusões",
+          "Divisão em três modos (igual / valor total / personalizada) com parcelamento em vários meses e despesas recorrentes, tudo em transações atômicas, além do total por mês e de uma validação que checa amizade, conflitos entre pagador/participantes e impede que a soma da divisão ultrapasse o valor total",
+          "Sistema próprio de permissões em 4 níveis (owner/full/read-write/read) protegendo todas as operações de escrita do kanban na camada de controller, sobre autenticação por token SPA do Laravel Sanctum",
+          "Rotinas de prática com segmentos cronometrados personalizados — dá para dividir uma hora de estudo de guitarra em blocos de escalas, harmonia e improvisação — junto de presets de Pomodoro prontos ou personalizados e eventos de agenda que se conectam a cartões do kanban e rotinas",
           "Listas colaborativas com log de atividades append-only que reconstrói cada adição/remoção/marcação comparando os arrays de itens a cada salvamento",
-          "CI/CD auto-hospedado — GitHub Actions faz deploy em um VPS Docker/Nginx/MySQL a cada push na main; o frontend é entregue como PWA instalável, com service worker Workbox para cache de API com suporte offline",
-          "Categorização auto-aprendiz: um motor de correspondência por palavras-chave com 21 categorias, apoiado por uma tabela de \"ícone aprendido\" por usuário que lembra correções e registra o uso"
+          "CI/CD em servidor próprio — GitHub Actions faz deploy em um VPS com Docker/Nginx/MySQL a cada push na main; o frontend é entregue como PWA instalável, com service worker Workbox para cache de API com suporte offline",
+          "Categorização que aprende com o uso: correspondência por palavras-chave em 21 categorias, apoiada por uma tabela de ícones aprendidos por usuário, que memoriza correções e registra a frequência de uso"
         ],
         "badges": ["Em uso ativo", "Bilíngue (EN/PT-BR)", "5 módulos", "Full-stack solo"],
         "pills": ["Laravel 11", "PHP 8.2", "Laravel Sanctum", "MySQL 8", "React 18", "Vite", "React Router", "Axios", "Docker", "Nginx", "GitHub Actions", "PWA (Workbox)"],
@@ -138,22 +139,22 @@
       {
         "variant": "simple",
         "images": [
-          { "src": "/images/projects/BHelper_mainPage.png", "alt": "BHelper dashboard listing the user's bands" },
-          { "src": "/images/projects/BHelper_Escalas.png", "alt": "BHelper fretboard scale visualizer with harmonic field breakdown" },
-          { "src": "/images/projects/BHelper_clicleof5s.png", "alt": "BHelper circle of fifths tool with chord progression suggestions" },
-          { "src": "/images/projects/BHelper_afinador.png", "alt": "BHelper real-time instrument tuner" }
+          { "src": "/images/projects/BHelper_mainPage.png", "alt": "Dashboard do BHelper listando as bandas do usuário" },
+          { "src": "/images/projects/BHelper_Escalas.png", "alt": "Visualizador de escalas no braço do instrumento do BHelper, com campo harmônico detalhado" },
+          { "src": "/images/projects/BHelper_clicleof5s.png", "alt": "Ferramenta de ciclo de quintas do BHelper com sugestões de progressão de acordes" },
+          { "src": "/images/projects/BHelper_afinador.png", "alt": "Afinador de instrumentos em tempo real do BHelper" }
         ],
         "title": "BHelper — Plataforma de Gestão de Bandas",
-        "description": "Uma API Laravel + SPA React multi-tenant que dá a cada banda seu próprio espaço isolado: quadros Kanban de tarefas, setlists colaborativas, um catálogo de músicas enriquecido automaticamente via APIs externas de música e um site público da banda — tudo em um único login, com onboarding por código de convite.",
+        "description": "Criado para resolver um problema meu como músico que toca em várias bandas: setlists, as músicas que eu precisava estudar e as rotinas de ensaio estavam espalhadas por todo lado. O BHelper é uma API Laravel + SPA React multi-tenant que dá a cada banda um espaço isolado — quadros Kanban, setlists colaborativas, um catálogo de músicas preenchido automaticamente via APIs externas e um site público da banda — hoje usado também pelas bandas dos meus amigos e evoluindo com o feedback deles.",
         "bullets": [
-          "Multi-tenancy verificado por header — cada endpoint resolve a banda ativa a partir de um header da requisição, valida contra a associação verificada no servidor e escopa toda query; acesso entre bandas retorna 403 em vez de confiar em um ID enviado pelo cliente",
+          "Multi-tenancy verificado por header — cada endpoint identifica a banda ativa a partir de um header da requisição, valida no servidor se o usuário realmente é membro dela e restringe todas as queries a essa banda; acesso entre bandas retorna 403 em vez de confiar em um ID enviado pelo cliente",
           "OAuth (PKCE) com transferência entre dispositivos — conecte uma conta de streaming pelo celular via QR code enquanto a sessão do desktop faz polling até concluir, e depois exporte uma setlist direto para uma nova playlist",
           "Enriquecimento automático de metadados — novas músicas recebem BPM, tom e letra orquestrando duas APIs externas de música, com cache de respostas para evitar chamadas redundantes",
-          "Afinador em tempo real no navegador usando amostragem via Web Audio, autocorrelação e interpolação parabólica com precisão de sub-cent, além de um visualizador de braço/escalas cobrindo mais de 30 tipos de escala",
+          "Afinador em tempo real no navegador usando amostragem via Web Audio, autocorrelação e interpolação parabólica com precisão abaixo de um cent, além de um visualizador de escalas no braço do instrumento cobrindo mais de 30 tipos de escala",
           "CI/CD com verificação de deploy — GitHub Actions faz deploy a cada push na main, verificando o SHA do commit implantado e rodando um health check HTTP ao vivo antes de considerar o deploy bem-sucedido",
-          "Núcleo de teoria musical testado — detecção de pitch e escala/transposição isolados em módulos puros com ~390 linhas de cobertura Vitest, desacoplados da camada Web Audio/DOM"
+          "Núcleo de teoria musical com testes — detecção de pitch e escalas/transposição isolados em módulos puros, com cerca de 390 linhas de testes em Vitest, desacoplados da camada Web Audio/DOM"
         ],
-        "badges": ["Em produção", "Full-stack solo", "9 áreas de funcionalidade", "2 integrações de API externas"],
+        "badges": ["Em produção", "Full-stack solo", "9 áreas de funcionalidades", "2 integrações com APIs externas"],
         "pills": ["Laravel 12", "PHP 8.2", "React 18", "Vite", "Laravel Sanctum", "MySQL", "Redis", "Docker", "GitHub Actions", "OAuth2 + PKCE", "Web Audio API", "Vitest"],
         "link": { "label": "Acessar bhelper.bell.vps-kinghost.net", "href": "https://bhelper.bell.vps-kinghost.net/" }
       }
@@ -163,19 +164,19 @@
         "variant": "internalFlagship",
         "diagram": "arch",
         "images": [
-          { "src": "/images/projects/Zeferino_interno.png", "alt": "Rede Zeferino internal back-office system quick-access dashboard" }
+          { "src": "/images/projects/Zeferino_interno.png", "alt": "Painel de acesso rápido do sistema interno de back-office da Rede Zeferino" }
         ],
         "barLabel": "Plataforma interna · sem acesso público",
         "title": "Rede Zeferino — Plataforma de Operações de Back-Office",
-        "description": "Plataforma web interna para uma rede de supermercados brasileira (mais de 8 lojas), centralizando as operações de varejo: relatórios de produção, geração de etiquetas, migrações de dados, monitoramento de lojas e integrações com Oracle RMS/Senior ERP. Construída sozinho, de ponta a ponta, sobre meu próprio framework PHP MVC feito à mão.",
+        "description": "Plataforma web interna para uma rede de supermercados brasileira (mais de 8 lojas), centralizando as operações de varejo: relatórios de produção, geração de etiquetas, migrações de dados, monitoramento de lojas e integrações com Oracle RMS/Senior ERP. Construída inteiramente por mim, de ponta a ponta, sobre meu próprio framework PHP MVC criado do zero.",
         "bullets": [
           "Camada de abstração multi-banco: um app conversando com MySQL local, MySQL centralizado Arius, Oracle RMS (leitura/escrita) e Oracle Senior ERP",
-          "RBAC orientado a dados: classes de permissão com overrides por usuário, um portão de acesso centralizado na camada de roteamento e uma sidebar dinâmica renderizada a partir de um catálogo de funcionalidades",
-          "Fluxo de gestão de pesagem (Balança CP): registro de peso em tempo real com persistência imediata via MERGE no Oracle, numeração sequencial, verificação e geração de romaneio — atendendo 100+ operações de recebimento por dia",
-          "Monitoramento de lojas em tempo real: status de rede das balanças em mais de 8 lojas via SSH com indicadores verde/amarelo/vermelho",
-          "CI/CD: GitHub Actions com runner Windows auto-hospedado e deploys sem downtime automatizados por PowerShell",
-          "Ambiente de desenvolvimento Docker com Oracle Instant Client, MariaDB, Apache e inicialização em um comando",
-          "Sistema de tema claro/escuro (CSS custom properties + data-bs-theme do Bootstrap 5.3, persistência via localStorage, detecção da preferência do SO)"
+          "RBAC orientado a dados: classes de permissão com overrides por usuário, controle de acesso centralizado na camada de rotas e uma sidebar dinâmica renderizada a partir de um catálogo de funcionalidades",
+          "Fluxo de gestão de pesagem (Balança CP): registro de peso em tempo real com persistência imediata via MERGE no Oracle, numeração sequencial, verificação e geração de romaneio — suportando mais de 100 operações de recebimento por dia",
+          "Monitoramento de lojas em tempo real: status de rede das balanças em mais de 8 lojas via SSH, com indicadores verde/amarelo/vermelho",
+          "CI/CD: GitHub Actions com runner Windows self-hosted e deploys sem downtime automatizados com PowerShell",
+          "Ambiente de desenvolvimento em Docker com Oracle Instant Client, MariaDB, Apache e inicialização com um único comando",
+          "Sistema de tema claro/escuro (CSS custom properties + data-bs-theme do Bootstrap 5.3, persistência via localStorage e detecção automática da preferência do sistema)"
         ],
         "badges": ["8+ lojas", "5 conexões de banco", "100+ operações diárias", "Full-stack solo + infra"],
         "pills": ["PHP 8.2", "MVC", "MySQL", "Oracle", "OCI8/PDO", "Docker", "GitHub Actions", "RBAC", "Bootstrap 5", "jQuery", "SCSS", "PowerShell", "SFTP"],
@@ -199,7 +200,7 @@
       },
       {
         "variant": "compact",
-        "title": "Migração de Legado SourceLink",
+        "title": "Migração do Portal Legado SourceLink",
         "inlineBadge": "Legado → Laravel",
         "description": "Migrei um portal PHP procedural legado para Laravel MVC, reestruturando a base de código com princípios de orientação a objetos.",
         "pills": ["PHP", "Laravel", "MVC", "OOP"]
@@ -209,8 +210,8 @@
   "talks": {
     "heading": "Palestras & Ensino",
     "items": [
-      { "kind": "Palestra", "title": "Palestra sobre Docker & Docker Compose", "org": "Stefanini", "description": "Apresentação para toda a empresa, voltada a desenvolvedores e testers, sobre a criação de ambientes automatizados com Docker." },
-      { "kind": "Palestra", "title": "Palestra de Desenvolvimento WordPress", "org": "Stefanini", "description": "Apresentação sobre por que o WordPress continua sendo o maior CMS e como desenvolver plugins e temas com PHP." },
+      { "kind": "Palestra", "title": "Docker & Docker Compose", "org": "Stefanini", "description": "Apresentação para toda a empresa, voltada a desenvolvedores e testers, sobre a criação de ambientes automatizados com Docker." },
+      { "kind": "Palestra", "title": "Desenvolvimento WordPress", "org": "Stefanini", "description": "Apresentação sobre por que o WordPress continua sendo o maior CMS e como desenvolver plugins e temas com PHP." },
       { "kind": "Ensino", "title": "Professor de Inglês", "org": "Stefanini", "description": "Sessões semanais de uma hora ajudando colegas a melhorar o inglês." },
       { "kind": "Ensino", "title": "Instrutor de Informática", "org": "Autônomo", "description": "Ensino de informática básica de forma particular." }
     ]
@@ -218,8 +219,8 @@
   "contact": {
     "eyebrow": "Contato",
     "heading": "Tem um projeto em mente?",
-    "line": "Estou aberto a oportunidades desafiadoras de full-stack — vamos conversar.",
-    "cta": "Diga olá",
+    "line": "Estou aberto a oportunidades desafiadoras como desenvolvedor full stack — vamos conversar.",
+    "cta": "Fale comigo",
     "email": "felipe.bell@hotmail.com",
     "location": "Mogi Mirim, São Paulo, Brasil · +55 19 99597-8967"
   },
