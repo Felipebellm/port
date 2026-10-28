@@ -1,0 +1,55 @@
+/* GENERATED from DESIGN.md by scripts/gen-tokens.mjs — do not edit. */
+:root {
+  --color-primary: #d50048;
+  --color-on-primary: #f5f0f7;
+  --color-secondary: #a90072;
+  --color-tertiary: #800080;
+  --color-surface-deep: #2a0048;
+  --color-outline: #560072;
+  --color-background: #000000;
+  --color-surface-media: #0a0212;
+  --color-on-surface: #f5f0f7;
+  --color-on-surface-variant: #b8a8c8;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 14px;
+  --spacing-lg: 18px;
+  --spacing-xl: 26px;
+  --spacing-2xl: 40px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
+  --spacing-section: 110px;
+  --spacing-container: 1180px;
+  --rounded-xs: 4px;
+  --rounded-sm: 6px;
+  --rounded-md: 8px;
+  --rounded-lg: 10px;
+  --rounded-xl: 12px;
+  --rounded-2xl: 14px;
+  --rounded-3xl: 16px;
+  --rounded-4xl: 18px;
+  --rounded-full: 9999px;
+}
+
+.t-display{font-family:'Space Grotesk',system-ui,sans-serif;font-size:54px;font-weight:700;line-height:1.02em;letter-spacing:-0.03em;}
+.t-headline{font-family:'Space Grotesk',system-ui,sans-serif;font-size:42px;font-weight:700;letter-spacing:-0.02em;}
+.t-title-lg{font-family:'Space Grotesk',system-ui,sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.01em;}
+.t-title-md{font-family:'Space Grotesk',system-ui,sans-serif;font-size:17px;font-weight:600;letter-spacing:-0.01em;}
+.t-title-sm{font-family:'Space Grotesk',system-ui,sans-serif;font-size:16px;font-weight:600;}
+.t-brand{font-family:'Space Grotesk',system-ui,sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;}
+.t-section-label{font-family:'Space Grotesk',system-ui,sans-serif;font-size:14px;font-weight:600;letter-spacing:0.2em;}
+.t-link{font-family:'Space Grotesk',system-ui,sans-serif;font-size:14px;font-weight:600;}
+.t-eyebrow{font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:0.28em;}
+.t-label-caps{font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.16em;}
+.t-label-meta{font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;}
+.t-label-bar{font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;}
+.t-label-xs{font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;}
+.t-footer{font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px;font-weight:400;letter-spacing:0.02em;}
+.t-button-lg{font-family:'Space Grotesk',system-ui,sans-serif;font-size:16px;font-weight:700;}
+.t-button{font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:700;}
+.t-body-lg{font-family:'Manrope',system-ui,sans-serif;font-size:16px;font-weight:400;line-height:1.65em;}
+.t-body-md{font-family:'Manrope',system-ui,sans-serif;font-size:15px;font-weight:400;line-height:1.6em;}
+.t-body-sm{font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:400;line-height:1.6em;}
+.t-caption{font-family:'Manrope',system-ui,sans-serif;font-size:13px;font-weight:400;line-height:1.6em;}
+.t-label{font-family:'Manrope',system-ui,sans-serif;font-size:12px;font-weight:500;}
+.t-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;font-weight:400;letter-spacing:0.05em;}

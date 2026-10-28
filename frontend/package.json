@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tokens": "node scripts/gen-tokens.mjs",
+    "lint:design": "node node_modules/@google/design.md/dist/index.js lint ../DESIGN.md"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@google/design.md": "^0.4.0",
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^5.4.11"
   }

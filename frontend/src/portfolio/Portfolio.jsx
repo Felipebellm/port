@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useLocale from "./useLocale";
+import "./tokens.css";
 
 /*
   Felipe Bell Marques — Portfolio (bilingual, data-driven)
@@ -8,50 +9,99 @@ import useLocale from "./useLocale";
   Language is auto-detected from the visitor's browser (Portuguese locales get
   pt-BR, everyone else gets English) and can be switched with the EN / PT-BR
   toggle; the choice persists in localStorage. See ./useLocale.js.
+
+  Visual tokens (colors, type scale `.t-*`, spacing, radii) come from /DESIGN.md,
+  compiled into ./tokens.css by `npm run tokens`. Don't hard-code hex values or font
+  sizes here — reference the token instead.
 */
+
+/* ---------- token helpers ---------- */
+const v = (token) => `var(--color-${token})`;
+const mix = (token, pct) => `color-mix(in srgb,var(--color-${token}) ${pct}%,transparent)`;
+const sp = (token) => `var(--spacing-${token})`;
+const r = (token) => `var(--rounded-${token})`;
+const GRADIENT = `linear-gradient(120deg,${v("surface-deep")},${v("secondary")},${v("primary")})`;
+const GRADIENT_H = `linear-gradient(90deg,${v("surface-deep")},${v("secondary")},${v("primary")})`;
+const ACCENT = `linear-gradient(120deg,${v("secondary")},${v("primary")})`;
+const TOWER_SEG = 80;    // vh of scroll per project in the tower
+const TOWER_HOLD = 0.2;  // fraction of each segment, at both ends, where the tower holds still on a card
+const stripes = (a, b) => `repeating-linear-gradient(135deg,${mix("outline", 18)} 0 ${a}px,${mix("surface-deep", 28)} ${a}px ${b}px)`;
 
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{margin:0;background:#000000;overflow-x:hidden;}
-::selection{background:#A90072;color:#F5F0F7;}
-.fbm-container{display:flex;gap:64px;max-width:1180px;margin:0 auto;padding:0 40px;}
-.fbm-left{width:44%;position:sticky;top:0;height:100vh;max-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:40px 0 24px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;}
+body{margin:0;background:${v("background")};overflow-x:hidden;}
+::selection{background:${v("secondary")};color:${v("on-surface")};}
+.fbm-container{display:flex;gap:${sp("3xl")};max-width:${sp("container")};margin:0 auto;padding:0 ${sp("2xl")};}
+.fbm-left{width:44%;position:sticky;top:0;height:100vh;max-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:${sp("2xl")} 0 24px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;}
 .fbm-left::-webkit-scrollbar{display:none;}
-.fbm-right{width:56%;padding:96px 0 96px;}
+.fbm-right{width:56%;padding:${sp("4xl")} 0;}
 .fbm-mobilehead{display:none;}
 .fbm-nav{width:240px;flex-shrink:0;}
-.fbm-navline{width:26px;height:2px;background:#560072;flex-shrink:0;transition:width .3s ease,background .3s ease,box-shadow .3s ease;}
-.fbm-navtext{font-family:'Space Grotesk';font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:#B8A8C8;transition:color .3s ease,letter-spacing .3s ease,font-weight .3s ease;}
-.fbm-navlink:hover .fbm-navtext{color:#F5F0F7;letter-spacing:.22em;font-weight:700;}
-.fbm-navlink:hover .fbm-navline{width:48px;background:linear-gradient(90deg,#A90072,#D50048);box-shadow:0 0 10px rgba(213,0,72,.55);}
-.fbm-navlink:focus-visible{outline:2px solid #D50048;outline-offset:4px;border-radius:4px;}
-.fbm-navlink.active .fbm-navtext{color:#F5F0F7;}
-.fbm-navlink.active .fbm-navline{width:52px;background:linear-gradient(90deg,#2A0048,#A90072,#D50048);}
+.fbm-navline{width:26px;height:2px;background:${v("outline")};flex-shrink:0;transition:width .3s ease,background .3s ease,box-shadow .3s ease;}
+.fbm-navtext{text-transform:uppercase;color:${v("on-surface-variant")};transition:color .3s ease,letter-spacing .3s ease,font-weight .3s ease;}
+.fbm-navlink:hover .fbm-navtext{color:${v("on-surface")};letter-spacing:.22em;font-weight:700;}
+.fbm-navlink:hover .fbm-navline{width:48px;background:${ACCENT};box-shadow:0 0 10px ${mix("primary", 55)};}
+.fbm-navlink:focus-visible{outline:2px solid ${v("primary")};outline-offset:4px;border-radius:${r("xs")};}
+.fbm-navlink.active .fbm-navtext{color:${v("on-surface")};}
+.fbm-navlink.active .fbm-navline{width:52px;background:${GRADIENT_H};}
 .fbm-explist:hover .fbm-card{opacity:.5;}
 .fbm-explist .fbm-card:hover{opacity:1;}
 .fbm-card{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,background .15s ease,opacity .15s ease;}
-.fbm-card:hover{transform:translateY(-4px);border-color:rgba(169,0,114,.55)!important;box-shadow:0 16px 48px rgba(169,0,114,.18);background:rgba(42,0,72,.32)!important;}
+.fbm-card:hover{transform:translateY(-4px);border-color:${mix("secondary", 55)}!important;box-shadow:0 16px 48px ${mix("secondary", 18)};background:${mix("surface-deep", 32)}!important;}
 .fbm-pill{transition:background .25s ease,color .25s ease,border-color .25s ease;}
-.fbm-pill:hover{background:#800080;color:#F5F0F7;border-color:#800080;}
+.fbm-pill:hover{background:${v("tertiary")};color:${v("on-surface")};border-color:${v("tertiary")};}
 .fbm-ext .fbm-arrow{transition:transform .25s ease;}
 .fbm-ext:hover .fbm-arrow{transform:translate(4px,-4px);}
-.fbm-ext:hover .fbm-extlabel{color:#F5F0F7;}
+.fbm-ext:hover .fbm-extlabel{color:${v("on-surface")};}
 .fbm-social{transition:color .25s ease,transform .25s ease;}
-.fbm-social:hover{color:#D50048;transform:translateY(-3px);}
+.fbm-social:hover{color:${v("primary")};transform:translateY(-3px);}
 .fbm-btn{transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease,filter .25s ease;}
-.fbm-btn:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 14px 40px rgba(213,0,72,.35);}
+.fbm-btn:hover{transform:translateY(-3px);filter:brightness(1.06);box-shadow:0 14px 40px ${mix("primary", 35)};}
 .fbm-langbtn{transition:color .2s ease,background .2s ease;}
-a:focus-visible,button:focus-visible{outline:2px solid #D50048;outline-offset:3px;border-radius:6px;}
+a:focus-visible,button:focus-visible{outline:2px solid ${v("primary")};outline-offset:3px;border-radius:${r("sm")};}
 .fbm-reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;will-change:opacity,transform;}
 .fbm-reveal.fbm-in{opacity:1;transform:none;}
-.fbm-skip{position:absolute;left:16px;top:-48px;background:#D50048;color:#F5F0F7;padding:10px 18px;border-radius:8px;z-index:100;font-weight:600;transition:top .2s ease;text-decoration:none;}
+.fbm-skip{position:absolute;left:16px;top:-48px;background:${v("primary")};color:${v("on-primary")};padding:10px 18px;border-radius:${r("md")};z-index:100;font-weight:600;transition:top .2s ease;text-decoration:none;}
 .fbm-skip:focus{top:16px;}
+/* project tower — see ProjectTower. --k = eased card index (0…n-1) driving the spin */
+@property --tp{syntax:'<number>';inherits:true;initial-value:0;}
+@keyframes fbm-spin{from{--tp:0;}to{--tp:1;}}
+html:has(.fbm-tower){scroll-snap-type:y proximity;}
+.fbm-tower{position:relative;height:calc(100vh + (var(--n) - 1) * ${TOWER_SEG}vh);}
+.fbm-tower-snap{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none;}
+.fbm-stage{position:sticky;top:0;height:100vh;overflow-y:clip;perspective:1600px;--k:0;--tp:0;
+  --cw:440px;--ch:min(520px,68vh);--R:260px;--dy:calc(var(--ch) + 28px);}
+@supports (animation-timeline: view()) and (width: round(down, 1px, 1px)){
+  .fbm-tower{view-timeline-name:--fbm-tower;}
+  .fbm-stage{animation:fbm-spin linear both;animation-timeline:--fbm-tower;animation-range:contain 0% contain 100%;
+    --kr:calc(var(--tp) * (var(--n) - 1));
+    --kf:round(down, var(--kr), 1);
+    --kx:clamp(0, (var(--kr) - var(--kf) - ${TOWER_HOLD}) / ${1 - 2 * TOWER_HOLD}, 1);
+    --k:calc(var(--kf) + var(--kx) * var(--kx) * (3 - 2 * var(--kx)));}
+}
+.fbm-axis{position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:${mix("outline", 55)};}
+.fbm-axis::after{content:"";position:absolute;inset:0;background:${GRADIENT.replace("120deg", "180deg")};transform-origin:top;transform:scaleY(var(--tp));box-shadow:0 0 12px ${mix("primary", 45)};}
+.fbm-ring{position:absolute;z-index:1;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;
+  transform:translateZ(calc(var(--R) * -1)) translateY(calc(var(--k) * var(--dy) * -1)) rotateY(calc(var(--k) * var(--step) * -1));}
+.fbm-tcard{position:absolute;left:calc(var(--cw) / -2);top:calc(var(--ch) / -2);width:var(--cw);height:var(--ch);
+  --d:calc(var(--k) - var(--i));--ad:max(var(--d), var(--d) * -1);
+  transform:rotateY(calc(var(--i) * var(--step))) translateZ(var(--R)) translateY(calc(var(--i) * var(--dy)));
+  opacity:clamp(0, 1 - var(--ad) * .6, 1);backface-visibility:hidden;pointer-events:none;
+  display:flex;flex-direction:column;overflow:hidden;border-radius:${r("4xl")};border:1px solid ${mix("outline", 60)};background:${v("surface-media")};}
+.fbm-tcard[data-front]{pointer-events:auto;border-color:${mix("secondary", 70)};box-shadow:0 18px 60px ${mix("primary", 22)};}
+.fbm-tdesc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.fbm-dialog{width:min(720px,92vw);max-height:88vh;padding:0;border:none;border-radius:${r("4xl")};background:${v("surface-media")};color:${v("on-surface")};overflow:auto;}
+.fbm-dialog::backdrop{background:${mix("background", 78)};backdrop-filter:blur(6px);}
+.fbm-dialog .fbm-reveal{opacity:1;transform:none;}
+.fbm-dialog .fbm-card,.fbm-dialog .fbm-card:hover{transform:none;margin:0!important;box-shadow:none;}
+html:has(.fbm-dialog[open]){overflow:hidden;}
+@media (max-width:1100px){ .fbm-stage{--cw:380px;--R:220px;} }
 @media (max-width:900px){
   .fbm-container{flex-direction:column;gap:0;padding:0 22px;}
-  .fbm-left{position:static;width:100%;height:auto;max-height:none;padding:96px 0 24px;justify-content:flex-start;gap:40px;}
-  .fbm-right{width:100%;padding:8px 0 64px;}
+  .fbm-left{position:static;width:100%;height:auto;max-height:none;padding:${sp("4xl")} 0 24px;justify-content:flex-start;gap:${sp("2xl")};}
+  .fbm-right{width:100%;padding:${sp("sm")} 0 ${sp("3xl")};}
   .fbm-nav{display:none!important;}
   .fbm-mobilehead{display:flex;}
   .fbm-reveal{opacity:1;transform:none;}
@@ -68,23 +118,24 @@ a:focus-visible,button:focus-visible{outline:2px solid #D50048;outline-offset:3p
 `;
 
 /* ---------- shared style fragments ---------- */
-const pillStyle = { fontSize: 12, padding: "4px 11px", borderRadius: 999, border: "1px solid #560072", color: "#B8A8C8", fontWeight: 500 };
-const pillStyleLg = { fontSize: 12, padding: "5px 12px", borderRadius: 999, border: "1px solid #560072", color: "#B8A8C8", fontWeight: 500 };
-const badgeStyle = { fontSize: 12, padding: "5px 12px", borderRadius: 8, background: "rgba(128,0,128,.22)", border: "1px solid #800080", color: "#F5F0F7", fontWeight: 600 };
-const rowWrap = { display: "flex", flexWrap: "wrap", gap: 8 };
+const pillStyle = { padding: "4px 11px", borderRadius: r("full"), border: `1px solid ${v("outline")}`, color: v("on-surface-variant") };
+const pillStyleLg = { ...pillStyle, padding: "5px 12px" };
+const badgeStyle = { padding: "5px 12px", borderRadius: r("md"), background: mix("tertiary", 22), border: `1px solid ${v("tertiary")}`, color: v("on-surface"), fontWeight: 600 };
+const rowWrap = { display: "flex", flexWrap: "wrap", gap: sp("sm") };
 const pillWrap = { display: "flex", flexWrap: "wrap", gap: 7 };
-const sectionH2 = { fontFamily: "'Space Grotesk'", fontSize: 14, letterSpacing: ".2em", textTransform: "uppercase", color: "#F5F0F7", margin: "0 0 30px", fontWeight: 600 };
-const extLabel = { color: "#D50048", transition: "color .25s ease" };
+const sectionH2 = { textTransform: "uppercase", color: v("on-surface"), margin: "0 0 30px" };
+const extLabel = { color: v("primary"), transition: "color .25s ease" };
+const sectionStyle = { marginBottom: sp("section"), scrollMarginTop: sp("4xl") };
 
 /* ---------- small components ---------- */
 function Pill({ children, large }) {
-  return <span className="fbm-pill" style={large ? pillStyleLg : pillStyle}>{children}</span>;
+  return <span className="fbm-pill t-label" style={large ? pillStyleLg : pillStyle}>{children}</span>;
 }
 
 function Bullet({ children, color }) {
   return (
-    <li style={{ fontSize: 14, color: "#B8A8C8", paddingLeft: 18, position: "relative" }}>
-      <span style={{ position: "absolute", left: 0, top: 9, width: 6, height: 6, borderRadius: "50%", background: color }} />
+    <li className="t-body-sm" style={{ color: v("on-surface-variant"), paddingLeft: sp("lg"), position: "relative" }}>
+      <span style={{ position: "absolute", left: 0, top: 9, width: 6, height: 6, borderRadius: r("full"), background: v(color) }} />
       {children}
     </li>
   );
@@ -92,10 +143,10 @@ function Bullet({ children, color }) {
 
 function ExtLink({ href, label, arrow = "→", style }) {
   return (
-    <a href={href} target={href && href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="fbm-ext"
-      style={{ display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none", fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: 14, ...style }}>
+    <a href={href} target={href && href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="fbm-ext t-link"
+      style={{ display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none", ...style }}>
       <span className="fbm-extlabel" style={extLabel}>{label}</span>
-      <span className="fbm-arrow" style={{ color: "#D50048", display: "inline-flex" }}>{arrow}</span>
+      <span className="fbm-arrow" style={{ color: v("primary"), display: "inline-flex" }}>{arrow}</span>
     </a>
   );
 }
@@ -104,15 +155,15 @@ function LangToggle({ locale, setLocale, ariaLabel, style }) {
   const opt = (code, label) => {
     const active = locale === code;
     return (
-      <button type="button" className="fbm-langbtn" onClick={() => setLocale(code)} aria-pressed={active}
-        style={{ border: "none", cursor: "pointer", padding: "5px 11px", borderRadius: 7, fontFamily: "'Space Grotesk'", fontSize: 11, fontWeight: 700, letterSpacing: ".08em",
-          background: active ? "#D50048" : "transparent", color: active ? "#F5F0F7" : "#B8A8C8" }}>
+      <button type="button" className="fbm-langbtn t-label-xs" onClick={() => setLocale(code)} aria-pressed={active}
+        style={{ border: "none", cursor: "pointer", padding: "5px 11px", borderRadius: r("md"),
+          background: active ? v("primary") : "transparent", color: active ? v("on-primary") : v("on-surface-variant") }}>
         {label}
       </button>
     );
   };
   return (
-    <div role="group" aria-label={ariaLabel} style={{ display: "inline-flex", gap: 2, padding: 3, borderRadius: 10, border: "1px solid #560072", background: "rgba(42,0,72,.3)", ...style }}>
+    <div role="group" aria-label={ariaLabel} style={{ display: "inline-flex", gap: 2, padding: 3, borderRadius: r("lg"), border: `1px solid ${v("outline")}`, background: mix("surface-deep", 30), ...style }}>
       {opt("en", "EN")}
       {opt("pt-BR", "PT-BR")}
     </div>
@@ -120,35 +171,35 @@ function LangToggle({ locale, setLocale, ariaLabel, style }) {
 }
 
 function RbacDiagram() {
-  const box = { fontFamily: "ui-monospace,SFMono-Regular,Menlo,monospace", fontSize: 9, letterSpacing: ".04em", padding: "5px 0", borderRadius: 6, textAlign: "center" };
+  const box = { padding: "5px 0", borderRadius: r("sm"), textAlign: "center" };
   return (
-    <div style={{ borderRadius: 12, border: "1px solid #560072", minHeight: 170, background: "repeating-linear-gradient(135deg,rgba(86,0,114,.18) 0 10px,rgba(42,0,72,.28) 10px 20px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, textAlign: "center", padding: 16 }}>
-      <div style={{ ...box, width: 110, background: "linear-gradient(120deg,#800080,#D50048)", color: "#F5F0F7" }}>Administrator</div>
-      <div style={{ ...box, width: 78, background: "rgba(169,0,114,.4)", border: "1px solid #A90072", color: "#F5F0F7" }}>RH Admin ×3</div>
-      <div style={{ ...box, width: 96, background: "rgba(86,0,114,.3)", border: "1px solid #560072", color: "#B8A8C8" }}>RH ×19 stores</div>
-      <span style={{ fontFamily: "ui-monospace,SFMono-Regular,Menlo,monospace", fontSize: 9, color: "#800080", lineHeight: 1.5 }}>three-tier RBAC</span>
+    <div style={{ borderRadius: r("xl"), border: `1px solid ${v("outline")}`, minHeight: 170, background: stripes(10, 20), display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, textAlign: "center", padding: 16 }}>
+      <div className="t-mono" style={{ ...box, width: 110, background: `linear-gradient(120deg,${v("tertiary")},${v("primary")})`, color: v("on-surface") }}>Administrator</div>
+      <div className="t-mono" style={{ ...box, width: 86, background: mix("secondary", 40), border: `1px solid ${v("secondary")}`, color: v("on-surface") }}>RH Admin ×3</div>
+      <div className="t-mono" style={{ ...box, width: 104, background: mix("outline", 30), border: `1px solid ${v("outline")}`, color: v("on-surface-variant") }}>RH ×19 stores</div>
+      <span className="t-mono" style={{ color: v("tertiary"), lineHeight: 1.5 }}>three-tier RBAC</span>
     </div>
   );
 }
 
 function ArchDiagram() {
   return (
-    <div style={{ borderRadius: 12, border: "1px solid #560072", minHeight: 170, background: "repeating-linear-gradient(135deg,rgba(86,0,114,.18) 0 10px,rgba(42,0,72,.28) 10px 20px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, textAlign: "center", padding: 14 }}>
-      <div style={{ width: 34, height: 34, borderRadius: 8, background: "linear-gradient(120deg,#A90072,#D50048)" }} />
-      <span style={{ fontFamily: "ui-monospace,SFMono-Regular,Menlo,monospace", fontSize: 10, letterSpacing: ".05em", color: "#B8A8C8", lineHeight: 1.5 }}>architecture<br />diagram</span>
+    <div style={{ borderRadius: r("xl"), border: `1px solid ${v("outline")}`, minHeight: 170, background: stripes(10, 20), display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: sp("sm"), textAlign: "center", padding: sp("md") }}>
+      <div style={{ width: 34, height: 34, borderRadius: r("md"), background: ACCENT }} />
+      <span className="t-mono" style={{ color: v("on-surface-variant"), lineHeight: 1.5 }}>architecture<br />diagram</span>
     </div>
   );
 }
 
-function ImageSlider({ images }) {
+function ImageSlider({ images, height }) {
   const [idx, setIdx] = useState(0);
   if (!images || images.length === 0) return null;
   const img = images[idx];
   const multi = images.length > 1;
-  const navBtnStyle = { position: "absolute", top: "50%", transform: "translateY(-50%)", width: 34, height: 34, borderRadius: "50%", border: "1px solid rgba(245,240,247,.3)", background: "rgba(10,2,18,.55)", backdropFilter: "blur(4px)", color: "#F5F0F7", fontSize: 18, lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" };
+  const navBtnStyle = { position: "absolute", top: "50%", transform: "translateY(-50%)", width: 34, height: 34, borderRadius: r("full"), border: `1px solid ${mix("on-surface", 30)}`, background: mix("surface-media", 55), backdropFilter: "blur(4px)", color: v("on-surface"), fontSize: 18, lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" };
   return (
-    <div style={{ position: "relative", background: "#0A0212", borderBottom: "1px solid #560072" }}>
-      <img src={img.src} alt={img.alt} style={{ display: "block", width: "100%", maxHeight: 460, objectFit: "contain", background: "#0A0212" }} />
+    <div style={{ position: "relative", background: v("surface-media"), borderBottom: `1px solid ${v("outline")}` }}>
+      <img src={img.src} alt={img.alt} style={{ display: "block", width: "100%", ...(height ? { height, objectFit: "cover", objectPosition: "top" } : { maxHeight: 460, objectFit: "contain" }), background: v("surface-media") }} />
       {multi && (
         <>
           <button type="button" aria-label="Previous image" onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)} style={{ ...navBtnStyle, left: 12 }}>‹</button>
@@ -156,7 +207,7 @@ function ImageSlider({ images }) {
           <div style={{ position: "absolute", bottom: 12, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 6 }}>
             {images.map((_, i) => (
               <button key={i} type="button" aria-label={`Show image ${i + 1} of ${images.length}`} onClick={() => setIdx(i)}
-                style={{ width: i === idx ? 18 : 7, height: 7, padding: 0, borderRadius: 999, border: "none", cursor: "pointer", background: i === idx ? "#D50048" : "rgba(245,240,247,.4)", transition: "width .25s ease,background .25s ease" }} />
+                style={{ width: i === idx ? 18 : 7, height: 7, padding: 0, borderRadius: r("full"), border: "none", cursor: "pointer", background: i === idx ? v("primary") : mix("on-surface", 40), transition: "width .25s ease,background .25s ease" }} />
             ))}
           </div>
         </>
@@ -166,21 +217,29 @@ function ImageSlider({ images }) {
 }
 
 /* ---------- project cards ---------- */
+function CardBody({ card, bulletColor }) {
+  return (
+    <>
+      <h3 className="t-title-lg" style={{ color: v("on-surface"), margin: "0 0 6px" }}>{card.title}</h3>
+      <p className="t-body-md" style={{ margin: "0 0 16px", color: v("on-surface-variant") }}>{card.description}</p>
+      {card.bullets && (
+        <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
+          {card.bullets.map((b, i) => <Bullet key={i} color={bulletColor}>{b}</Bullet>)}
+        </ul>
+      )}
+      {card.badges && <div style={{ ...rowWrap, marginBottom: 16 }}>{card.badges.map((b, i) => <span key={i} className="t-label" style={badgeStyle}>{b}</span>)}</div>}
+      {card.pills && <div style={{ ...pillWrap, marginBottom: 18 }}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
+    </>
+  );
+}
+
 function HeroCardBody({ card }) {
   return (
     <div>
-      <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 20, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
-      <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
-      {card.bullets && (
-        <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
-          {card.bullets.map((b, i) => <Bullet key={i} color="#D50048">{b}</Bullet>)}
-        </ul>
-      )}
-      {card.badges && <div style={{ ...rowWrap, marginBottom: 16 }}>{card.badges.map((b, i) => <span key={i} style={badgeStyle}>{b}</span>)}</div>}
-      {card.pills && <div style={{ ...pillWrap, marginBottom: 18 }}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
+      <CardBody card={card} bulletColor="primary" />
       <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
         {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
-        {card.note && <span style={{ fontSize: 12, color: "#800080", fontStyle: "italic" }}>{card.note}</span>}
+        {card.note && <span className="t-label" style={{ color: v("tertiary"), fontStyle: "italic", fontWeight: 400 }}>{card.note}</span>}
       </div>
     </div>
   );
@@ -189,17 +248,17 @@ function HeroCardBody({ card }) {
 function HeroCard({ card }) {
   const hasImages = card.images && card.images.length > 0;
   return (
-    <article className="fbm-card fbm-reveal" style={{ border: "1px solid rgba(86,0,114,.6)", borderRadius: 18, padding: 0, overflow: "hidden", background: "rgba(42,0,72,.22)", marginBottom: 14 }}>
-      <div style={{ padding: "8px 20px", background: "linear-gradient(90deg,#2A0048,#A90072,#D50048)", display: "flex", alignItems: "center", gap: 8 }}>
-        <span style={{ fontFamily: "'Space Grotesk'", fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", fontWeight: 700, color: "#F5F0F7" }}>{card.barLabel}</span>
+    <article className="fbm-card fbm-reveal" style={{ border: `1px solid ${mix("outline", 60)}`, borderRadius: r("4xl"), padding: 0, overflow: "hidden", background: mix("surface-deep", 22), marginBottom: sp("md") }}>
+      <div style={{ padding: "8px 20px", background: GRADIENT_H, display: "flex", alignItems: "center", gap: sp("sm") }}>
+        <span className="t-label-bar" style={{ textTransform: "uppercase", color: v("on-primary") }}>{card.barLabel}</span>
       </div>
       {hasImages ? (
         <>
           <ImageSlider images={card.images} />
-          <div style={{ padding: 26 }}><HeroCardBody card={card} /></div>
+          <div style={{ padding: sp("xl") }}><HeroCardBody card={card} /></div>
         </>
       ) : (
-        <div className="fbm-cardgrid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 26, padding: 26 }}>
+        <div className="fbm-cardgrid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: sp("xl"), padding: sp("xl") }}>
           {card.diagram === "rbac" ? <RbacDiagram /> : <ArchDiagram />}
           <HeroCardBody card={card} />
         </div>
@@ -210,18 +269,10 @@ function HeroCard({ card }) {
 
 function SimpleCard({ card }) {
   return (
-    <article className="fbm-card fbm-reveal" style={{ border: "1px solid rgba(86,0,114,.5)", borderRadius: 16, padding: 0, overflow: "hidden", background: "rgba(42,0,72,.16)", marginBottom: 14 }}>
+    <article className="fbm-card fbm-reveal" style={{ border: `1px solid ${mix("outline", 50)}`, borderRadius: r("3xl"), padding: 0, overflow: "hidden", background: mix("surface-deep", 16), marginBottom: sp("md") }}>
       {card.images && card.images.length > 0 && <ImageSlider images={card.images} />}
-      <div style={{ padding: 26 }}>
-        <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 19, color: "#F5F0F7", margin: "0 0 6px", fontWeight: 700, letterSpacing: "-.01em" }}>{card.title}</h3>
-        <p style={{ margin: "0 0 16px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
-        {card.bullets && (
-          <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
-            {card.bullets.map((b, i) => <Bullet key={i} color="#A90072">{b}</Bullet>)}
-          </ul>
-        )}
-        {card.badges && <div style={{ ...rowWrap, marginBottom: 16 }}>{card.badges.map((b, i) => <span key={i} style={badgeStyle}>{b}</span>)}</div>}
-        {card.pills && <div style={{ ...pillWrap, marginBottom: 18 }}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
+      <div style={{ padding: sp("xl") }}>
+        <CardBody card={card} bulletColor="secondary" />
         {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
       </div>
     </article>
@@ -231,27 +282,27 @@ function SimpleCard({ card }) {
 function CompactCard({ card }) {
   const title = card.link ? (
     <a href={card.link.href} target="_blank" rel="noopener noreferrer" className="fbm-ext" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>
-      <h3 className="fbm-extlabel" style={{ fontFamily: "'Space Grotesk'", fontSize: 17, color: "#F5F0F7", margin: 0, fontWeight: 600, transition: "color .25s ease" }}>{card.title}</h3>
-      <span className="fbm-arrow" style={{ color: "#A90072", display: "inline-flex" }}>↗</span>
+      <h3 className="fbm-extlabel t-title-md" style={{ color: v("on-surface"), margin: 0, transition: "color .25s ease" }}>{card.title}</h3>
+      <span className="fbm-arrow" style={{ color: v("secondary"), display: "inline-flex" }}>↗</span>
     </a>
   ) : (
-    <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 17, color: "#F5F0F7", margin: 0, fontWeight: 600 }}>{card.title}</h3>
+    <h3 className="t-title-md" style={{ color: v("on-surface"), margin: 0 }}>{card.title}</h3>
   );
   return (
-    <article className="fbm-card fbm-reveal" style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: 20, padding: 22, borderRadius: 14, border: "1px solid transparent" }}>
-      <div className="fbm-cardgrid-hide" style={{ borderRadius: 10, border: "1px solid #560072", overflow: "hidden", background: card.images?.[0] ? undefined : "repeating-linear-gradient(135deg,rgba(86,0,114,.16) 0 8px,rgba(42,0,72,.26) 8px 16px)", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 70 }}>
+    <article className="fbm-card fbm-reveal" style={{ display: "grid", gridTemplateColumns: "96px 1fr", gap: 20, padding: 22, borderRadius: r("2xl"), border: "1px solid transparent" }}>
+      <div className="fbm-cardgrid-hide" style={{ borderRadius: r("lg"), border: `1px solid ${v("outline")}`, overflow: "hidden", background: card.images?.[0] ? undefined : stripes(8, 16), display: "flex", alignItems: "center", justifyContent: "center", minHeight: 70 }}>
         {card.images?.[0] ? (
           <img src={card.images[0].src} alt={card.images[0].alt} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         ) : (
-          <div style={{ width: 26, height: 26, borderRadius: 7, background: "linear-gradient(120deg,#A90072,#D50048)" }} />
+          <div style={{ width: 26, height: 26, borderRadius: r("sm"), background: ACCENT }} />
         )}
       </div>
       <div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: 8 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: sp("sm") }}>
           {title}
-          {card.inlineBadge && <span style={{ fontSize: 11, padding: "3px 9px", borderRadius: 7, background: "rgba(128,0,128,.2)", border: "1px solid #800080", color: "#F5F0F7", fontWeight: 600 }}>{card.inlineBadge}</span>}
+          {card.inlineBadge && <span className="t-label" style={{ ...badgeStyle, padding: "3px 9px", background: mix("tertiary", 20) }}>{card.inlineBadge}</span>}
         </div>
-        <p style={{ margin: "0 0 12px", fontSize: 15, color: "#B8A8C8" }}>{card.description}</p>
+        <p className="t-body-md" style={{ margin: "0 0 12px", color: v("on-surface-variant") }}>{card.description}</p>
         {card.pills && <div style={pillWrap}>{card.pills.map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
       </div>
     </article>
@@ -266,10 +317,142 @@ function ProjectCard({ card }) {
 
 function GroupHeader({ label, dotColor, glow }) {
   return (
-    <div className="fbm-reveal" style={{ display: "flex", alignItems: "center", gap: 14, margin: "0 0 8px" }}>
-      <span style={{ width: 8, height: 8, borderRadius: "50%", background: dotColor, boxShadow: glow ? "0 0 12px rgba(213,0,72,.7)" : "none", flexShrink: 0 }} />
-      <span style={{ fontFamily: "'Space Grotesk'", fontSize: 12, letterSpacing: ".18em", textTransform: "uppercase", color: "#F5F0F7", fontWeight: 700, whiteSpace: "nowrap" }}>{label}</span>
-      <span style={{ flex: 1, height: 1, background: "linear-gradient(90deg,#560072,transparent)" }} />
+    <div className="fbm-reveal" style={{ display: "flex", alignItems: "center", gap: sp("md"), margin: "0 0 8px" }}>
+      <span style={{ width: 8, height: 8, borderRadius: r("full"), background: v(dotColor), boxShadow: glow ? `0 0 12px ${mix("primary", 70)}` : "none", flexShrink: 0 }} />
+      <span className="t-label-caps" style={{ textTransform: "uppercase", color: v("on-surface"), whiteSpace: "nowrap" }}>{label}</span>
+      <span style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${v("outline")},transparent)` }} />
+    </div>
+  );
+}
+
+/* ---------- project tower ---------- */
+// Desktop + motion allowed → spinning helix; otherwise the stacked list.
+const TOWER_QUERY = "(min-width:901px) and (prefers-reduced-motion: no-preference)";
+function useTowerMode() {
+  const [on, setOn] = useState(() => window.matchMedia(TOWER_QUERY).matches);
+  useEffect(() => {
+    const m = window.matchMedia(TOWER_QUERY);
+    const onChange = () => setOn(m.matches);
+    m.addEventListener("change", onChange);
+    return () => m.removeEventListener("change", onChange);
+  }, []);
+  return on;
+}
+
+// Native scroll-driven animation drives --tp/--k in CSS; older engines get the JS fallback below.
+// (window.CSS — the module-level `CSS` is this file's stylesheet string)
+const nativeSpin = () => window.CSS.supports("animation-timeline: view()") && window.CSS.supports("width: round(down, 1px, 1px)");
+
+// Same easing as the CSS: hold flat near each card, smoothstep between cards.
+function easeIndex(p, n) {
+  const k = p * (n - 1), base = Math.floor(k);
+  const x = Math.min(1, Math.max(0, (k - base - TOWER_HOLD) / (1 - 2 * TOWER_HOLD)));
+  return base + x * x * (3 - 2 * x);
+}
+
+function TowerCard({ card, index, front, ui, onDetails, onFocusCard }) {
+  const hasImages = card.images && card.images.length > 0;
+  return (
+    <article className="fbm-tcard" style={{ "--i": index }} data-front={front || undefined} onFocus={() => onFocusCard(index)}>
+      <div style={{ flexShrink: 0 }}>
+        {hasImages ? <ImageSlider images={card.images} height={190} /> : (
+          <div style={{ height: 190, background: stripes(10, 20), borderBottom: `1px solid ${v("outline")}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 40, height: 40, borderRadius: r("lg"), background: ACCENT }} />
+          </div>
+        )}
+      </div>
+      <div style={{ padding: 22, display: "flex", flexDirection: "column", gap: 10, flex: 1, minHeight: 0 }}>
+        {(card.barLabel || card.inlineBadge) && <span className="t-label-bar" style={{ textTransform: "uppercase", color: v("secondary") }}>{card.barLabel || card.inlineBadge}</span>}
+        <h3 className="t-title-lg" style={{ color: v("on-surface"), margin: 0 }}>{card.title}</h3>
+        <p className="t-body-sm fbm-tdesc" style={{ margin: 0, color: v("on-surface-variant") }}>{card.description}</p>
+        {card.badges ? <div style={{ ...rowWrap, gap: 6 }}>{card.badges.slice(0, 3).map((b, i) => <span key={i} className="t-label" style={{ ...badgeStyle, padding: "3px 9px" }}>{b}</span>)}</div>
+          : card.pills && <div style={pillWrap}>{card.pills.slice(0, 7).map((p, i) => <Pill key={i}>{p}</Pill>)}</div>}
+        <div style={{ marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+          {card.link ? <ExtLink href={card.link.href} label={card.link.label || new URL(card.link.href).hostname.replace(/^www\./, "")} arrow="↗" /> : <span />}
+          <button type="button" className="fbm-pill t-label" onClick={() => onDetails(card)} style={{ ...pillStyleLg, background: "transparent", cursor: "pointer" }}>{ui.projectDetails} +</button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ProjectTower({ projects, ui }) {
+  const cards = [
+    ...projects.live.map((card) => ({ card, group: "live" })),
+    ...projects.internal.map((card) => ({ card, group: "internal" })),
+  ];
+  const n = cards.length;
+  const towerRef = useRef(null);
+  const stageRef = useRef(null);
+  const dialogRef = useRef(null);
+  const [active, setActive] = useState(0);
+  const [detail, setDetail] = useState(null);
+
+  useEffect(() => {
+    const tower = towerRef.current, stage = stageRef.current;
+    const native = nativeSpin();
+    let raf = null;
+    const update = () => {
+      raf = null;
+      const rect = tower.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -rect.top / (rect.height - window.innerHeight)));
+      if (!native) {
+        stage.style.setProperty("--tp", p);
+        stage.style.setProperty("--k", easeIndex(p, n));
+      }
+      setActive(Math.round(p * (n - 1)));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, [n]);
+
+  useEffect(() => {
+    const d = dialogRef.current;
+    if (detail && !d.open) d.showModal();
+  }, [detail]);
+
+  // Keyboard users tabbing into a card that isn't in front: spin it to the front.
+  const focusCard = (i) => {
+    if (i === active) return;
+    const top = towerRef.current.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top + (i * TOWER_SEG * window.innerHeight) / 100 });
+  };
+
+  const group = cards[active].group;
+  return (
+    <div ref={towerRef} className="fbm-tower" style={{ "--n": n }}>
+      {cards.map((_, i) => <div key={i} className="fbm-tower-snap" aria-hidden="true" style={{ top: `${i * TOWER_SEG}vh` }} />)}
+      <div ref={stageRef} className="fbm-stage" style={{ "--step": `${360 / Math.max(n, 6)}deg` }}>
+        <div className="fbm-axis" aria-hidden="true" />
+        <div className="fbm-ring">
+          {cards.map(({ card }, i) => (
+            <TowerCard key={i} card={card} index={i} front={i === active} ui={ui} onDetails={setDetail} onFocusCard={focusCard} />
+          ))}
+        </div>
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 3, padding: `${sp("2xl")} 0 ${sp("2xl")}`, background: `linear-gradient(180deg,${v("background")} 72%,transparent)` }}>
+          <div style={{ display: "flex", alignItems: "center", gap: sp("md") }}>
+            <span style={{ width: 8, height: 8, borderRadius: r("full"), background: v(group === "live" ? "primary" : "outline"), boxShadow: group === "live" ? `0 0 12px ${mix("primary", 70)}` : "none" }} />
+            <span className="t-label-caps" style={{ textTransform: "uppercase", color: v("on-surface") }} aria-live="polite">{group === "live" ? projects.liveLabel : projects.internalLabel}</span>
+            <span style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${v("outline")},transparent)` }} />
+            <span className="t-label-meta" style={{ color: v("secondary") }}>{String(active + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span>
+          </div>
+          <p className="t-caption" style={{ margin: "8px 0 0 22px", color: v("on-surface-variant"), maxWidth: 560, opacity: group === "internal" ? 1 : 0, transition: "opacity .4s ease" }}>{projects.internalIntro}</p>
+        </div>
+        <span className="t-label-meta" style={{ position: "absolute", zIndex: 3, bottom: sp("xl"), left: 0, right: 0, textAlign: "center", textTransform: "uppercase", color: v("on-surface-variant"), opacity: active === 0 ? 1 : 0, transition: "opacity .4s ease" }} aria-hidden="true">{ui.towerHint} ↓</span>
+      </div>
+      <dialog ref={dialogRef} className="fbm-dialog" onClose={() => setDetail(null)} onClick={(e) => { if (e.target === dialogRef.current) dialogRef.current.close(); }}>
+        {detail && (
+          <>
+            <div style={{ display: "flex", justifyContent: "flex-end", padding: "12px 12px 0" }}>
+              <button type="button" className="fbm-pill t-label" onClick={() => dialogRef.current.close()} style={{ ...pillStyleLg, background: "transparent", cursor: "pointer" }}>{ui.close} ✕</button>
+            </div>
+            <div style={{ padding: "8px 12px 12px" }}><ProjectCard card={detail} /></div>
+          </>
+        )}
+      </dialog>
     </div>
   );
 }
@@ -278,6 +461,7 @@ function GroupHeader({ label, dotColor, glow }) {
 export default function Portfolio() {
   const rootRef = useRef(null);
   const { locale, content: c, setLocale } = useLocale();
+  const towerMode = useTowerMode();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -326,8 +510,8 @@ export default function Portfolio() {
     setActive("about");
 
     return () => cleanups.forEach((fn) => { try { fn(); } catch (e) {} });
-    // re-run when locale changes so the newly rendered nodes get observed
-  }, [locale]);
+    // re-run when locale or project layout changes so the newly rendered nodes get observed
+  }, [locale, towerMode]);
 
   const navItems = [
     ["about", c.nav.about], ["experience", c.nav.experience], ["projects", c.nav.projects], ["talks", c.nav.talks], ["contact", c.nav.contact],
@@ -336,18 +520,18 @@ export default function Portfolio() {
   return (
     <>
       <style>{CSS}</style>
-      <div ref={rootRef} style={{ position: "relative", background: "#000000", color: "#B8A8C8", fontFamily: "'Manrope',system-ui,sans-serif", lineHeight: 1.6, minHeight: "100vh" }}>
+      <div ref={rootRef} className="t-body-lg" style={{ position: "relative", background: v("background"), color: v("on-surface-variant"), lineHeight: 1.6, minHeight: "100vh" }}>
 
         <a href="#fbm-main" className="fbm-skip">{locale === "pt-BR" ? "Pular para o conteúdo" : "Skip to content"}</a>
 
-        <div id="fbm-spotlight" aria-hidden="true" style={{ position: "fixed", top: 0, left: 0, width: 640, height: 640, pointerEvents: "none", zIndex: 0, borderRadius: "50%", background: "radial-gradient(circle at center, rgba(85,0,114,.35), rgba(42,0,72,.22) 35%, transparent 68%)", transform: "translate(-50%,-50%)", opacity: 0, transition: "opacity .4s ease" }} />
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(1200px 600px at 20% -5%, rgba(42,0,72,.35), transparent 55%)" }} />
+        <div id="fbm-spotlight" aria-hidden="true" style={{ position: "fixed", top: 0, left: 0, width: 640, height: 640, pointerEvents: "none", zIndex: 0, borderRadius: r("full"), background: `radial-gradient(circle at center, ${mix("outline", 35)}, ${mix("surface-deep", 22)} 35%, transparent 68%)`, transform: "translate(-50%,-50%)", opacity: 0, transition: "opacity .4s ease" }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(1200px 600px at 20% -5%, ${mix("surface-deep", 35)}, transparent 55%)` }} />
 
         <div className="fbm-container" style={{ position: "relative", zIndex: 1 }}>
 
           {/* MOBILE HEADER */}
-          <header className="fbm-mobilehead" style={{ position: "sticky", top: 0, zIndex: 20, width: "100%", padding: "14px 22px", margin: "0 -22px", background: "rgba(0,0,0,.72)", backdropFilter: "blur(14px)", borderBottom: "1px solid rgba(86,0,114,.35)", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-            <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: 15, color: "#F5F0F7", letterSpacing: "-.01em" }}>{c.hero.name}</span>
+          <header className="fbm-mobilehead" style={{ position: "sticky", top: 0, zIndex: 20, width: "100%", padding: "14px 22px", margin: "0 -22px", background: mix("background", 72), backdropFilter: "blur(14px)", borderBottom: `1px solid ${mix("outline", 35)}`, alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <span className="t-brand" style={{ color: v("on-surface") }}>{c.hero.name}</span>
             <LangToggle locale={locale} setLocale={setLocale} ariaLabel={c.ui.langToggleAria} />
           </header>
 
@@ -357,33 +541,33 @@ export default function Portfolio() {
               <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
                 <LangToggle locale={locale} setLocale={setLocale} ariaLabel={c.ui.langToggleAria} />
               </div>
-              <p style={{ fontFamily: "'Space Grotesk'", fontSize: 13, letterSpacing: ".28em", textTransform: "uppercase", color: "#A90072", margin: "0 0 14px", fontWeight: 600 }}>{c.hero.role}</p>
-              <h1 style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: "clamp(34px,4.2vw,54px)", lineHeight: 1.02, letterSpacing: "-.03em", margin: "0 0 16px", background: "linear-gradient(120deg,#2A0048 0%,#A90072 52%,#D50048 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: "#D50048", maxWidth: 320 }}>{c.hero.name}</h1>
-              <p style={{ fontSize: 16, color: "#B8A8C8", maxWidth: 360, margin: "0 0 22px", lineHeight: 1.65 }}>{c.hero.tagline}</p>
+              <p className="t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 14px" }}>{c.hero.role}</p>
+              <h1 className="t-display" style={{ fontSize: "clamp(34px,4.2vw,54px)", margin: "0 0 16px", background: `linear-gradient(120deg,${v("surface-deep")} 0%,${v("secondary")} 52%,${v("primary")} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: v("primary"), maxWidth: 320 }}>{c.hero.name}</h1>
+              <p className="t-body-lg" style={{ color: v("on-surface-variant"), maxWidth: 360, margin: "0 0 22px" }}>{c.hero.tagline}</p>
 
-              <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 22 }}>
-                <a href={c.hero.resumeHref} className="fbm-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 24px", borderRadius: 10, background: "linear-gradient(120deg,#2A0048,#A90072,#D50048)", color: "#F5F0F7", fontWeight: 700, fontSize: 14, textDecoration: "none", boxShadow: "0 8px 28px rgba(213,0,72,.28)" }}>{c.hero.resumeCta}</a>
-                <a href={"mailto:" + c.social.email} className="fbm-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 24px", borderRadius: 10, background: "transparent", border: "1px solid #560072", color: "#F5F0F7", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>{c.hero.contactCta}</a>
+              <div style={{ display: "flex", gap: sp("md"), flexWrap: "wrap", marginBottom: 22 }}>
+                <a href={c.hero.resumeHref} className="fbm-btn t-button" style={{ display: "inline-flex", alignItems: "center", gap: sp("sm"), padding: "13px 24px", borderRadius: r("lg"), background: GRADIENT, color: v("on-primary"), textDecoration: "none", boxShadow: `0 8px 28px ${mix("primary", 28)}` }}>{c.hero.resumeCta}</a>
+                <a href={"mailto:" + c.social.email} className="fbm-btn t-button" style={{ display: "inline-flex", alignItems: "center", gap: sp("sm"), padding: "13px 24px", borderRadius: r("lg"), background: "transparent", border: `1px solid ${v("outline")}`, color: v("on-surface"), fontWeight: 600, textDecoration: "none" }}>{c.hero.contactCta}</a>
               </div>
 
               <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
                 <nav className="fbm-nav" aria-label={c.nav.about} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   {navItems.map(([id, label]) => (
-                    <a key={id} href={"#" + id} data-nav={id} className="fbm-navlink" style={{ display: "flex", alignItems: "center", gap: 18, padding: "6px 0", textDecoration: "none" }}>
+                    <a key={id} href={"#" + id} data-nav={id} className="fbm-navlink" style={{ display: "flex", alignItems: "center", gap: sp("lg"), padding: "6px 0", textDecoration: "none" }}>
                       <span className="fbm-navline" />
-                      <span className="fbm-navtext">{label}</span>
+                      <span className="fbm-navtext t-label-caps">{label}</span>
                     </a>
                   ))}
                 </nav>
 
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
-                  <a href={c.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="fbm-social" style={{ color: "#B8A8C8", display: "inline-flex" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: sp("lg") }}>
+                  <a href={c.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" /></svg>
                   </a>
-                  <a href={c.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="fbm-social" style={{ color: "#B8A8C8", display: "inline-flex" }}>
+                  <a href={c.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z" /></svg>
                   </a>
-                  <a href={"mailto:" + c.social.email} aria-label="Email" className="fbm-social" style={{ color: "#B8A8C8", display: "inline-flex" }}>
+                  <a href={"mailto:" + c.social.email} aria-label="Email" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5" /><path d="m3 6 9 7 9-7" /></svg>
                   </a>
                 </div>
@@ -395,62 +579,66 @@ export default function Portfolio() {
           <main id="fbm-main" className="fbm-right">
 
             {/* ABOUT */}
-            <section id="about" data-screen-label="About" style={{ marginBottom: 110, scrollMarginTop: 96 }}>
-              <h2 className="fbm-reveal" style={{ ...sectionH2, margin: "0 0 26px" }}>{c.about.heading}</h2>
-              <div className="fbm-reveal" style={{ display: "flex", flexDirection: "column", gap: 18, fontSize: 16, color: "#B8A8C8", maxWidth: 600 }}>
+            <section id="about" data-screen-label="About" style={sectionStyle}>
+              <h2 className="fbm-reveal t-section-label" style={{ ...sectionH2, margin: "0 0 26px" }}>{c.about.heading}</h2>
+              <div className="fbm-reveal t-body-lg" style={{ display: "flex", flexDirection: "column", gap: sp("lg"), lineHeight: 1.6, color: v("on-surface-variant"), maxWidth: 600 }}>
                 {c.about.paragraphs.map((p, i) => <p key={i} style={{ margin: 0 }}>{p}</p>)}
               </div>
             </section>
 
             {/* EXPERIENCE */}
-            <section id="experience" data-screen-label="Experience" style={{ marginBottom: 110, scrollMarginTop: 96 }}>
-              <h2 className="fbm-reveal" style={sectionH2}>{c.experience.heading}</h2>
-              <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {c.experience.roles.map((r, i) => (
-                  <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "130px 1fr", gap: 18, padding: 22, borderRadius: 14, border: "1px solid transparent" }}>
-                    <div style={{ fontFamily: "'Space Grotesk'", fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", color: "#A90072", fontWeight: 600, paddingTop: 4 }}>{r.period}</div>
+            <section id="experience" data-screen-label="Experience" style={sectionStyle}>
+              <h2 className="fbm-reveal t-section-label" style={sectionH2}>{c.experience.heading}</h2>
+              <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
+                {c.experience.roles.map((role, i) => (
+                  <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "130px 1fr", gap: sp("lg"), padding: 22, borderRadius: r("2xl"), border: "1px solid transparent" }}>
+                    <div className="t-label-meta" style={{ textTransform: "uppercase", color: v("secondary"), paddingTop: sp("xs") }}>{role.period}</div>
                     <div>
-                      <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 17, color: "#F5F0F7", margin: "0 0 8px", fontWeight: 600, letterSpacing: "-.01em" }}>{r.title} · <span style={{ color: "#D50048" }}>{r.company}</span></h3>
-                      {r.location && <p style={{ margin: "0 0 6px", fontSize: 12, color: "#800080", letterSpacing: ".04em" }}>{r.location}</p>}
-                      <p style={{ margin: "0 0 14px", fontSize: 15, color: "#B8A8C8" }}>{r.description}</p>
-                      <div style={rowWrap}>{r.pills.map((p, j) => <Pill key={j} large>{p}</Pill>)}</div>
+                      <h3 className="t-title-md" style={{ color: v("on-surface"), margin: "0 0 8px" }}>{role.title} · <span style={{ color: v("primary") }}>{role.company}</span></h3>
+                      {role.location && <p className="t-label" style={{ margin: "0 0 6px", color: v("tertiary"), fontWeight: 400, letterSpacing: ".04em" }}>{role.location}</p>}
+                      <p className="t-body-md" style={{ margin: "0 0 14px", color: v("on-surface-variant") }}>{role.description}</p>
+                      <div style={rowWrap}>{role.pills.map((p, j) => <Pill key={j} large>{p}</Pill>)}</div>
                     </div>
                   </article>
                 ))}
               </div>
-              <ExtLink href={c.experience.resumeHref} label={c.experience.resumeLink} style={{ marginTop: 26 }} />
+              <ExtLink href={c.experience.resumeHref} label={c.experience.resumeLink} style={{ marginTop: sp("xl") }} />
             </section>
 
             {/* PROJECTS */}
-            <section id="projects" data-screen-label="Projects" style={{ marginBottom: 110, scrollMarginTop: 96 }}>
-              <h2 className="fbm-reveal" style={{ ...sectionH2, margin: "0 0 10px" }}>{c.projects.heading}</h2>
-              <p className="fbm-reveal" style={{ margin: "0 0 30px", fontSize: 15, color: "#B8A8C8", maxWidth: 560 }}>{c.projects.intro}</p>
+            <section id="projects" data-screen-label="Projects" style={sectionStyle}>
+              <h2 className="fbm-reveal t-section-label" style={{ ...sectionH2, margin: "0 0 10px" }}>{c.projects.heading}</h2>
+              <p className="fbm-reveal t-body-md" style={{ margin: "0 0 30px", color: v("on-surface-variant"), maxWidth: 560 }}>{c.projects.intro}</p>
 
-              <GroupHeader label={c.projects.liveLabel} dotColor="#D50048" glow />
-              <div style={{ height: 22 }} />
-              {c.projects.live.map((card, i) => <ProjectCard key={i} card={card} />)}
+              {towerMode ? <ProjectTower projects={c.projects} ui={c.ui} /> : (
+                <>
+                  <GroupHeader label={c.projects.liveLabel} dotColor="primary" glow />
+                  <div style={{ height: 22 }} />
+                  {c.projects.live.map((card, i) => <ProjectCard key={i} card={card} />)}
 
-              <div style={{ height: 12 }} />
-              <GroupHeader label={c.projects.internalLabel} dotColor="#560072" />
-              <p className="fbm-reveal" style={{ margin: "0 0 22px", fontSize: 13, color: "#800080", maxWidth: 560 }}>{c.projects.internalIntro}</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {c.projects.internal.map((card, i) => <ProjectCard key={i} card={card} />)}
-              </div>
+                  <div style={{ height: 12 }} />
+                  <GroupHeader label={c.projects.internalLabel} dotColor="outline" />
+                  <p className="fbm-reveal t-caption" style={{ margin: "0 0 22px", color: v("tertiary"), maxWidth: 560 }}>{c.projects.internalIntro}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
+                    {c.projects.internal.map((card, i) => <ProjectCard key={i} card={card} />)}
+                  </div>
+                </>
+              )}
 
               <ExtLink href={c.projects.archiveHref} label={c.projects.archiveLink} style={{ marginTop: 24 }} />
-              <p className="fbm-reveal" style={{ margin: "12px 0 0", fontSize: 13, color: "#800080", maxWidth: 560 }}>{c.projects.archiveList}</p>
+              <p className="fbm-reveal t-caption" style={{ margin: "12px 0 0", color: v("tertiary"), maxWidth: 560 }}>{c.projects.archiveList}</p>
             </section>
 
             {/* TALKS */}
-            <section id="talks" data-screen-label="Talks" style={{ marginBottom: 110, scrollMarginTop: 96 }}>
-              <h2 className="fbm-reveal" style={sectionH2}>{c.talks.heading}</h2>
-              <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <section id="talks" data-screen-label="Talks" style={sectionStyle}>
+              <h2 className="fbm-reveal t-section-label" style={sectionH2}>{c.talks.heading}</h2>
+              <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
                 {c.talks.items.map((t, i) => (
-                  <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "110px 1fr", gap: 18, padding: "20px 22px", borderRadius: 14, border: "1px solid transparent", alignItems: "baseline" }}>
-                    <div style={{ fontFamily: "'Space Grotesk'", fontSize: 12, letterSpacing: ".06em", textTransform: "uppercase", color: "#A90072", fontWeight: 600 }}>{t.kind}</div>
+                  <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "110px 1fr", gap: sp("lg"), padding: "20px 22px", borderRadius: r("2xl"), border: "1px solid transparent", alignItems: "baseline" }}>
+                    <div className="t-label-meta" style={{ textTransform: "uppercase", color: v("secondary") }}>{t.kind}</div>
                     <div>
-                      <h3 style={{ fontFamily: "'Space Grotesk'", fontSize: 16, color: "#F5F0F7", margin: "0 0 5px", fontWeight: 600 }}>{t.title} <span style={{ color: "#800080", fontWeight: 500 }}>· {t.org}</span></h3>
-                      <p style={{ margin: 0, fontSize: 14, color: "#B8A8C8" }}>{t.description}</p>
+                      <h3 className="t-title-sm" style={{ color: v("on-surface"), margin: "0 0 5px" }}>{t.title} <span style={{ color: v("tertiary"), fontWeight: 500 }}>· {t.org}</span></h3>
+                      <p className="t-body-sm" style={{ margin: 0, color: v("on-surface-variant") }}>{t.description}</p>
                     </div>
                   </article>
                 ))}
@@ -458,17 +646,17 @@ export default function Portfolio() {
             </section>
 
             {/* CONTACT */}
-            <section id="contact" data-screen-label="Contact" style={{ marginBottom: 70, scrollMarginTop: 96, textAlign: "center", padding: "20px 0" }}>
-              <p className="fbm-reveal" style={{ fontFamily: "'Space Grotesk'", fontSize: 13, letterSpacing: ".2em", textTransform: "uppercase", color: "#A90072", margin: "0 0 16px", fontWeight: 600 }}>{c.contact.eyebrow}</p>
-              <h2 className="fbm-reveal" style={{ fontFamily: "'Space Grotesk'", fontSize: "clamp(30px,4vw,42px)", color: "#F5F0F7", margin: "0 0 16px", fontWeight: 700, letterSpacing: "-.02em" }}>{c.contact.heading}</h2>
-              <p className="fbm-reveal" style={{ fontSize: 16, color: "#B8A8C8", margin: "0 auto 32px", maxWidth: 440 }}>{c.contact.line}</p>
-              <a href={"mailto:" + c.contact.email} className="fbm-btn fbm-reveal" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 34px", borderRadius: 12, background: "linear-gradient(120deg,#2A0048,#A90072,#D50048)", color: "#F5F0F7", fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: 16, textDecoration: "none", boxShadow: "0 12px 36px rgba(213,0,72,.32)" }}>{c.contact.cta}</a>
-              <p className="fbm-reveal" style={{ margin: "28px 0 0", fontSize: 13, color: "#800080" }}>{c.contact.location}</p>
+            <section id="contact" data-screen-label="Contact" style={{ marginBottom: 70, scrollMarginTop: sp("4xl"), textAlign: "center", padding: "20px 0" }}>
+              <p className="fbm-reveal t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 16px" }}>{c.contact.eyebrow}</p>
+              <h2 className="fbm-reveal t-headline" style={{ fontSize: "clamp(30px,4vw,42px)", color: v("on-surface"), margin: "0 0 16px" }}>{c.contact.heading}</h2>
+              <p className="fbm-reveal t-body-lg" style={{ color: v("on-surface-variant"), margin: "0 auto 32px", maxWidth: 440, lineHeight: 1.6 }}>{c.contact.line}</p>
+              <a href={"mailto:" + c.contact.email} className="fbm-btn fbm-reveal t-button-lg" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 34px", borderRadius: r("xl"), background: GRADIENT, color: v("on-primary"), textDecoration: "none", boxShadow: `0 12px 36px ${mix("primary", 32)}` }}>{c.contact.cta}</a>
+              <p className="fbm-reveal t-caption" style={{ margin: "28px 0 0", color: v("tertiary") }}>{c.contact.location}</p>
             </section>
 
             {/* FOOTER */}
-            <footer style={{ borderTop: "1px solid rgba(86,0,114,.35)", paddingTop: 26, textAlign: "center" }}>
-              <p style={{ margin: 0, fontSize: 13, color: "#800080", fontFamily: "'Space Grotesk'", letterSpacing: ".02em" }}>{c.footer.credit}</p>
+            <footer style={{ borderTop: `1px solid ${mix("outline", 35)}`, paddingTop: sp("xl"), textAlign: "center" }}>
+              <p className="t-footer" style={{ margin: 0, color: v("tertiary") }}>{c.footer.credit}</p>
             </footer>
 
           </main>

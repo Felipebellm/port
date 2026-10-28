@@ -4,7 +4,10 @@
     "description": "Desenvolvedor Full Stack especializado em PHP, Laravel e WordPress — plataformas corporativas, frameworks sob medida, integrações multi-banco e pipelines de CI/CD."
   },
   "ui": {
-    "langToggleAria": "Mudar idioma"
+    "langToggleAria": "Mudar idioma",
+    "towerHint": "Role para girar",
+    "projectDetails": "Detalhes",
+    "close": "Fechar"
   },
   "hero": {
     "role": "Desenvolvedor Full Stack",

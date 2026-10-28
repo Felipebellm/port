@@ -42,6 +42,11 @@ Each locale JSON has: `meta`, `ui`, `hero`, `nav`, `about`, `experience.roles[]`
 locale files structurally identical — `Portfolio.jsx` indexes into them positionally
 (e.g. `c.experience.roles.map(...)`).
 
+On desktop with motion allowed, Projects renders as `ProjectTower` (a scroll-pinned 3D helix
+of all live + internal cards; spin driven by CSS scroll-driven animations where supported, JS
+fallback setting the same `--tp`/`--k` vars otherwise). Mobile / reduced-motion get the stacked
+card list. Tower cards show a summary; "Details" opens the full card in a `<dialog>`.
+
 Contact is a `mailto:` CTA (`contact.cta` / `contact.email`) — there is no backend to
 receive form submissions.
 
@@ -49,6 +54,10 @@ receive form submissions.
 
 - No CSS framework or Sass — `Portfolio.jsx` is self-contained (CSS-in-JS via a
   template-literal `<style>` block + inline `style` props).
+- Design tokens live in `/DESIGN.md` (Google Labs design.md format). `cd frontend && npm run tokens`
+  regenerates `src/portfolio/tokens.css` (CSS vars + `.t-*` type classes); `npm run lint:design`
+  validates it. In `Portfolio.jsx` use `v("token")` / `mix("token", pct)` / `sp()` / `r()` and `.t-*`
+  classes — never raw hex or font sizes. Don't edit `tokens.css` by hand.
 - Don't add routing, state management, or a backend unless explicitly asked — the
   project was deliberately reduced to a static content-driven SPA.
 

@@ -4,7 +4,10 @@
     "description": "Full Stack Developer specializing in PHP, Laravel, and WordPress — enterprise platforms, custom frameworks, multi-database integrations, and CI/CD pipelines."
   },
   "ui": {
-    "langToggleAria": "Change language"
+    "langToggleAria": "Change language",
+    "towerHint": "Scroll to spin",
+    "projectDetails": "Details",
+    "close": "Close"
   },
   "hero": {
     "role": "Full Stack Developer",
