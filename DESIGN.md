@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Felipe Bell Marques — Portfolio
-description: Dark, editorial, single-page developer portfolio. Black canvas, violet-to-crimson accents, technical display type.
+description: Editorial, single-page developer portfolio with a purple-dark (default) and a purple-white theme. Violet-to-crimson accents, technical display type.
 colors:
   primary: "#D50048"
   on-primary: "#F5F0F7"
@@ -13,6 +13,13 @@ colors:
   surface-media: "#0A0212"
   on-surface: "#F5F0F7"
   on-surface-variant: "#B8A8C8"
+  gradient-start: "#2A0048"
+  surface-deep-light: "#EFE4F6"
+  outline-light: "#D6BFE6"
+  background-light: "#FBF8FD"
+  surface-media-light: "#FFFFFF"
+  on-surface-light: "#1E0533"
+  on-surface-variant-light: "#4E3B5E"
 typography:
   display:
     fontFamily: Space Grotesk
@@ -232,15 +239,50 @@ components:
     backgroundColor: "{colors.outline}"
   tower-axis:
     backgroundColor: "{colors.outline}"
-    width: 2px
+    width: 22px
   tower-card:
     backgroundColor: "{colors.surface-media}"
     textColor: "{colors.on-surface-variant}"
     typography: "{typography.body-sm}"
     rounded: "{rounded.4xl}"
     padding: 22px
-    width: 440px
-    height: 520px
+    width: 560px
+    height: 560px
+  theme-toggle:
+    backgroundColor: "{colors.surface-deep}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.full}"
+    size: 26px
+  theme-toggle-knob:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.full}"
+  page-light:
+    backgroundColor: "{colors.background-light}"
+    textColor: "{colors.on-surface-variant-light}"
+  heading-light:
+    backgroundColor: "{colors.background-light}"
+    textColor: "{colors.on-surface-light}"
+  card-light:
+    backgroundColor: "{colors.surface-media-light}"
+    textColor: "{colors.on-surface-variant-light}"
+  badge-light:
+    backgroundColor: "{colors.surface-deep-light}"
+    textColor: "{colors.on-surface-light}"
+  divider-light:
+    backgroundColor: "{colors.outline-light}"
+  text-link-light:
+    backgroundColor: "{colors.background-light}"
+    textColor: "{colors.primary}"
+  eyebrow-light:
+    backgroundColor: "{colors.background-light}"
+    textColor: "{colors.secondary}"
+  meta-text-light:
+    backgroundColor: "{colors.background-light}"
+    textColor: "{colors.tertiary}"
+  button-primary-gradient:
+    backgroundColor: "{colors.gradient-start}"
+    textColor: "{colors.on-primary}"
   tower-dialog:
     backgroundColor: "{colors.surface-media}"
     textColor: "{colors.on-surface}"
@@ -272,9 +314,27 @@ The palette is a single hue family that runs from deep violet to crimson, set on
 - **On-surface (#F5F0F7):** headings and text on filled accents.
 - **On-surface-variant (#B8A8C8):** all body copy.
 
-The **signature gradient** is `surface-deep → secondary → primary` (120° on buttons,
-90° on bars and nav underlines). It's the only gradient for filled surfaces. Translucent
-fills are always one of these tokens mixed with transparency, never a new hex.
+The **signature gradient** is `gradient-start → secondary → primary` (120° on buttons
+and the name, 90° on bars and nav underlines). It's the only gradient for filled
+surfaces. `gradient-start` (#2A0048) is the same in both themes, so the gradient never
+washes out. Translucent fills are always one of these tokens mixed with transparency,
+never a new hex.
+
+### Light theme (purple-white)
+
+The same accents (`primary`, `secondary`, `tertiary`, `on-primary`) on a lavender-white
+canvas. Tokens with a `-light` suffix replace their base token when
+`<html data-theme="light">`:
+
+- **Background-light (#FBF8FD):** a barely-violet white page.
+- **Surface-media-light (#FFFFFF):** pure white card and image surfaces.
+- **Surface-deep-light (#EFE4F6):** lavender tint fills.
+- **Outline-light (#D6BFE6):** soft lilac borders.
+- **On-surface-light (#1E0533):** deep aubergine headings.
+- **On-surface-variant-light (#4E3B5E):** muted plum body copy.
+
+On white, `secondary` and `tertiary` pass AA as text. The theme defaults to the OS
+preference, can be switched with the theme toggle, and is remembered across visits.
 
 ## Typography
 
@@ -367,7 +427,9 @@ corners, and no radius above 18px except for pills.
 - **Do** express translucency as a token plus alpha (`color-mix`), never a new hex.
 - **Do** honour `prefers-reduced-motion`: no spotlight, no reveal animation, no tower.
 - **Do** keep the tower's front card perfectly flat so its text stays crisp.
-- **Don't** introduce new hues, greys or a light theme. The site is dark-only.
+- **Don't** introduce new hues or greys. Only the two themes exist. Every color must come
+  from a token that has both a dark value and (if it changes) a `-light` value.
+- **Do** switch themes with a crossfade (View Transitions) where supported.
 - **Don't** use `tertiary` or `secondary` for body-length text. On black they're
   label/metadata colors, below AA for long reading.
 - **Don't** add drop shadows that aren't tinted from `secondary`/`primary`.

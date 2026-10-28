@@ -4,6 +4,7 @@ import {
   useScroll, useSpring, useTransform, useMotionValue, useMotionValueEvent, useReducedMotion,
 } from "motion/react";
 import useLocale from "./useLocale";
+import useTheme from "./useTheme";
 import Lenis from "lenis";
 import Snap from "lenis/snap";
 import "lenis/dist/lenis.css";
@@ -31,8 +32,8 @@ const v = (token) => `var(--color-${token})`;
 const mix = (token, pct) => `color-mix(in srgb,var(--color-${token}) ${pct}%,transparent)`;
 const sp = (token) => `var(--spacing-${token})`;
 const r = (token) => `var(--rounded-${token})`;
-const GRADIENT = `linear-gradient(120deg,${v("surface-deep")},${v("secondary")},${v("primary")})`;
-const GRADIENT_H = `linear-gradient(90deg,${v("surface-deep")},${v("secondary")},${v("primary")})`;
+const GRADIENT = `linear-gradient(120deg,${v("gradient-start")},${v("secondary")},${v("primary")})`;
+const GRADIENT_H = `linear-gradient(90deg,${v("gradient-start")},${v("secondary")},${v("primary")})`;
 const ACCENT = `linear-gradient(120deg,${v("secondary")},${v("primary")})`;
 const TOWER_SEG = 50;    // vh of scroll per project in the tower
 const TOWER_HOLD = 0.15; // fraction of each segment, at both ends, where the tower holds still on a card
@@ -60,7 +61,8 @@ const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 *{box-sizing:border-box;}
 body{margin:0;background:${v("background")};overflow-x:hidden;}
-::selection{background:${v("secondary")};color:${v("on-surface")};}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.45s;animation-timing-function:ease;}
+::selection{background:${v("secondary")};color:${v("on-primary")};}
 .fbm-container{max-width:${sp("container")};margin:0 auto;padding:0 ${sp("2xl")};}
 .fbm-narrow{max-width:820px;margin:0 auto;}
 .fbm-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:${sp("4xl")} 0 ${sp("3xl")};}
@@ -83,6 +85,14 @@ body{margin:0;background:${v("background")};overflow-x:hidden;}
 .fbm-side .fbm-navtext{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width .45s ease,opacity .3s ease,color .3s ease,letter-spacing .3s ease;}
 .fbm-side:hover .fbm-navlink,.fbm-side:focus-within .fbm-navlink,.fbm-side[data-open] .fbm-navlink{gap:${sp("md")};}
 .fbm-side:hover .fbm-navtext,.fbm-side:focus-within .fbm-navtext,.fbm-side[data-open] .fbm-navtext{max-width:220px;opacity:1;}
+.fbm-sidetools{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:8px;padding-top:10px;border-top:1px solid ${mix("outline", 45)};}
+.fbm-iconbtn{width:26px;height:26px;padding:0;border-radius:${r("full")};border:1px solid ${v("outline")};background:${mix("surface-deep", 40)};color:${v("on-surface")};
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .25s ease,color .25s ease;}
+.fbm-iconbtn:hover{border-color:${v("primary")};color:${v("primary")};}
+.fbm-themeswitch{position:relative;width:60px;height:30px;padding:0 7px;border-radius:${r("full")};border:1px solid ${v("outline")};background:${mix("surface-deep", 30)};
+  color:${v("on-surface-variant")};display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.fbm-themeknob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:${r("full")};background:${v("primary")};color:${v("on-primary")};
+  display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px ${mix("primary", 40)};}
 .fbm-sidetoggle{align-self:flex-start;border:none;background:transparent;color:${v("on-surface-variant")};cursor:pointer;padding:2px 0 6px;font-size:16px;line-height:1;}
 .fbm-navline{position:relative;width:26px;height:2px;background:${v("outline")};flex-shrink:0;transition:width .3s ease,background .3s ease,box-shadow .3s ease;}
 .fbm-navglow{position:absolute;inset:0;border-radius:2px;background:${GRADIENT_H};box-shadow:0 0 10px ${mix("primary", 55)};}
@@ -611,8 +621,49 @@ function NavLinks({ items, active, onGo, group }) {
   ));
 }
 
+/* ---------- theme ---------- */
+const SunIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
+);
+const MoonIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5a8.5 8.5 0 1 0 10.8 10.8Z" /></svg>
+);
+
+// Full switch (hero): knob springs between moon (dark) and sun (light).
+// Compact (sidebar): a 26px icon button whose icon spins over to the other one.
+function ThemeToggle({ theme, onToggle, ui, compact }) {
+  const light = theme === "light";
+  const label = light ? ui.toDarkTheme : ui.toLightTheme;
+  if (compact) {
+    return (
+      <m.button type="button" className="fbm-iconbtn" aria-label={label} title={label} onClick={onToggle} {...press}>
+        <AnimatePresence mode="wait" initial={false}>
+          <m.span key={theme} initial={{ rotate: -90, scale: 0.5, opacity: 0 }} animate={{ rotate: 0, scale: 1, opacity: 1 }} exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
+            transition={{ duration: 0.22 }} style={{ display: "inline-flex" }}>{light ? <SunIcon /> : <MoonIcon />}</m.span>
+        </AnimatePresence>
+      </m.button>
+    );
+  }
+  return (
+    <button type="button" role="switch" aria-checked={light} aria-label={label} title={label} className="fbm-themeswitch" onClick={onToggle}>
+      <MoonIcon /><SunIcon />
+      <m.span className="fbm-themeknob" animate={{ x: light ? 30 : 0 }} transition={SPRING}>{light ? <SunIcon /> : <MoonIcon />}</m.span>
+    </button>
+  );
+}
+
+// Compact language switch for the sidebar: shows the current language, tap to flip.
+function LangButton({ locale, setLocale, label }) {
+  return (
+    <m.button type="button" className="fbm-iconbtn t-label-xs" aria-label={label} title={label} onClick={() => setLocale(locale === "en" ? "pt-BR" : "en")} {...press}>
+      {locale === "en" ? "EN" : "PT"}
+    </m.button>
+  );
+}
+
 // Floating section nav: slides in once the hero is behind us; collapsed to lines, expands sideways.
-function SideNav({ show, items, active, onGo, label }) {
+// The language + theme buttons sit at the bottom and are always visible, even collapsed.
+function SideNav({ show, items, active, onGo, label, tools }) {
   const [open, setOpen] = useState(false);
   return (
     <AnimatePresence>
@@ -622,6 +673,7 @@ function SideNav({ show, items, active, onGo, label }) {
           transition={{ duration: 0.5, ease: EASE }}>
           <button type="button" className="fbm-sidetoggle" aria-expanded={open} aria-label={label} onClick={() => setOpen((o) => !o)}>{open ? "‹" : "≡"}</button>
           <NavLinks items={items} active={active} group="nav-side" onGo={(id) => { setOpen(false); onGo(id); }} />
+          <div className="fbm-sidetools">{tools}</div>
         </m.nav>
       )}
     </AnimatePresence>
@@ -678,6 +730,7 @@ function Page() {
   const rootRef = useRef(null);
   const heroRef = useRef(null);
   const { locale, content: c, setLocale } = useLocale();
+  const { theme, toggleTheme } = useTheme();
   const towerMode = useTowerMode();
   const reduced = useReducedMotion();
   const [lenis, setLenis] = useState(null);
@@ -742,21 +795,26 @@ function Page() {
         <Spotlight />
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(1200px 700px at 30% 0%, ${mix("surface-deep", 45)}, transparent 60%)` }} />
 
-        <SideNav show={pastHero} items={navItems} active={activeId} onGo={goTo} label={c.ui.sectionsNav} />
+        <SideNav show={pastHero} items={navItems} active={activeId} onGo={goTo} label={c.ui.sectionsNav}
+          tools={<>
+            <LangButton locale={locale} setLocale={setLocale} label={c.ui.langToggleShort} />
+            <ThemeToggle compact theme={theme} onToggle={toggleTheme} ui={c.ui} />
+          </>} />
 
         <div className="fbm-container" style={{ position: "relative", zIndex: 1 }}>
 
           {/* HERO — the introduction */}
           <header ref={heroRef} className="fbm-hero">
             <m.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE, delay: 0.5 }}
-              style={{ position: "absolute", top: sp("xl"), right: 0 }}>
+              style={{ position: "absolute", top: sp("xl"), right: 0, zIndex: 2, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 10 }}>
               <LangToggle locale={locale} setLocale={setLocale} ariaLabel={c.ui.langToggleAria} />
+              <ThemeToggle theme={theme} onToggle={toggleTheme} ui={c.ui} />
             </m.div>
             <m.div variants={heroParent} initial="hidden" animate="show" style={reduced ? undefined : { y: heroY, opacity: heroOpacity }}>
               <m.p variants={heroChild} className="t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 18px" }}>{c.hero.role}</m.p>
               <div className="fbm-namerow">
                 <Avatar photo={c.hero.photo} name={c.hero.name} />
-                <m.h1 variants={heroChild} className="t-display" style={{ fontSize: "clamp(44px,8.5vw,108px)", margin: 0, background: `linear-gradient(120deg,${v("surface-deep")} 0%,${v("secondary")} 45%,${v("primary")} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: v("primary") }}>{c.hero.name}</m.h1>
+                <m.h1 variants={heroChild} className="t-display" style={{ fontSize: "clamp(44px,8.5vw,108px)", margin: 0, background: `linear-gradient(120deg,${v("gradient-start")} 0%,${v("secondary")} 45%,${v("primary")} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: v("primary") }}>{c.hero.name}</m.h1>
               </div>
               <m.p variants={heroChild} className="t-body-lg" style={{ color: v("on-surface-variant"), maxWidth: 620, margin: "0 0 34px", fontSize: "clamp(16px,1.6vw,19px)" }}>{c.hero.tagline}</m.p>
 

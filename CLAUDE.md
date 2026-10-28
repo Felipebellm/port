@@ -30,6 +30,10 @@ Everything lives in [frontend/](frontend/):
 - `src/portfolio/useLocale.js` — picks `en` or `pt-BR` (browser-language auto-detect,
   overridable via the EN / PT-BR toggle, persisted in `localStorage`), and keeps
   `<html lang>` / `document.title` / the meta description in sync.
+- `src/portfolio/useTheme.js` — dark (default) / light theme on `<html data-theme>`, saved in
+  `localStorage("theme")`, OS preference as fallback; `index.html` sets it before first paint.
+  Theme colors are DESIGN.md tokens with a `-light` suffix, emitted by `gen-tokens.mjs` as a
+  `:root[data-theme="light"]` override — never branch on the theme in JS for colors.
 - `src/portfolio/content/en.json`, `src/portfolio/content/pt-BR.json` — the actual
   content. **To change what's on the site, edit these files** — no component changes
   needed for text, project entries, experience roles, etc.

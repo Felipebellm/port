@@ -8,7 +8,10 @@
     "towerHint": "Role para girar",
     "projectDetails": "Detalhes",
     "close": "Fechar",
-    "sectionsNav": "Seções"
+    "sectionsNav": "Seções",
+    "toLightTheme": "Mudar para o tema claro",
+    "toDarkTheme": "Mudar para o tema escuro",
+    "langToggleShort": "Mudar idioma para inglês"
   },
   "hero": {
     "role": "Desenvolvedor Full Stack",

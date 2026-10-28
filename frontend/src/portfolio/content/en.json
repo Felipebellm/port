@@ -8,7 +8,10 @@
     "towerHint": "Scroll to spin",
     "projectDetails": "Details",
     "close": "Close",
-    "sectionsNav": "Sections"
+    "sectionsNav": "Sections",
+    "toLightTheme": "Switch to light theme",
+    "toDarkTheme": "Switch to dark theme",
+    "langToggleShort": "Switch language to Portuguese"
   },
   "hero": {
     "role": "Full Stack Developer",

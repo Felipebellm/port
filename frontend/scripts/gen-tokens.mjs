@@ -21,6 +21,13 @@ if (report.summary.errors > 0) {
 
 const vars = execFileSync(process.execPath, [cli, "export", "--format", "css-vars", designPath], { encoding: "utf8" });
 
+// Theme convention: a color token named `<base>-light` overrides `--color-<base>` when <html data-theme="light">.
+const lightDecls = vars.split("\n")
+  .map((line) => line.match(/^\s*--color-(.+)-light:\s*(.+);/))
+  .filter(Boolean)
+  .map(([, base, value]) => `  --color-${base}: ${value};`);
+const themes = `:root{color-scheme:dark;}\n:root[data-theme="light"] {\n  color-scheme: light;\n${lightDecls.join("\n")}\n}`;
+
 const STACKS = {
   "Space Grotesk": "'Space Grotesk',system-ui,sans-serif",
   Manrope: "'Manrope',system-ui,sans-serif",
@@ -36,5 +43,5 @@ const typeClasses = [...report.designSystem.typography.entries()].map(([name, t]
   return `.t-${name}{${decls.join(";")};}`;
 });
 
-writeFileSync(outPath, `/* GENERATED from DESIGN.md by scripts/gen-tokens.mjs — do not edit. */\n${vars.trim()}\n\n${typeClasses.join("\n")}\n`);
+writeFileSync(outPath, `/* GENERATED from DESIGN.md by scripts/gen-tokens.mjs — do not edit. */\n${vars.trim()}\n\n${themes}\n\n${typeClasses.join("\n")}\n`);
 console.log(`tokens.css written (${report.summary.warnings} lint warnings)`);
