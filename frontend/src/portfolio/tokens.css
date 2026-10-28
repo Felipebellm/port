@@ -13,7 +13,7 @@
   --color-gradient-start: #2a0048;
   --color-surface-deep-light: #efe4f6;
   --color-outline-light: #d6bfe6;
-  --color-background-light: #fbf8fd;
+  --color-background-light: #edebf0;
   --color-surface-media-light: #ffffff;
   --color-on-surface-light: #1e0533;
   --color-on-surface-variant-light: #4e3b5e;
@@ -43,7 +43,7 @@
   color-scheme: light;
   --color-surface-deep: #efe4f6;
   --color-outline: #d6bfe6;
-  --color-background: #fbf8fd;
+  --color-background: #edebf0;
   --color-surface-media: #ffffff;
   --color-on-surface: #1e0533;
   --color-on-surface-variant: #4e3b5e;

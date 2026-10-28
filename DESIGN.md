@@ -16,7 +16,7 @@ colors:
   gradient-start: "#2A0048"
   surface-deep-light: "#EFE4F6"
   outline-light: "#D6BFE6"
-  background-light: "#FBF8FD"
+  background-light: "#EDEBF0"
   surface-media-light: "#FFFFFF"
   on-surface-light: "#1E0533"
   on-surface-variant-light: "#4E3B5E"
@@ -326,7 +326,7 @@ The same accents (`primary`, `secondary`, `tertiary`, `on-primary`) on a lavende
 canvas. Tokens with a `-light` suffix replace their base token when
 `<html data-theme="light">`:
 
-- **Background-light (#FBF8FD):** a barely-violet white page.
+- **Background-light (#EDEBF0):** a soft, slightly violet light grey page, so white cards lift off it.
 - **Surface-media-light (#FFFFFF):** pure white card and image surfaces.
 - **Surface-deep-light (#EFE4F6):** lavender tint fills.
 - **Outline-light (#D6BFE6):** soft lilac borders.

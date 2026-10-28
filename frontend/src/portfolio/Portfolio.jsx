@@ -75,9 +75,6 @@ body{margin:0;background:${v("background")};overflow-x:hidden;}
 .fbm-avatar-photo{position:absolute;inset:0;border-radius:inherit;overflow:hidden;border:3px solid ${v("background")};background:${v("surface-deep")};display:flex;align-items:center;justify-content:center;}
 .fbm-avatar-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;}
 .fbm-navlink{display:flex;align-items:center;gap:${sp("lg")};padding:6px 0;text-decoration:none;}
-.fbm-cue{position:absolute;left:50%;bottom:${sp("xl")};width:2px;height:44px;margin-left:-1px;background:linear-gradient(180deg,${v("outline")},transparent);overflow:hidden;}
-.fbm-cue::after{content:"";position:absolute;left:0;top:-40%;width:100%;height:40%;background:${v("primary")};animation:fbm-cue 1.8s ease-in-out infinite;}
-@keyframes fbm-cue{to{top:110%;}}
 /* floating section nav (shown/hidden by Motion): collapsed to lines, expands horizontally */
 .fbm-side{position:fixed;top:24px;left:24px;z-index:50;display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-radius:${r("lg")};
   background:${mix("background", 72)};backdrop-filter:blur(12px);border:1px solid ${mix("outline", 45)};}
@@ -168,7 +165,7 @@ html:has(.fbm-dialog[open]){overflow:hidden;}
   .fbm-exprow{grid-template-columns:1fr!important;gap:6px!important;}
 }
 @media (prefers-reduced-motion:reduce){
-  .fbm-cue::after,.fbm-avatar-ring{animation:none;}
+  .fbm-avatar-ring{animation:none;}
 }
 `;
 
@@ -830,7 +827,6 @@ function Page() {
                 <NavLinks items={navItems} active={activeId} group="nav-hero" onGo={goTo} />
               </m.nav>
             </m.div>
-            <m.span className="fbm-cue" aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }} />
           </header>
 
           <main id="fbm-main">
