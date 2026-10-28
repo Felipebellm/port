@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import useLocale from "./useLocale";
+import Lenis from "lenis";
+import Snap from "lenis/snap";
+import "lenis/dist/lenis.css";
 import "./tokens.css";
 
 /*
@@ -30,15 +33,26 @@ const stripes = (a, b) => `repeating-linear-gradient(135deg,${mix("outline", 18)
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
 body{margin:0;background:${v("background")};overflow-x:hidden;}
 ::selection{background:${v("secondary")};color:${v("on-surface")};}
-.fbm-container{display:flex;gap:${sp("3xl")};max-width:${sp("container")};margin:0 auto;padding:0 ${sp("2xl")};}
-.fbm-left{width:44%;position:sticky;top:0;height:100vh;max-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:${sp("2xl")} 0 24px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;}
-.fbm-left::-webkit-scrollbar{display:none;}
-.fbm-right{width:56%;padding:${sp("4xl")} 0;}
-.fbm-mobilehead{display:none;}
-.fbm-nav{width:240px;flex-shrink:0;}
+.fbm-container{max-width:${sp("container")};margin:0 auto;padding:0 ${sp("2xl")};}
+.fbm-narrow{max-width:820px;margin:0 auto;}
+.fbm-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:${sp("4xl")} 0 ${sp("3xl")};}
+.fbm-heronav{display:flex;flex-wrap:wrap;gap:10px 40px;}
+.fbm-navlink{display:flex;align-items:center;gap:${sp("lg")};padding:6px 0;text-decoration:none;}
+.fbm-cue{position:absolute;left:50%;bottom:${sp("xl")};width:2px;height:44px;margin-left:-1px;background:linear-gradient(180deg,${v("outline")},transparent);overflow:hidden;}
+.fbm-cue::after{content:"";position:absolute;left:0;top:-40%;width:100%;height:40%;background:${v("primary")};animation:fbm-cue 1.8s ease-in-out infinite;}
+@keyframes fbm-cue{to{top:110%;}}
+/* floating section nav: fades in once past the hero, collapsed to lines, expands horizontally */
+.fbm-side{position:fixed;top:24px;left:24px;z-index:50;display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-radius:${r("lg")};
+  background:${mix("background", 72)};backdrop-filter:blur(12px);border:1px solid ${mix("outline", 45)};
+  opacity:0;transform:translateX(-14px);pointer-events:none;transition:opacity .5s ease,transform .5s ease;}
+.fbm-side[data-show]{opacity:1;transform:none;pointer-events:auto;}
+.fbm-side .fbm-navlink{gap:0;transition:gap .4s ease;}
+.fbm-side .fbm-navtext{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width .45s ease,opacity .3s ease,color .3s ease,letter-spacing .3s ease;}
+.fbm-side:hover .fbm-navlink,.fbm-side:focus-within .fbm-navlink,.fbm-side[data-open] .fbm-navlink{gap:${sp("md")};}
+.fbm-side:hover .fbm-navtext,.fbm-side:focus-within .fbm-navtext,.fbm-side[data-open] .fbm-navtext{max-width:220px;opacity:1;}
+.fbm-sidetoggle{align-self:flex-start;border:none;background:transparent;color:${v("on-surface-variant")};cursor:pointer;padding:2px 0 6px;font-size:16px;line-height:1;}
 .fbm-navline{width:26px;height:2px;background:${v("outline")};flex-shrink:0;transition:width .3s ease,background .3s ease,box-shadow .3s ease;}
 .fbm-navtext{text-transform:uppercase;color:${v("on-surface-variant")};transition:color .3s ease,letter-spacing .3s ease,font-weight .3s ease;}
 .fbm-navlink:hover .fbm-navtext{color:${v("on-surface")};letter-spacing:.22em;font-weight:700;}
@@ -68,11 +82,10 @@ a:focus-visible,button:focus-visible{outline:2px solid ${v("primary")};outline-o
 /* project tower — see ProjectTower. --k = eased card index (0…n-1) driving the spin */
 @property --tp{syntax:'<number>';inherits:true;initial-value:0;}
 @keyframes fbm-spin{from{--tp:0;}to{--tp:1;}}
-html:has(.fbm-tower){scroll-snap-type:y proximity;}
 .fbm-tower{position:relative;height:calc(100vh + (var(--n) - 1) * ${TOWER_SEG}vh);}
-.fbm-tower-snap{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none;}
-.fbm-stage{position:sticky;top:0;height:100vh;overflow-y:clip;perspective:1600px;--k:0;--tp:0;
-  --cw:440px;--ch:min(520px,68vh);--R:260px;--dy:calc(var(--ch) + 28px);}
+.fbm-tower-snap{position:absolute;left:0;width:1px;height:1px;pointer-events:none;}
+.fbm-stage{position:sticky;top:0;height:100vh;overflow-y:clip;perspective:1700px;--k:0;--tp:0;
+  --cw:560px;--ch:min(560px,70vh);--R:600px;--dy:calc(var(--ch) * .55);}
 @supports (animation-timeline: view()) and (width: round(down, 1px, 1px)){
   .fbm-tower{view-timeline-name:--fbm-tower;}
   .fbm-stage{animation:fbm-spin linear both;animation-timeline:--fbm-tower;animation-range:contain 0% contain 100%;
@@ -81,14 +94,20 @@ html:has(.fbm-tower){scroll-snap-type:y proximity;}
     --kx:clamp(0, (var(--kr) - var(--kf) - ${TOWER_HOLD}) / ${1 - 2 * TOWER_HOLD}, 1);
     --k:calc(var(--kf) + var(--kx) * var(--kx) * (3 - 2 * var(--kx)));}
 }
-.fbm-axis{position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:${mix("outline", 55)};}
-.fbm-axis::after{content:"";position:absolute;inset:0;background:${GRADIENT.replace("120deg", "180deg")};transform-origin:top;transform:scaleY(var(--tp));box-shadow:0 0 12px ${mix("primary", 45)};}
+/* the axis: a shaded cylinder whose helical "ramp" threads scroll with --k, so it reads as spinning */
+.fbm-axis{position:absolute;left:50%;top:0;bottom:0;width:22px;margin-left:-11px;border-radius:11px;
+  background:linear-gradient(90deg,${mix("surface-deep", 40)} 0%,${mix("outline", 85)} 30%,${mix("secondary", 45)} 50%,${mix("outline", 85)} 70%,${mix("surface-deep", 40)} 100%);}
+.fbm-axis::before{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:repeating-linear-gradient(-32deg,transparent 0 16px,${mix("primary", 70)} 16px 21px,transparent 21px 40px);
+  background-position:0 calc(var(--k) * -320px);
+  -webkit-mask:linear-gradient(90deg,transparent,black 30%,black 70%,transparent);mask:linear-gradient(90deg,transparent,black 30%,black 70%,transparent);}
+.fbm-axis::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;border-radius:2px;background:${GRADIENT.replace("120deg", "180deg")};transform-origin:top;transform:scaleY(var(--tp));box-shadow:0 0 16px ${mix("primary", 60)};}
 .fbm-ring{position:absolute;z-index:1;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;
   transform:translateZ(calc(var(--R) * -1)) translateY(calc(var(--k) * var(--dy) * -1)) rotateY(calc(var(--k) * var(--step) * -1));}
 .fbm-tcard{position:absolute;left:calc(var(--cw) / -2);top:calc(var(--ch) / -2);width:var(--cw);height:var(--ch);
   --d:calc(var(--k) - var(--i));--ad:max(var(--d), var(--d) * -1);
   transform:rotateY(calc(var(--i) * var(--step))) translateZ(var(--R)) translateY(calc(var(--i) * var(--dy)));
-  opacity:clamp(0, 1 - var(--ad) * .6, 1);backface-visibility:hidden;pointer-events:none;
+  opacity:clamp(0, 1 - var(--ad) * .45, 1);backface-visibility:hidden;pointer-events:none;
   display:flex;flex-direction:column;overflow:hidden;border-radius:${r("4xl")};border:1px solid ${mix("outline", 60)};background:${v("surface-media")};}
 .fbm-tcard[data-front]{pointer-events:auto;border-color:${mix("secondary", 70)};box-shadow:0 18px 60px ${mix("primary", 22)};}
 .fbm-tdesc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
@@ -97,13 +116,11 @@ html:has(.fbm-tower){scroll-snap-type:y proximity;}
 .fbm-dialog .fbm-reveal{opacity:1;transform:none;}
 .fbm-dialog .fbm-card,.fbm-dialog .fbm-card:hover{transform:none;margin:0!important;box-shadow:none;}
 html:has(.fbm-dialog[open]){overflow:hidden;}
-@media (max-width:1100px){ .fbm-stage{--cw:380px;--R:220px;} }
+@media (max-width:1100px){ .fbm-stage{--cw:480px;--R:520px;} }
 @media (max-width:900px){
-  .fbm-container{flex-direction:column;gap:0;padding:0 22px;}
-  .fbm-left{position:static;width:100%;height:auto;max-height:none;padding:${sp("4xl")} 0 24px;justify-content:flex-start;gap:${sp("2xl")};}
-  .fbm-right{width:100%;padding:${sp("sm")} 0 ${sp("3xl")};}
-  .fbm-nav{display:none!important;}
-  .fbm-mobilehead{display:flex;}
+  .fbm-container{padding:0 22px;}
+  .fbm-heronav{gap:6px 28px;}
+  .fbm-side{top:14px;left:14px;}
   .fbm-reveal{opacity:1;transform:none;}
 }
 @media (max-width:600px){
@@ -355,8 +372,8 @@ function TowerCard({ card, index, front, ui, onDetails, onFocusCard }) {
   return (
     <article className="fbm-tcard" style={{ "--i": index }} data-front={front || undefined} onFocus={() => onFocusCard(index)}>
       <div style={{ flexShrink: 0 }}>
-        {hasImages ? <ImageSlider images={card.images} height={190} /> : (
-          <div style={{ height: 190, background: stripes(10, 20), borderBottom: `1px solid ${v("outline")}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {hasImages ? <ImageSlider images={card.images} height={230} /> : (
+          <div style={{ height: 230, background: stripes(10, 20), borderBottom: `1px solid ${v("outline")}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 40, height: 40, borderRadius: r("lg"), background: ACCENT }} />
           </div>
         )}
@@ -376,7 +393,7 @@ function TowerCard({ card, index, front, ui, onDetails, onFocusCard }) {
   );
 }
 
-function ProjectTower({ projects, ui }) {
+function ProjectTower({ projects, ui, lenis }) {
   const cards = [
     ...projects.live.map((card) => ({ card, group: "live" })),
     ...projects.internal.map((card) => ({ card, group: "internal" })),
@@ -409,16 +426,26 @@ function ProjectTower({ projects, ui }) {
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); if (raf) cancelAnimationFrame(raf); };
   }, [n]);
 
+  // Smooth-scroll snapping: settle on the nearest card once the visitor stops scrolling nearby.
+  useEffect(() => {
+    if (!lenis) return;
+    const snap = new Snap(lenis, { type: "proximity", distanceThreshold: "30%", debounce: 160, duration: 0.9 });
+    towerRef.current.querySelectorAll(".fbm-tower-snap").forEach((el) => snap.addElement(el, { align: ["start"] }));
+    return () => snap.destroy();
+  }, [lenis, n]);
+
   useEffect(() => {
     const d = dialogRef.current;
-    if (detail && !d.open) d.showModal();
-  }, [detail]);
+    if (detail && !d.open) { d.showModal(); lenis?.stop(); }
+    if (!detail) lenis?.start();
+  }, [detail, lenis]);
 
   // Keyboard users tabbing into a card that isn't in front: spin it to the front.
   const focusCard = (i) => {
     if (i === active) return;
-    const top = towerRef.current.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + (i * TOWER_SEG * window.innerHeight) / 100 });
+    const top = towerRef.current.getBoundingClientRect().top + window.scrollY + (i * TOWER_SEG * window.innerHeight) / 100;
+    if (lenis) lenis.scrollTo(top, { duration: 0.9 });
+    else window.scrollTo({ top });
   };
 
   const group = cards[active].group;
@@ -443,7 +470,7 @@ function ProjectTower({ projects, ui }) {
         </div>
         <span className="t-label-meta" style={{ position: "absolute", zIndex: 3, bottom: sp("xl"), left: 0, right: 0, textAlign: "center", textTransform: "uppercase", color: v("on-surface-variant"), opacity: active === 0 ? 1 : 0, transition: "opacity .4s ease" }} aria-hidden="true">{ui.towerHint} ↓</span>
       </div>
-      <dialog ref={dialogRef} className="fbm-dialog" onClose={() => setDetail(null)} onClick={(e) => { if (e.target === dialogRef.current) dialogRef.current.close(); }}>
+      <dialog ref={dialogRef} className="fbm-dialog" data-lenis-prevent onClose={() => setDetail(null)} onClick={(e) => { if (e.target === dialogRef.current) dialogRef.current.close(); }}>
         {detail && (
           <>
             <div style={{ display: "flex", justifyContent: "flex-end", padding: "12px 12px 0" }}>
@@ -457,11 +484,64 @@ function ProjectTower({ projects, ui }) {
   );
 }
 
+/* ---------- navigation ---------- */
+function NavLinks({ items, onGo }) {
+  return items.map(([id, label]) => (
+    <a key={id} href={"#" + id} data-nav={id} className="fbm-navlink" onClick={(e) => { e.preventDefault(); onGo(id); }}>
+      <span className="fbm-navline" />
+      <span className="fbm-navtext t-label-caps">{label}</span>
+    </a>
+  ));
+}
+
+// Floating section nav: fades in once the hero is behind us; collapsed to lines, expands sideways.
+function SideNav({ show, items, onGo, label }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <nav className="fbm-side" aria-label={label} data-show={show || undefined} data-open={open || undefined} aria-hidden={!show} inert={!show ? "" : undefined}>
+      <button type="button" className="fbm-sidetoggle" aria-expanded={open} aria-label={label} onClick={() => setOpen((o) => !o)}>{open ? "‹" : "≡"}</button>
+      <NavLinks items={items} onGo={(id) => { setOpen(false); onGo(id); }} />
+    </nav>
+  );
+}
+
+const Socials = ({ c }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: sp("lg") }}>
+    <a href={c.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" /></svg>
+    </a>
+    <a href={c.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z" /></svg>
+    </a>
+    <a href={"mailto:" + c.social.email} aria-label="Email" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5" /><path d="m3 6 9 7 9-7" /></svg>
+    </a>
+  </div>
+);
+
 /* ---------- main ---------- */
 export default function Portfolio() {
   const rootRef = useRef(null);
+  const heroRef = useRef(null);
   const { locale, content: c, setLocale } = useLocale();
   const towerMode = useTowerMode();
+  const [lenis, setLenis] = useState(null);
+  const [pastHero, setPastHero] = useState(false);
+
+  // Smooth scrolling (wheel); skipped entirely when the visitor prefers reduced motion.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const l = new Lenis({ autoRaf: true, lerp: 0.085, wheelMultiplier: 0.9 });
+    setLenis(l);
+    return () => { l.destroy(); setLenis(null); };
+  }, []);
+
+  // The floating nav appears once the hero is mostly scrolled away (i.e. entering Projects).
+  useEffect(() => {
+    const io = new IntersectionObserver(([en]) => setPastHero(en.intersectionRatio < 0.2 && en.boundingClientRect.top < 0), { threshold: [0, 0.2, 0.5] });
+    io.observe(heroRef.current);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -492,7 +572,7 @@ export default function Portfolio() {
       cleanups.push(() => ro.disconnect());
     }
 
-    const ids = ["about", "experience", "projects", "talks", "contact"];
+    const ids = ["projects", "about", "experience", "talks", "contact"];
     const sections = ids.map((id) => root.querySelector("#" + id)).filter(Boolean);
     const links = Array.from(root.querySelectorAll(".fbm-navlink"));
     const setActive = (id) => links.forEach((l) => l.classList.toggle("active", l.getAttribute("data-nav") === id));
@@ -502,20 +582,30 @@ export default function Portfolio() {
         entries.forEach((en) => { vis[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0; });
         let best = null, br = 0;
         Object.keys(vis).forEach((id) => { if (vis[id] > br) { br = vis[id]; best = id; } });
-        if (best) setActive(best);
+        setActive(best);
       }, { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] });
       sections.forEach((s) => so.observe(s));
       cleanups.push(() => so.disconnect());
     }
-    setActive("about");
 
     return () => cleanups.forEach((fn) => { try { fn(); } catch (e) {} });
     // re-run when locale or project layout changes so the newly rendered nodes get observed
   }, [locale, towerMode]);
 
   const navItems = [
-    ["about", c.nav.about], ["experience", c.nav.experience], ["projects", c.nav.projects], ["talks", c.nav.talks], ["contact", c.nav.contact],
+    ["projects", c.nav.projects], ["about", c.nav.about], ["experience", c.nav.experience], ["talks", c.nav.talks], ["contact", c.nav.contact],
   ];
+
+  // Nav click: glide to the section, then move keyboard focus to its heading.
+  const goTo = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const focus = () => el.querySelector("h2")?.focus({ preventScroll: true });
+    if (lenis) lenis.scrollTo(el, { offset: -48, duration: 1.4, onComplete: focus });
+    else { el.scrollIntoView({ behavior: "auto" }); focus(); }
+    history.replaceState(null, "", "#" + id);
+  };
+  const sectionTitle = (text, style) => <h2 tabIndex={-1} className="fbm-reveal t-section-label" style={{ ...sectionH2, outline: "none", ...style }}>{text}</h2>;
 
   return (
     <>
@@ -525,93 +615,46 @@ export default function Portfolio() {
         <a href="#fbm-main" className="fbm-skip">{locale === "pt-BR" ? "Pular para o conteúdo" : "Skip to content"}</a>
 
         <div id="fbm-spotlight" aria-hidden="true" style={{ position: "fixed", top: 0, left: 0, width: 640, height: 640, pointerEvents: "none", zIndex: 0, borderRadius: r("full"), background: `radial-gradient(circle at center, ${mix("outline", 35)}, ${mix("surface-deep", 22)} 35%, transparent 68%)`, transform: "translate(-50%,-50%)", opacity: 0, transition: "opacity .4s ease" }} />
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(1200px 600px at 20% -5%, ${mix("surface-deep", 35)}, transparent 55%)` }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(1200px 700px at 30% 0%, ${mix("surface-deep", 45)}, transparent 60%)` }} />
+
+        <SideNav show={pastHero} items={navItems} onGo={goTo} label={c.ui.sectionsNav} />
 
         <div className="fbm-container" style={{ position: "relative", zIndex: 1 }}>
 
-          {/* MOBILE HEADER */}
-          <header className="fbm-mobilehead" style={{ position: "sticky", top: 0, zIndex: 20, width: "100%", padding: "14px 22px", margin: "0 -22px", background: mix("background", 72), backdropFilter: "blur(14px)", borderBottom: `1px solid ${mix("outline", 35)}`, alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-            <span className="t-brand" style={{ color: v("on-surface") }}>{c.hero.name}</span>
-            <LangToggle locale={locale} setLocale={setLocale} ariaLabel={c.ui.langToggleAria} />
-          </header>
+          {/* HERO — the introduction */}
+          <header ref={heroRef} className="fbm-hero">
+            <div style={{ position: "absolute", top: sp("xl"), right: 0 }}>
+              <LangToggle locale={locale} setLocale={setLocale} ariaLabel={c.ui.langToggleAria} />
+            </div>
+            <p className="t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 18px" }}>{c.hero.role}</p>
+            <h1 className="t-display" style={{ fontSize: "clamp(48px,9vw,112px)", margin: "0 0 24px", background: `linear-gradient(120deg,${v("surface-deep")} 0%,${v("secondary")} 45%,${v("primary")} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: v("primary") }}>{c.hero.name}</h1>
+            <p className="t-body-lg" style={{ color: v("on-surface-variant"), maxWidth: 620, margin: "0 0 34px", fontSize: "clamp(16px,1.6vw,19px)" }}>{c.hero.tagline}</p>
 
-          {/* LEFT COLUMN */}
-          <header className="fbm-left">
-            <div>
-              <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-                <LangToggle locale={locale} setLocale={setLocale} ariaLabel={c.ui.langToggleAria} />
-              </div>
-              <p className="t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 14px" }}>{c.hero.role}</p>
-              <h1 className="t-display" style={{ fontSize: "clamp(34px,4.2vw,54px)", margin: "0 0 16px", background: `linear-gradient(120deg,${v("surface-deep")} 0%,${v("secondary")} 52%,${v("primary")} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: v("primary"), maxWidth: 320 }}>{c.hero.name}</h1>
-              <p className="t-body-lg" style={{ color: v("on-surface-variant"), maxWidth: 360, margin: "0 0 22px" }}>{c.hero.tagline}</p>
-
-              <div style={{ display: "flex", gap: sp("md"), flexWrap: "wrap", marginBottom: 22 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: sp("xl"), flexWrap: "wrap", marginBottom: sp("3xl") }}>
+              <div style={{ display: "flex", gap: sp("md"), flexWrap: "wrap" }}>
                 <a href={c.hero.resumeHref} className="fbm-btn t-button" style={{ display: "inline-flex", alignItems: "center", gap: sp("sm"), padding: "13px 24px", borderRadius: r("lg"), background: GRADIENT, color: v("on-primary"), textDecoration: "none", boxShadow: `0 8px 28px ${mix("primary", 28)}` }}>{c.hero.resumeCta}</a>
                 <a href={"mailto:" + c.social.email} className="fbm-btn t-button" style={{ display: "inline-flex", alignItems: "center", gap: sp("sm"), padding: "13px 24px", borderRadius: r("lg"), background: "transparent", border: `1px solid ${v("outline")}`, color: v("on-surface"), fontWeight: 600, textDecoration: "none" }}>{c.hero.contactCta}</a>
               </div>
-
-              <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-                <nav className="fbm-nav" aria-label={c.nav.about} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  {navItems.map(([id, label]) => (
-                    <a key={id} href={"#" + id} data-nav={id} className="fbm-navlink" style={{ display: "flex", alignItems: "center", gap: sp("lg"), padding: "6px 0", textDecoration: "none" }}>
-                      <span className="fbm-navline" />
-                      <span className="fbm-navtext t-label-caps">{label}</span>
-                    </a>
-                  ))}
-                </nav>
-
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: sp("lg") }}>
-                  <a href={c.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" /></svg>
-                  </a>
-                  <a href={c.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z" /></svg>
-                  </a>
-                  <a href={"mailto:" + c.social.email} aria-label="Email" className="fbm-social" style={{ color: v("on-surface-variant"), display: "inline-flex" }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5" /><path d="m3 6 9 7 9-7" /></svg>
-                  </a>
-                </div>
-              </div>
+              <Socials c={c} />
             </div>
+
+            <nav className="fbm-heronav" aria-label={c.ui.sectionsNav}>
+              <NavLinks items={navItems} onGo={goTo} />
+            </nav>
+            <span className="fbm-cue" aria-hidden="true" />
           </header>
 
-          {/* RIGHT COLUMN */}
-          <main id="fbm-main" className="fbm-right">
+          <main id="fbm-main">
 
-            {/* ABOUT */}
-            <section id="about" data-screen-label="About" style={sectionStyle}>
-              <h2 className="fbm-reveal t-section-label" style={{ ...sectionH2, margin: "0 0 26px" }}>{c.about.heading}</h2>
-              <div className="fbm-reveal t-body-lg" style={{ display: "flex", flexDirection: "column", gap: sp("lg"), lineHeight: 1.6, color: v("on-surface-variant"), maxWidth: 600 }}>
-                {c.about.paragraphs.map((p, i) => <p key={i} style={{ margin: 0 }}>{p}</p>)}
-              </div>
-            </section>
-
-            {/* EXPERIENCE */}
-            <section id="experience" data-screen-label="Experience" style={sectionStyle}>
-              <h2 className="fbm-reveal t-section-label" style={sectionH2}>{c.experience.heading}</h2>
-              <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
-                {c.experience.roles.map((role, i) => (
-                  <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "130px 1fr", gap: sp("lg"), padding: 22, borderRadius: r("2xl"), border: "1px solid transparent" }}>
-                    <div className="t-label-meta" style={{ textTransform: "uppercase", color: v("secondary"), paddingTop: sp("xs") }}>{role.period}</div>
-                    <div>
-                      <h3 className="t-title-md" style={{ color: v("on-surface"), margin: "0 0 8px" }}>{role.title} · <span style={{ color: v("primary") }}>{role.company}</span></h3>
-                      {role.location && <p className="t-label" style={{ margin: "0 0 6px", color: v("tertiary"), fontWeight: 400, letterSpacing: ".04em" }}>{role.location}</p>}
-                      <p className="t-body-md" style={{ margin: "0 0 14px", color: v("on-surface-variant") }}>{role.description}</p>
-                      <div style={rowWrap}>{role.pills.map((p, j) => <Pill key={j} large>{p}</Pill>)}</div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <ExtLink href={c.experience.resumeHref} label={c.experience.resumeLink} style={{ marginTop: sp("xl") }} />
-            </section>
-
-            {/* PROJECTS */}
+            {/* PROJECTS — the tower */}
             <section id="projects" data-screen-label="Projects" style={sectionStyle}>
-              <h2 className="fbm-reveal t-section-label" style={{ ...sectionH2, margin: "0 0 10px" }}>{c.projects.heading}</h2>
-              <p className="fbm-reveal t-body-md" style={{ margin: "0 0 30px", color: v("on-surface-variant"), maxWidth: 560 }}>{c.projects.intro}</p>
+              <div className="fbm-narrow">
+                {sectionTitle(c.projects.heading, { margin: "0 0 10px" })}
+                <p className="fbm-reveal t-body-md" style={{ margin: "0 0 30px", color: v("on-surface-variant"), maxWidth: 560 }}>{c.projects.intro}</p>
+              </div>
 
-              {towerMode ? <ProjectTower projects={c.projects} ui={c.ui} /> : (
-                <>
+              {towerMode ? <ProjectTower projects={c.projects} ui={c.ui} lenis={lenis} /> : (
+                <div className="fbm-narrow">
                   <GroupHeader label={c.projects.liveLabel} dotColor="primary" glow />
                   <div style={{ height: 22 }} />
                   {c.projects.live.map((card, i) => <ProjectCard key={i} card={card} />)}
@@ -622,42 +665,73 @@ export default function Portfolio() {
                   <div style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
                     {c.projects.internal.map((card, i) => <ProjectCard key={i} card={card} />)}
                   </div>
-                </>
+                </div>
               )}
 
-              <ExtLink href={c.projects.archiveHref} label={c.projects.archiveLink} style={{ marginTop: 24 }} />
-              <p className="fbm-reveal t-caption" style={{ margin: "12px 0 0", color: v("tertiary"), maxWidth: 560 }}>{c.projects.archiveList}</p>
-            </section>
-
-            {/* TALKS */}
-            <section id="talks" data-screen-label="Talks" style={sectionStyle}>
-              <h2 className="fbm-reveal t-section-label" style={sectionH2}>{c.talks.heading}</h2>
-              <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
-                {c.talks.items.map((t, i) => (
-                  <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "110px 1fr", gap: sp("lg"), padding: "20px 22px", borderRadius: r("2xl"), border: "1px solid transparent", alignItems: "baseline" }}>
-                    <div className="t-label-meta" style={{ textTransform: "uppercase", color: v("secondary") }}>{t.kind}</div>
-                    <div>
-                      <h3 className="t-title-sm" style={{ color: v("on-surface"), margin: "0 0 5px" }}>{t.title} <span style={{ color: v("tertiary"), fontWeight: 500 }}>· {t.org}</span></h3>
-                      <p className="t-body-sm" style={{ margin: 0, color: v("on-surface-variant") }}>{t.description}</p>
-                    </div>
-                  </article>
-                ))}
+              <div className="fbm-narrow">
+                <ExtLink href={c.projects.archiveHref} label={c.projects.archiveLink} style={{ marginTop: 24 }} />
+                <p className="fbm-reveal t-caption" style={{ margin: "12px 0 0", color: v("tertiary"), maxWidth: 560 }}>{c.projects.archiveList}</p>
               </div>
             </section>
 
-            {/* CONTACT */}
-            <section id="contact" data-screen-label="Contact" style={{ marginBottom: 70, scrollMarginTop: sp("4xl"), textAlign: "center", padding: "20px 0" }}>
-              <p className="fbm-reveal t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 16px" }}>{c.contact.eyebrow}</p>
-              <h2 className="fbm-reveal t-headline" style={{ fontSize: "clamp(30px,4vw,42px)", color: v("on-surface"), margin: "0 0 16px" }}>{c.contact.heading}</h2>
-              <p className="fbm-reveal t-body-lg" style={{ color: v("on-surface-variant"), margin: "0 auto 32px", maxWidth: 440, lineHeight: 1.6 }}>{c.contact.line}</p>
-              <a href={"mailto:" + c.contact.email} className="fbm-btn fbm-reveal t-button-lg" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 34px", borderRadius: r("xl"), background: GRADIENT, color: v("on-primary"), textDecoration: "none", boxShadow: `0 12px 36px ${mix("primary", 32)}` }}>{c.contact.cta}</a>
-              <p className="fbm-reveal t-caption" style={{ margin: "28px 0 0", color: v("tertiary") }}>{c.contact.location}</p>
-            </section>
+            <div className="fbm-narrow">
+              {/* ABOUT */}
+              <section id="about" data-screen-label="About" style={sectionStyle}>
+                {sectionTitle(c.about.heading, { margin: "0 0 26px" })}
+                <div className="fbm-reveal t-body-lg" style={{ display: "flex", flexDirection: "column", gap: sp("lg"), lineHeight: 1.6, color: v("on-surface-variant"), maxWidth: 680 }}>
+                  {c.about.paragraphs.map((p, i) => <p key={i} style={{ margin: 0 }}>{p}</p>)}
+                </div>
+              </section>
 
-            {/* FOOTER */}
-            <footer style={{ borderTop: `1px solid ${mix("outline", 35)}`, paddingTop: sp("xl"), textAlign: "center" }}>
-              <p className="t-footer" style={{ margin: 0, color: v("tertiary") }}>{c.footer.credit}</p>
-            </footer>
+              {/* EXPERIENCE */}
+              <section id="experience" data-screen-label="Experience" style={sectionStyle}>
+                {sectionTitle(c.experience.heading)}
+                <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
+                  {c.experience.roles.map((role, i) => (
+                    <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "130px 1fr", gap: sp("lg"), padding: 22, borderRadius: r("2xl"), border: "1px solid transparent" }}>
+                      <div className="t-label-meta" style={{ textTransform: "uppercase", color: v("secondary"), paddingTop: sp("xs") }}>{role.period}</div>
+                      <div>
+                        <h3 className="t-title-md" style={{ color: v("on-surface"), margin: "0 0 8px" }}>{role.title} · <span style={{ color: v("primary") }}>{role.company}</span></h3>
+                        {role.location && <p className="t-label" style={{ margin: "0 0 6px", color: v("tertiary"), fontWeight: 400, letterSpacing: ".04em" }}>{role.location}</p>}
+                        <p className="t-body-md" style={{ margin: "0 0 14px", color: v("on-surface-variant") }}>{role.description}</p>
+                        <div style={rowWrap}>{role.pills.map((p, j) => <Pill key={j} large>{p}</Pill>)}</div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+                <ExtLink href={c.experience.resumeHref} label={c.experience.resumeLink} style={{ marginTop: sp("xl") }} />
+              </section>
+
+              {/* TALKS */}
+              <section id="talks" data-screen-label="Talks" style={sectionStyle}>
+                {sectionTitle(c.talks.heading)}
+                <div className="fbm-explist" style={{ display: "flex", flexDirection: "column", gap: sp("md") }}>
+                  {c.talks.items.map((t, i) => (
+                    <article key={i} className="fbm-card fbm-reveal fbm-exprow" style={{ display: "grid", gridTemplateColumns: "110px 1fr", gap: sp("lg"), padding: "20px 22px", borderRadius: r("2xl"), border: "1px solid transparent", alignItems: "baseline" }}>
+                      <div className="t-label-meta" style={{ textTransform: "uppercase", color: v("secondary") }}>{t.kind}</div>
+                      <div>
+                        <h3 className="t-title-sm" style={{ color: v("on-surface"), margin: "0 0 5px" }}>{t.title} <span style={{ color: v("tertiary"), fontWeight: 500 }}>· {t.org}</span></h3>
+                        <p className="t-body-sm" style={{ margin: 0, color: v("on-surface-variant") }}>{t.description}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              {/* CONTACT */}
+              <section id="contact" data-screen-label="Contact" style={{ marginBottom: 70, scrollMarginTop: sp("4xl"), textAlign: "center", padding: "20px 0" }}>
+                <p className="fbm-reveal t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 16px" }}>{c.contact.eyebrow}</p>
+                <h2 tabIndex={-1} className="fbm-reveal t-headline" style={{ fontSize: "clamp(30px,4vw,42px)", color: v("on-surface"), margin: "0 0 16px", outline: "none" }}>{c.contact.heading}</h2>
+                <p className="fbm-reveal t-body-lg" style={{ color: v("on-surface-variant"), margin: "0 auto 32px", maxWidth: 440, lineHeight: 1.6 }}>{c.contact.line}</p>
+                <a href={"mailto:" + c.contact.email} className="fbm-btn fbm-reveal t-button-lg" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 34px", borderRadius: r("xl"), background: GRADIENT, color: v("on-primary"), textDecoration: "none", boxShadow: `0 12px 36px ${mix("primary", 32)}` }}>{c.contact.cta}</a>
+                <p className="fbm-reveal t-caption" style={{ margin: "28px 0 0", color: v("tertiary") }}>{c.contact.location}</p>
+              </section>
+
+              {/* FOOTER */}
+              <footer style={{ borderTop: `1px solid ${mix("outline", 35)}`, padding: `${sp("xl")} 0 ${sp("2xl")}`, textAlign: "center" }}>
+                <p className="t-footer" style={{ margin: 0, color: v("tertiary") }}>{c.footer.credit}</p>
+              </footer>
+            </div>
 
           </main>
         </div>

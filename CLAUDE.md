@@ -21,8 +21,9 @@ Frontend-only dev (no Docker): `cd frontend && npm install && npm run dev`.
 Everything lives in [frontend/](frontend/):
 
 - `src/main.jsx` — entry point, renders `<Portfolio />` directly (no router — the site
-  is a single scrolling page with hash-anchor nav: `#about`, `#experience`, `#projects`,
-  `#talks`, `#contact`).
+  is a single scrolling, single-column page: hero → `#projects` → `#about` → `#experience`
+  → `#talks` → `#contact`). Section links (hero nav + the floating `SideNav` that fades in
+  after the hero) scroll via Lenis and focus the section heading.
 - `src/portfolio/Portfolio.jsx` — the entire page. Renders purely from the active
   locale's content object; all styling is a single injected `<style>` tag (`fbm-*`
   classes) plus inline styles, no CSS framework.
@@ -46,6 +47,9 @@ On desktop with motion allowed, Projects renders as `ProjectTower` (a scroll-pin
 of all live + internal cards; spin driven by CSS scroll-driven animations where supported, JS
 fallback setting the same `--tp`/`--k` vars otherwise). Mobile / reduced-motion get the stacked
 card list. Tower cards show a summary; "Details" opens the full card in a `<dialog>`.
+Smooth wheel scrolling uses **Lenis** (the one runtime dependency besides React, added on
+request); its `lenis/snap` plugin snaps the tower to cards. Lenis is skipped under reduced
+motion. Don't add CSS `scroll-snap` or `scroll-behavior: smooth` — they fight Lenis.
 
 Contact is a `mailto:` CTA (`contact.cta` / `contact.email`) — there is no backend to
 receive form submissions.

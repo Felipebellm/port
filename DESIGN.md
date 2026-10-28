@@ -16,7 +16,7 @@ colors:
 typography:
   display:
     fontFamily: Space Grotesk
-    fontSize: 54px
+    fontSize: 112px
     fontWeight: 700
     lineHeight: 1.02em
     letterSpacing: -0.03em
@@ -291,11 +291,19 @@ Uppercase labels (`section-label`, `eyebrow`, `label-caps`, `label-meta`,
 
 ## Layout
 
-Two columns on desktop (max `container` 1180px, 64px gutter): a sticky 44% identity
-column on the left (name, CTAs, nav, socials) and a scrolling 56% content column.
-Under 900px it collapses into one column with a sticky blurred mobile header. Sections
-are separated by `section` (110px). Cards use `xl` (26px) inner padding and `md` (14px)
-between siblings. Mobile side gutter is 22px.
+A single column (max `container` 1180px, 40px gutter, 22px on mobile), in this order:
+
+1. **Hero:** full viewport. Role eyebrow, the name in `display` (fluid up to 112px), the
+   tagline, CTAs and socials, then a horizontal section nav. Clicking a nav link glides
+   to that section and moves focus to its heading.
+2. **Projects:** the full-width project tower.
+3. **About, Experience, Talks, Contact, footer:** in a centered 820px reading column.
+
+Once the hero scrolls away, a **floating section nav** fades in at the top left. It's
+collapsed to short lines and expands horizontally on hover, focus or tap to show the
+labels. Sections are separated by `section` (110px). Cards use `xl` (26px) inner padding
+and `md` (14px) between siblings. Wheel scrolling is smoothed (Lenis), except under
+reduced motion.
 
 ## Elevation & Depth
 
@@ -321,9 +329,10 @@ corners, and no radius above 18px except for pills.
 - **Nav links** pair a short line with an uppercase label; the line grows into the
   gradient when active.
 - **Project tower** (desktop, motion allowed): the Projects section pins a full-height
-  stage while the visitor scrolls past it. A vertical `outline` axis fills with the
-  signature gradient as progress advances, and every project, live then internal, sits
-  on a helix around it. Scrolling spins the tower one card per step and holds still on
+  stage while the visitor scrolls past it. The axis is a thick shaded cylinder with
+  helical `primary` threads that slide as you scroll, so it reads like a spinning
+  parking-garage ramp. Its core fills with the signature gradient as progress advances,
+  and every project, live then internal, sits on a helix around it. Scrolling spins the tower one card per step and holds still on
   each card (scroll-snap plus an eased hold). The front card is flat (0°, no blur) and
   interactive. Cards turning away fade out and aren't clickable. Tower cards are a
   uniform summary (`tower-card`: media, title, clamped description, badges, link) with a

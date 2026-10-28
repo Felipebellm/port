@@ -7,7 +7,8 @@
     "langToggleAria": "Change language",
     "towerHint": "Scroll to spin",
     "projectDetails": "Details",
-    "close": "Close"
+    "close": "Close",
+    "sectionsNav": "Sections"
   },
   "hero": {
     "role": "Full Stack Developer",
