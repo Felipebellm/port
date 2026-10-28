@@ -50,6 +50,11 @@ card list. Tower cards show a summary; "Details" opens the full card in a `<dial
 Smooth wheel scrolling uses **Lenis** (the one runtime dependency besides React, added on
 request); its `lenis/snap` plugin snaps the tower to cards. Lenis is skipped under reduced
 motion. Don't add CSS `scroll-snap` or `scroll-behavior: smooth` — they fight Lenis.
+Animations use **Motion** (`motion@12`, `motion/react`) via `<LazyMotion strict>` — use `m.*`
+components, never `motion.*`; features load lazily from `src/portfolio/motionFeatures.js`.
+Presets live at the top of `Portfolio.jsx` (`reveal()`, `lift`, `press`, `heroChild`, `SPRING`).
+Don't put CSS transitions on `transform`/`opacity` of Motion-animated elements.
+The hero portrait is `hero.photo` in the content JSON → `frontend/public/images/profile.jpg`.
 
 Contact is a `mailto:` CTA (`contact.cta` / `contact.email`) — there is no backend to
 receive form submissions.

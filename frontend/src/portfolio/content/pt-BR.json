@@ -16,7 +16,8 @@
     "tagline": "Construo plataformas web corporativas com PHP, Laravel e WordPress — de migrações de sistemas legados a frameworks sob medida com pipelines completos de CI/CD.",
     "resumeCta": "Ver Currículo",
     "resumeHref": "#",
-    "contactCta": "Entre em contato"
+    "contactCta": "Entre em contato",
+    "photo": { "src": "/images/profile.jpg", "alt": "Retrato de Felipe Bell Marques" }
   },
   "nav": {
     "about": "Sobre",

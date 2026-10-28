@@ -16,7 +16,8 @@
     "tagline": "I build enterprise web platforms with PHP, Laravel, and WordPress — from legacy migrations to custom frameworks with full CI/CD pipelines.",
     "resumeCta": "View Résumé",
     "resumeHref": "#",
-    "contactCta": "Get in touch"
+    "contactCta": "Get in touch",
+    "photo": { "src": "/images/profile.jpg", "alt": "Portrait of Felipe Bell Marques" }
   },
   "nav": {
     "about": "About",

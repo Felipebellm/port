@@ -311,6 +311,22 @@ Depth comes from light, not shadows: a radial violet spotlight follows the curso
 a soft radial wash sits at the top of the page. Cards lift 4px on hover with a magenta
 glow. Primary buttons carry a crimson glow. There are no grey drop shadows.
 
+### Motion
+
+All movement uses one vocabulary, built with Motion (motion.dev):
+
+- **Reveal:** a 26px fade-up, 0.7s with `ease-out-expo`, once per element, with a small
+  stagger inside lists.
+- **Hover:** springs (stiffness 380, damping 30). Cards lift 4px, buttons lift 3px and
+  press to 0.96.
+- **Hero entrance:** blur-to-sharp in a stagger, and the portrait springs in. While you
+  scroll into the tower, the hero drifts up and fades.
+- **Shared indicators glide** instead of jumping: the active nav line and the language
+  pill.
+- **Ambient:** a 2px gradient progress bar at the top and a spring-trailing cursor glow.
+
+Under reduced motion only the fades remain.
+
 ## Shapes
 
 Soft rectangles. Radii scale with element size: `full` for pills and dots, `md`–`lg` for
@@ -328,6 +344,9 @@ corners, and no radius above 18px except for pills.
 - **Text links** are crimson with a trailing arrow that nudges on hover.
 - **Nav links** pair a short line with an uppercase label; the line grows into the
   gradient when active.
+- **Portrait:** a circular photo (`full` radius, 4px `background` gap) inside a slowly
+  rotating conic ring of the signature gradient with a soft `primary` glow. It sits right
+  of the name on desktop and above it on mobile.
 - **Project tower** (desktop, motion allowed): the Projects section pins a full-height
   stage while the visitor scrolls past it. The axis is a thick shaded cylinder with
   helical `primary` threads that slide as you scroll, so it reads like a spinning
