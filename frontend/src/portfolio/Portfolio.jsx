@@ -34,8 +34,8 @@ const r = (token) => `var(--rounded-${token})`;
 const GRADIENT = `linear-gradient(120deg,${v("surface-deep")},${v("secondary")},${v("primary")})`;
 const GRADIENT_H = `linear-gradient(90deg,${v("surface-deep")},${v("secondary")},${v("primary")})`;
 const ACCENT = `linear-gradient(120deg,${v("secondary")},${v("primary")})`;
-const TOWER_SEG = 80;    // vh of scroll per project in the tower
-const TOWER_HOLD = 0.2;  // fraction of each segment, at both ends, where the tower holds still on a card
+const TOWER_SEG = 50;    // vh of scroll per project in the tower
+const TOWER_HOLD = 0.15; // fraction of each segment, at both ends, where the tower holds still on a card
 const stripes = (a, b) => `repeating-linear-gradient(135deg,${mix("outline", 18)} 0 ${a}px,${mix("surface-deep", 28)} ${a}px ${b}px)`;
 
 /* ---------- motion presets ---------- */
@@ -65,13 +65,12 @@ body{margin:0;background:${v("background")};overflow-x:hidden;}
 .fbm-narrow{max-width:820px;margin:0 auto;}
 .fbm-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:${sp("4xl")} 0 ${sp("3xl")};}
 .fbm-heronav{display:flex;flex-wrap:wrap;gap:10px 40px;}
-.fbm-herogrid{display:grid;grid-template-columns:1fr auto;align-items:center;gap:${sp("3xl")};}
-.fbm-herogrid > .fbm-avatar{order:2;}
-.fbm-avatar{position:relative;width:clamp(200px,24vw,340px);aspect-ratio:1;border-radius:${r("full")};}
-.fbm-avatar-ring{position:absolute;inset:-6px;border-radius:inherit;background:conic-gradient(from 0deg,${v("surface-deep")},${v("secondary")},${v("primary")},${v("surface-deep")});
-  box-shadow:0 0 60px ${mix("primary", 30)};animation:fbm-ring 9s linear infinite;}
+.fbm-namerow{display:flex;align-items:center;gap:clamp(18px,2.4vw,34px);margin:0 0 24px;}
+.fbm-avatar{position:relative;flex-shrink:0;width:clamp(72px,9vw,128px);aspect-ratio:1;border-radius:${r("full")};}
+.fbm-avatar-ring{position:absolute;inset:-4px;border-radius:inherit;background:conic-gradient(from 0deg,${v("surface-deep")},${v("secondary")},${v("primary")},${v("surface-deep")});
+  box-shadow:0 0 32px ${mix("primary", 30)};animation:fbm-ring 9s linear infinite;}
 @keyframes fbm-ring{to{transform:rotate(360deg);}}
-.fbm-avatar-photo{position:absolute;inset:0;border-radius:inherit;overflow:hidden;border:4px solid ${v("background")};background:${v("surface-deep")};display:flex;align-items:center;justify-content:center;}
+.fbm-avatar-photo{position:absolute;inset:0;border-radius:inherit;overflow:hidden;border:3px solid ${v("background")};background:${v("surface-deep")};display:flex;align-items:center;justify-content:center;}
 .fbm-avatar-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;}
 .fbm-navlink{display:flex;align-items:center;gap:${sp("lg")};padding:6px 0;text-decoration:none;}
 .fbm-cue{position:absolute;left:50%;bottom:${sp("xl")};width:2px;height:44px;margin-left:-1px;background:linear-gradient(180deg,${v("outline")},transparent);overflow:hidden;}
@@ -152,8 +151,6 @@ html:has(.fbm-dialog[open]){overflow:hidden;}
 @media (max-width:900px){
   .fbm-container{padding:0 22px;}
   .fbm-heronav{gap:6px 28px;}
-  .fbm-herogrid{grid-template-columns:1fr;gap:${sp("xl")};}
-  .fbm-herogrid > .fbm-avatar{order:0;width:clamp(140px,40vw,200px);}
   .fbm-side{top:14px;left:14px;}
 }
 @media (max-width:600px){
@@ -643,7 +640,7 @@ function Avatar({ photo, name }) {
       <span className="fbm-avatar-photo">
         {photo && !failed
           ? <img src={photo.src} alt={photo.alt} onError={() => setFailed(true)} />
-          : <span className="t-display" role="img" aria-label={photo?.alt || name} style={{ fontSize: "clamp(40px,6vw,88px)", color: v("on-surface") }}>{initials}</span>}
+          : <span className="t-display" role="img" aria-label={photo?.alt || name} style={{ fontSize: "clamp(22px,3vw,40px)", color: v("on-surface") }}>{initials}</span>}
       </span>
     </m.div>
   );
@@ -755,11 +752,12 @@ function Page() {
               style={{ position: "absolute", top: sp("xl"), right: 0 }}>
               <LangToggle locale={locale} setLocale={setLocale} ariaLabel={c.ui.langToggleAria} />
             </m.div>
-            <m.div variants={heroParent} initial="hidden" animate="show" className="fbm-herogrid" style={reduced ? undefined : { y: heroY, opacity: heroOpacity }}>
-              <Avatar photo={c.hero.photo} name={c.hero.name} />
-              <div>
+            <m.div variants={heroParent} initial="hidden" animate="show" style={reduced ? undefined : { y: heroY, opacity: heroOpacity }}>
               <m.p variants={heroChild} className="t-eyebrow" style={{ textTransform: "uppercase", color: v("secondary"), margin: "0 0 18px" }}>{c.hero.role}</m.p>
-              <m.h1 variants={heroChild} className="t-display" style={{ fontSize: "clamp(48px,9vw,112px)", margin: "0 0 24px", background: `linear-gradient(120deg,${v("surface-deep")} 0%,${v("secondary")} 45%,${v("primary")} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: v("primary") }}>{c.hero.name}</m.h1>
+              <div className="fbm-namerow">
+                <Avatar photo={c.hero.photo} name={c.hero.name} />
+                <m.h1 variants={heroChild} className="t-display" style={{ fontSize: "clamp(44px,8.5vw,108px)", margin: 0, background: `linear-gradient(120deg,${v("surface-deep")} 0%,${v("secondary")} 45%,${v("primary")} 100%)`, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: v("primary") }}>{c.hero.name}</m.h1>
+              </div>
               <m.p variants={heroChild} className="t-body-lg" style={{ color: v("on-surface-variant"), maxWidth: 620, margin: "0 0 34px", fontSize: "clamp(16px,1.6vw,19px)" }}>{c.hero.tagline}</m.p>
 
               <m.div variants={heroChild} style={{ display: "flex", alignItems: "center", gap: sp("xl"), flexWrap: "wrap", marginBottom: sp("3xl") }}>
@@ -773,7 +771,6 @@ function Page() {
               <m.nav variants={heroChild} className="fbm-heronav" aria-label={c.ui.sectionsNav}>
                 <NavLinks items={navItems} active={activeId} group="nav-hero" onGo={goTo} />
               </m.nav>
-              </div>
             </m.div>
             <m.span className="fbm-cue" aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }} />
           </header>
