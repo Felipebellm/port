@@ -5,7 +5,9 @@
   },
   "ui": {
     "langToggleAria": "Change language",
-    "towerHint": "Scroll to spin",
+    "towerHint": "Scroll or use the arrows",
+    "prevProject": "Previous project",
+    "nextProject": "Next project",
     "projectDetails": "Details",
     "close": "Close",
     "sectionsNav": "Sections",

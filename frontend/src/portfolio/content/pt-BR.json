@@ -5,7 +5,9 @@
   },
   "ui": {
     "langToggleAria": "Mudar idioma",
-    "towerHint": "Role para girar",
+    "towerHint": "Role ou use as setas",
+    "prevProject": "Projeto anterior",
+    "nextProject": "Próximo projeto",
     "projectDetails": "Detalhes",
     "close": "Fechar",
     "sectionsNav": "Seções",

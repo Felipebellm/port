@@ -47,13 +47,19 @@ Each locale JSON has: `meta`, `ui`, `hero`, `nav`, `about`, `experience.roles[]`
 locale files structurally identical — `Portfolio.jsx` indexes into them positionally
 (e.g. `c.experience.roles.map(...)`).
 
-On desktop with motion allowed, Projects renders as `ProjectTower` (a scroll-pinned 3D helix
-of all live + internal cards; spin driven by CSS scroll-driven animations where supported, JS
-fallback setting the same `--tp`/`--k` vars otherwise). Mobile / reduced-motion get the stacked
-card list. Tower cards show a summary; "Details" opens the full card in a `<dialog>`.
+On desktop with motion allowed, Projects renders as `ProjectTower`: a scroll-pinned 3D ring of all
+live + internal cards. The front card faces the viewer, with one neighbour on each side, above a floor
+dial. The spin is driven by CSS scroll-driven animations where supported; elsewhere a JS fallback sets
+the same `--tp`/`--k` vars. `--e`/`--o` (JS) spin the ring in and out as the section arrives and leaves,
+mirror images of each other. Prev/next arrows, the bottom rail, ←/→ keys and clicking a neighbour all
+scroll to that card's position (`goTo`). Mobile / reduced-motion get the stacked card list. Tower cards
+show a summary; "Details" opens the full card in a `<dialog>`.
 Smooth wheel scrolling uses **Lenis** (the one runtime dependency besides React, added on
-request); its `lenis/snap` plugin snaps the tower to cards. Lenis is skipped under reduced
-motion. Don't add CSS `scroll-snap` or `scroll-behavior: smooth` — they fight Lenis.
+request). The tower has its own small snap (Lenis `virtual-scroll` listener) that settles on a card
+**only while the section is pinned**, so nothing pulls you into the section or holds you back from
+leaving it. Don't swap it for `lenis/snap`: its snap points pull visitors back past the last card.
+Lenis is skipped under reduced motion. Don't add CSS `scroll-snap` or `scroll-behavior: smooth`, which
+fight Lenis.
 Animations use **Motion** (`motion@12`, `motion/react`) via `<LazyMotion strict>` — use `m.*`
 components, never `motion.*`; features load lazily from `src/portfolio/motionFeatures.js`.
 Presets live at the top of `Portfolio.jsx` (`reveal()`, `lift`, `press`, `heroChild`, `SPRING`).

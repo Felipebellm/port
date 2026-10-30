@@ -6,7 +6,6 @@ import {
 import useLocale from "./useLocale";
 import useTheme from "./useTheme";
 import Lenis from "lenis";
-import Snap from "lenis/snap";
 import "lenis/dist/lenis.css";
 import "./tokens.css";
 
@@ -116,13 +115,14 @@ body{margin:0;background:${v("background")};overflow-x:hidden;}
 a:focus-visible,button:focus-visible{outline:2px solid ${v("primary")};outline-offset:3px;border-radius:${r("sm")};}
 .fbm-skip{position:absolute;left:16px;top:-48px;background:${v("primary")};color:${v("on-primary")};padding:10px 18px;border-radius:${r("md")};z-index:100;font-weight:600;transition:top .2s ease;text-decoration:none;}
 .fbm-skip:focus{top:16px;}
-/* project tower — see ProjectTower. --k = eased card index (0…n-1) driving the spin */
+/* project tower — see ProjectTower. Cards stand on an arc of a cylinder (seen from slightly above) over a
+   floor dial. --k = eased card index (0…n-1) spins it; --e / --o (set from JS) spin it in and out and fade
+   it as the section arrives and leaves. --d = this card's distance from the front, in cards. */
 @property --tp{syntax:'<number>';inherits:true;initial-value:0;}
 @keyframes fbm-spin{from{--tp:0;}to{--tp:1;}}
 .fbm-tower{position:relative;height:calc(100vh + (var(--n) - 1) * ${TOWER_SEG}vh);}
-.fbm-tower-snap{position:absolute;left:0;width:1px;height:1px;pointer-events:none;}
-.fbm-stage{position:sticky;top:0;height:100vh;overflow-y:clip;perspective:1700px;--k:0;--tp:0;
-  --cw:560px;--ch:min(560px,70vh);--R:600px;--dy:calc(var(--ch) * .55);}
+.fbm-stage{position:sticky;top:0;height:100vh;overflow-y:clip;perspective:2000px;perspective-origin:50% 30%;--k:0;--tp:0;--e:0;--o:1;
+  --step:45deg;--cw:540px;--ch:min(560px,66vh);--cy:calc(50% + 28px);--R:calc((var(--cw) + 70px) / (2 * sin(var(--step) / 2)));--fy:calc(var(--ch) / 2 + 34px);}
 @supports (animation-timeline: view()) and (width: round(down, 1px, 1px)){
   .fbm-tower{view-timeline-name:--fbm-tower;}
   .fbm-stage{animation:fbm-spin linear both;animation-timeline:--fbm-tower;animation-range:contain 0% contain 100%;
@@ -131,30 +131,55 @@ a:focus-visible,button:focus-visible{outline:2px solid ${v("primary")};outline-o
     --kx:clamp(0, (var(--kr) - var(--kf) - ${TOWER_HOLD}) / ${1 - 2 * TOWER_HOLD}, 1);
     --k:calc(var(--kf) + var(--kx) * var(--kx) * (3 - 2 * var(--kx)));}
 }
-/* the axis: a shaded cylinder whose helical "ramp" threads scroll with --k, so it reads as spinning */
-.fbm-axis{position:absolute;left:50%;top:0;bottom:0;width:22px;margin-left:-11px;border-radius:11px;
-  background:linear-gradient(90deg,${mix("surface-deep", 40)} 0%,${mix("outline", 85)} 30%,${mix("secondary", 45)} 50%,${mix("outline", 85)} 70%,${mix("surface-deep", 40)} 100%);}
-.fbm-axis::before{content:"";position:absolute;inset:0;border-radius:inherit;
-  background:repeating-linear-gradient(-32deg,transparent 0 16px,${mix("primary", 70)} 16px 21px,transparent 21px 40px);
-  background-position:0 calc(var(--k) * -320px);
-  -webkit-mask:linear-gradient(90deg,transparent,black 30%,black 70%,transparent);mask:linear-gradient(90deg,transparent,black 30%,black 70%,transparent);}
-.fbm-axis::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;border-radius:2px;background:${GRADIENT.replace("120deg", "180deg")};transform-origin:top;transform:scaleY(var(--tp));box-shadow:0 0 16px ${mix("primary", 60)};}
-.fbm-ring{position:absolute;z-index:1;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;
-  transform:translateZ(calc(var(--R) * -1)) translateY(calc(var(--k) * var(--dy) * -1)) rotateY(calc(var(--k) * var(--step) * -1));}
+/* soft light behind the front card + the floor: a static gradient hairline ellipse with a pool of light at the front */
+.fbm-glow{position:absolute;left:50%;top:var(--cy);width:min(1100px,92vw);height:calc(var(--ch) * 1.3);transform:translate(-50%,-50%);opacity:var(--o);pointer-events:none;
+  background:radial-gradient(closest-side,${mix("secondary", 16)},${mix("surface-deep", 10)} 55%,transparent);}
+.fbm-floor{position:absolute;left:50%;top:var(--cy);width:calc(var(--R) * 2 + 140px);aspect-ratio:1;margin:calc(var(--R) * -1 - 70px);border-radius:50%;opacity:var(--o);pointer-events:none;
+  transform:translateZ(calc(var(--R) * -1)) translateY(var(--fy)) rotateX(90deg);
+  background:radial-gradient(circle at 50% 100%,${mix("primary", 20)},${mix("secondary", 8)} 22%,transparent 42%);}
+.fbm-floor::after{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:conic-gradient(from 180deg,${v("primary")},${v("secondary")} 22%,${mix("outline", 50)} 50%,${v("secondary")} 78%,${v("primary")});
+  -webkit-mask:radial-gradient(closest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px),#000 99%,transparent);
+  mask:radial-gradient(closest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px),#000 99%,transparent);}
+/* the ring spins; the dial (a band of ticks) lies on the floor and turns with it */
+.fbm-ring{position:absolute;z-index:1;left:50%;top:var(--cy);width:0;height:0;transform-style:preserve-3d;
+  transform:translateZ(calc(var(--R) * -1)) rotateY(calc((var(--k) + var(--e)) * var(--step) * -1));}
+.fbm-dial{position:absolute;width:calc(var(--R) * 2 + 56px);aspect-ratio:1;margin:calc(var(--R) * -1 - 28px);border-radius:50%;opacity:calc(var(--o) * .8);pointer-events:none;
+  transform:translateY(var(--fy)) rotateX(90deg);
+  background:repeating-conic-gradient(from -.2deg,${mix("on-surface-variant", 55)} 0 .4deg,transparent .4deg 3deg);
+  -webkit-mask:radial-gradient(closest-side,transparent calc(100% - 12px),#000 calc(100% - 11px) 99%,transparent);
+  mask:radial-gradient(closest-side,transparent calc(100% - 12px),#000 calc(100% - 11px) 99%,transparent);}
 .fbm-tcard{position:absolute;left:calc(var(--cw) / -2);top:calc(var(--ch) / -2);width:var(--cw);height:var(--ch);
-  --d:calc(var(--k) - var(--i));--ad:max(var(--d), var(--d) * -1);
-  transform:rotateY(calc(var(--i) * var(--step))) translateZ(var(--R)) translateY(calc(var(--i) * var(--dy)));
-  opacity:clamp(0, 1 - var(--ad) * .45, 1);backface-visibility:hidden;pointer-events:none;
+  --d:calc(var(--i) - var(--k) - var(--e));--ad:max(var(--d), var(--d) * -1);
+  transform:rotateY(calc(var(--i) * var(--step))) translateZ(var(--R));
+  opacity:calc(clamp(0, (1.7 - var(--ad)) * 2, 1) * var(--o));backface-visibility:hidden;pointer-events:none;
   display:flex;flex-direction:column;overflow:hidden;border-radius:${r("4xl")};border:1px solid ${mix("outline", 60)};background:${v("surface-media")};
   transition:border-color .5s ease,box-shadow .5s ease;}
+/* cards turned away from the front sink into the background */
+.fbm-tcard::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;background:${v("background")};pointer-events:none;
+  opacity:calc((1 - cos(var(--d) * var(--step))) * 1.6);}
 .fbm-tcard[data-front]{pointer-events:auto;border-color:${mix("secondary", 70)};box-shadow:0 18px 60px ${mix("primary", 22)};}
+.fbm-tcard[data-near]{pointer-events:auto;cursor:pointer;}
+.fbm-tcard[data-near] *{pointer-events:none;}
+.fbm-tcard[data-near]:hover{border-color:${mix("secondary", 60)};}
 .fbm-tdesc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+/* arrows beside the front card + the card rail along the bottom */
+.fbm-tnav{position:absolute;z-index:3;top:var(--cy);width:48px;height:48px;margin-top:-24px;padding:0;border-radius:${r("full")};border:1px solid ${v("outline")};
+  background:${mix("background", 60)};backdrop-filter:blur(10px);color:${v("on-surface")};display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:border-color .25s ease,color .25s ease,box-shadow .25s ease;}
+.fbm-tnav:hover:not(:disabled){border-color:${v("primary")};color:${v("primary")};box-shadow:0 0 24px ${mix("primary", 35)};}
+.fbm-tnav:disabled{cursor:default;}
+.fbm-tnav[data-dir="prev"]{left:calc(50% - var(--cw) / 2 - 84px);}
+.fbm-tnav[data-dir="next"]{right:calc(50% - var(--cw) / 2 - 84px);}
+.fbm-tbar{position:absolute;z-index:3;left:0;right:0;bottom:${sp("lg")};display:flex;flex-direction:column;align-items:center;gap:6px;}
+.fbm-trail{display:flex;gap:10px;}
+.fbm-tdot{border:none;background:transparent;padding:8px 0;cursor:pointer;}
 .fbm-dialog{width:min(720px,92vw);max-height:88vh;padding:0;border:none;background:transparent;color:${v("on-surface")};overflow:auto;}
 .fbm-dialog::backdrop{background:${mix("background", 78)};backdrop-filter:blur(6px);animation:fbm-fade .35s ease;}
 @keyframes fbm-fade{from{opacity:0;}}
 .fbm-dialog .fbm-card{margin:0!important;}
 html:has(.fbm-dialog[open]){overflow:hidden;}
-@media (max-width:1100px){ .fbm-stage{--cw:480px;--R:520px;} }
+@media (max-width:1100px){ .fbm-stage{--cw:470px;} }
 @media (max-width:900px){
   .fbm-container{padding:0 22px;}
   .fbm-heronav{gap:6px 28px;}
@@ -422,13 +447,16 @@ function easeIndex(p, n) {
   return base + x * x * (3 - 2 * x);
 }
 
-function TowerCard({ card, index, front, ui, onDetails, onFocusCard }) {
+// Front card is live; its immediate neighbours are click targets that turn the ring to them.
+// Tabbing into any other card turns it to the front.
+function TowerCard({ card, index, front, near, ui, onDetails, onSelect }) {
   const hasImages = card.images && card.images.length > 0;
   return (
-    <article className="fbm-tcard" style={{ "--i": index }} data-front={front || undefined} onFocus={() => onFocusCard(index)}>
+    <article className="fbm-tcard" style={{ "--i": index }} data-front={front || undefined} data-near={near || undefined}
+      onFocus={front ? undefined : () => onSelect(index)} onClick={near ? () => onSelect(index) : undefined}>
       <div style={{ flexShrink: 0 }}>
-        {hasImages ? <ImageSlider images={card.images} height={230} /> : (
-          <div style={{ height: 230, background: stripes(10, 20), borderBottom: `1px solid ${v("outline")}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {hasImages ? <ImageSlider images={card.images} height={220} /> : (
+          <div style={{ height: 220, background: stripes(10, 20), borderBottom: `1px solid ${v("outline")}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 40, height: 40, borderRadius: r("lg"), background: ACCENT }} />
           </div>
         )}
@@ -469,6 +497,13 @@ function Counter({ value, total }) {
   );
 }
 
+const Chevron = ({ flip }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+    style={flip ? { transform: "scaleX(-1)" } : undefined}><path d="m9 6 6 6-6 6" /></svg>
+);
+
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+
 function ProjectTower({ projects, ui, lenis }) {
   const cards = [
     ...projects.live.map((card) => ({ card, group: "live" })),
@@ -478,12 +513,14 @@ function ProjectTower({ projects, ui, lenis }) {
   const towerRef = useRef(null);
   const stageRef = useRef(null);
   const dialogRef = useRef(null);
+  const activeRef = useRef(0);
+  const pendingRef = useRef(null); // card an arrow/rail click is gliding to, so rapid clicks keep advancing
   const [active, setActive] = useState(0);
   const [detail, setDetail] = useState(null);
   const [closing, setClosing] = useState(false);
   const native = useMemo(nativeSpin, []);
 
-  // Progress through the pinned tower (0 → 1). Natively the CSS scroll timeline spins the tower;
+  // Progress through the pinned tower (0 → 1). Natively the CSS scroll timeline spins the ring;
   // otherwise Motion's scroll progress drives the same custom properties.
   const { scrollYProgress } = useScroll({ target: towerRef, offset: ["start start", "end end"] });
   const apply = (p) => {
@@ -491,17 +528,67 @@ function ProjectTower({ projects, ui, lenis }) {
       stageRef.current.style.setProperty("--tp", p);
       stageRef.current.style.setProperty("--k", easeIndex(p, n));
     }
-    setActive(Math.round(p * (n - 1)));
+    activeRef.current = Math.round(p * (n - 1));
+    setActive(activeRef.current);
   };
   useMotionValueEvent(scrollYProgress, "change", apply);
-  useEffect(() => { apply(scrollYProgress.get()); }, [n]);
 
-  // Smooth-scroll snapping: settle on the nearest card once the visitor stops scrolling nearby.
+  // Arriving and leaving are mirror images: over one viewport of travel before the pin the ring spins
+  // into place and fades up; over the one after, it keeps turning the same way and fades out.
+  const { scrollYProgress: travel } = useScroll({ target: towerRef, offset: ["start end", "end start"] });
+  const applyTravel = (t) => {
+    const vh = window.innerHeight, total = towerRef.current.offsetHeight + vh, d = t * total;
+    const enter = 1 - clamp01(d / vh), leave = 1 - clamp01((total - d) / vh);
+    stageRef.current.style.setProperty("--e", (leave * leave - enter * enter) * 0.8);
+    stageRef.current.style.setProperty("--o", 1 - Math.max(enter, leave) ** 2 * 0.85);
+  };
+  useMotionValueEvent(travel, "change", applyTravel);
+  useEffect(() => { apply(scrollYProgress.get()); applyTravel(travel.get()); }, [n]);
+
+  // Scroll position at which card i is in front.
+  const cardTop = (i) => towerRef.current.getBoundingClientRect().top + window.scrollY + (i * TOWER_SEG * window.innerHeight) / 100;
+  const goTo = (i) => {
+    const to = Math.max(0, Math.min(n - 1, i));
+    const done = () => { pendingRef.current = null; };
+    pendingRef.current = to;
+    if (lenis) lenis.scrollTo(cardTop(to), { duration: Math.min(1.6, 0.8 + 0.12 * Math.abs(to - activeRef.current)), onComplete: done });
+    else { window.scrollTo({ top: cardTop(to) }); done(); }
+  };
+  const step = (dir) => goTo((pendingRef.current ?? activeRef.current) + dir);
+
+  // Settle on a card once the visitor stops scrolling — only inside the pinned range, so nothing pulls you
+  // into the section or holds you back from leaving it. A quarter card of travel moves on to the next one.
   useEffect(() => {
     if (!lenis) return;
-    const snap = new Snap(lenis, { type: "proximity", distanceThreshold: "50%", debounce: 160, duration: 0.9 });
-    towerRef.current.querySelectorAll(".fbm-tower-snap").forEach((el) => snap.addElement(el, { align: ["start"] }));
-    return () => snap.destroy();
+    let timer, dir = 1;
+    const settle = () => {
+      if (lenis.isStopped) return;
+      const rel = (lenis.targetScroll - cardTop(0)) / ((TOWER_SEG * window.innerHeight) / 100);
+      if (rel <= 0 || rel >= n - 1) return;
+      lenis.scrollTo(cardTop(dir > 0 ? Math.ceil(rel - 0.25) : Math.floor(rel + 0.25)), { duration: 0.8 });
+    };
+    const onInput = ({ deltaY }) => {
+      if (deltaY) dir = Math.sign(deltaY);
+      pendingRef.current = null;
+      clearTimeout(timer);
+      timer = setTimeout(settle, 180);
+    };
+    lenis.on("virtual-scroll", onInput);
+    return () => { clearTimeout(timer); lenis.off("virtual-scroll", onInput); };
+  }, [lenis, n]);
+
+  // ← / → turn the ring while it's pinned on screen.
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.key !== "ArrowLeft" && e.key !== "ArrowRight") || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      if (dialogRef.current.open || e.target.closest?.("input,textarea,select,[contenteditable]")) return;
+      const r = towerRef.current.getBoundingClientRect();
+      if (r.top > 2 || r.bottom < window.innerHeight - 2) return;
+      e.preventDefault();
+      step(e.key === "ArrowRight" ? 1 : -1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [lenis, n]);
 
   useEffect(() => {
@@ -513,25 +600,29 @@ function ProjectTower({ projects, ui, lenis }) {
   // Close animates out first, then really closes the <dialog>.
   const requestClose = () => setClosing(true);
 
-  // Keyboard users tabbing into a card that isn't in front: spin it to the front.
-  const focusCard = (i) => {
-    if (i === active) return;
-    const top = towerRef.current.getBoundingClientRect().top + window.scrollY + (i * TOWER_SEG * window.innerHeight) / 100;
-    if (lenis) lenis.scrollTo(top, { duration: 0.9 });
-    else window.scrollTo({ top });
-  };
-
   const group = cards[active].group;
+  const arrow = (dir) => {
+    const off = dir < 0 ? active === 0 : active === n - 1;
+    return (
+      <m.button type="button" className="fbm-tnav" data-dir={dir < 0 ? "prev" : "next"} aria-label={dir < 0 ? ui.prevProject : ui.nextProject}
+        disabled={off} onClick={() => step(dir)} animate={{ opacity: off ? 0.3 : 1 }} transition={{ duration: 0.3 }} {...(off ? {} : press)}>
+        <Chevron flip={dir < 0} />
+      </m.button>
+    );
+  };
   return (
     <div ref={towerRef} className="fbm-tower" style={{ "--n": n }}>
-      {cards.map((_, i) => <div key={i} className="fbm-tower-snap" aria-hidden="true" style={{ top: `${i * TOWER_SEG}vh` }} />)}
-      <div ref={stageRef} className="fbm-stage" style={{ "--step": `${360 / Math.max(n, 6)}deg` }}>
-        <div className="fbm-axis" aria-hidden="true" />
+      <div ref={stageRef} className="fbm-stage">
+        <div className="fbm-glow" aria-hidden="true" />
+        <div className="fbm-floor" aria-hidden="true" />
         <div className="fbm-ring">
+          <div className="fbm-dial" aria-hidden="true" />
           {cards.map(({ card }, i) => (
-            <TowerCard key={i} card={card} index={i} front={i === active} ui={ui} onDetails={setDetail} onFocusCard={focusCard} />
+            <TowerCard key={i} card={card} index={i} front={i === active} near={Math.abs(i - active) === 1} ui={ui} onDetails={setDetail} onSelect={goTo} />
           ))}
         </div>
+        {arrow(-1)}
+        {arrow(1)}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 3, padding: `${sp("2xl")} 0 ${sp("2xl")}`, background: `linear-gradient(180deg,${v("background")} 72%,transparent)` }}>
           <div style={{ display: "flex", alignItems: "center", gap: sp("md") }}>
             <span style={{ width: 8, height: 8, borderRadius: r("full"), background: v(group === "live" ? "primary" : "outline"), boxShadow: group === "live" ? `0 0 12px ${mix("primary", 70)}` : "none", transition: "background .4s ease,box-shadow .4s ease" }} />
@@ -553,9 +644,19 @@ function ProjectTower({ projects, ui, lenis }) {
             )}
           </AnimatePresence>
         </div>
-        <m.span className="t-label-meta" animate={{ opacity: active === 0 ? 1 : 0, y: active === 0 ? [0, 6, 0] : 0 }}
-          transition={{ opacity: { duration: 0.4 }, y: { duration: 1.6, repeat: Infinity, ease: "easeInOut" } }}
-          style={{ position: "absolute", zIndex: 3, bottom: sp("xl"), left: 0, right: 0, textAlign: "center", textTransform: "uppercase", color: v("on-surface-variant") }} aria-hidden="true">{ui.towerHint} ↓</m.span>
+        <div className="fbm-tbar">
+          <m.span className="t-label-meta" animate={{ opacity: active === 0 ? 1 : 0, y: active === 0 ? [0, 4, 0] : 0 }}
+            transition={{ opacity: { duration: 0.4 }, y: { duration: 1.6, repeat: Infinity, ease: "easeInOut" } }}
+            style={{ textTransform: "uppercase", color: v("on-surface-variant") }} aria-hidden="true">{ui.towerHint}</m.span>
+          <div className="fbm-trail" role="group" aria-label={projects.heading}>
+            {cards.map(({ card }, i) => (
+              <button key={i} type="button" className={"fbm-navlink fbm-tdot" + (i === active ? " active" : "")} aria-label={`${pad2(i + 1)} · ${card.title}`}
+                aria-current={i === active || undefined} onClick={() => goTo(i)}>
+                <span className="fbm-navline">{i === active && <m.span layoutId="tower-dot" className="fbm-navglow" transition={SPRING} />}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
       <dialog ref={dialogRef} className="fbm-dialog" data-lenis-prevent
         onCancel={(e) => { e.preventDefault(); requestClose(); }}
