@@ -137,10 +137,11 @@ a:focus-visible,button:focus-visible{outline:2px solid ${v("primary")};outline-o
 .fbm-floor{position:absolute;left:50%;top:var(--cy);width:calc(var(--R) * 2 + 140px);aspect-ratio:1;margin:calc(var(--R) * -1 - 70px);border-radius:50%;opacity:var(--o);pointer-events:none;
   transform:translateZ(calc(var(--R) * -1)) translateY(var(--fy)) rotateX(90deg);
   background:radial-gradient(circle at 50% 100%,${mix("primary", 20)},${mix("secondary", 8)} 22%,transparent 42%);}
+/* the floor is seen almost edge-on, so the front/back of the line render ~6x thinner than drawn: keep it thick */
 .fbm-floor::after{content:"";position:absolute;inset:0;border-radius:inherit;
-  background:conic-gradient(from 180deg,${v("primary")},${v("secondary")} 22%,${mix("outline", 50)} 50%,${v("secondary")} 78%,${v("primary")});
-  -webkit-mask:radial-gradient(closest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px),#000 99%,transparent);
-  mask:radial-gradient(closest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px),#000 99%,transparent);}
+  background:conic-gradient(from 180deg,${v("primary")},${v("secondary")} 22%,${v("outline")} 50%,${v("secondary")} 78%,${v("primary")});
+  -webkit-mask:radial-gradient(closest-side,transparent calc(100% - 14px),#000 calc(100% - 11px) calc(100% - 3px),transparent 100%);
+  mask:radial-gradient(closest-side,transparent calc(100% - 14px),#000 calc(100% - 11px) calc(100% - 3px),transparent 100%);}
 /* the ring spins; the dial (a band of ticks) lies on the floor and turns with it */
 .fbm-ring{position:absolute;z-index:1;left:50%;top:var(--cy);width:0;height:0;transform-style:preserve-3d;
   transform:translateZ(calc(var(--R) * -1)) rotateY(calc((var(--k) + var(--e)) * var(--step) * -1));}
