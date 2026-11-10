@@ -1,73 +1,94 @@
 /* GENERATED from DESIGN.md by scripts/gen-tokens.mjs — do not edit. */
 :root {
-  --color-primary: #d50048;
-  --color-on-primary: #f5f0f7;
-  --color-secondary: #a90072;
-  --color-tertiary: #800080;
-  --color-surface-deep: #2a0048;
-  --color-outline: #560072;
-  --color-background: #000000;
-  --color-surface-media: #0a0212;
-  --color-on-surface: #f5f0f7;
-  --color-on-surface-variant: #b8a8c8;
-  --color-gradient-start: #2a0048;
-  --color-surface-deep-light: #efe4f6;
-  --color-outline-light: #d6bfe6;
-  --color-background-light: #edebf0;
-  --color-surface-media-light: #ffffff;
-  --color-on-surface-light: #1e0533;
-  --color-on-surface-variant-light: #4e3b5e;
+  --color-base: #111111;
+  --color-surface: #0c0c0c;
+  --color-structure: #f2f2f2;
+  --color-structure-strong: #f8f8f8;
+  --color-muted: #a9a9a9;
+  --color-mid: #7c7c7c;
+  --color-line: #4a4a4a;
+  --color-shadow: #4a4a4a;
+  --color-paper: #f2f2f2;
+  --color-ink: #111111;
+  --color-paper-muted: #4a4a4a;
+  --color-band: #f2f2f2;
+  --color-on-band: #111111;
+  --color-band-muted: #4a4a4a;
+  --color-accent: #c6ff00;
+  --color-on-accent: #111111;
+  --color-base-light: #ededed;
+  --color-surface-light: #f5f5f5;
+  --color-structure-light: #0d0d0d;
+  --color-structure-strong-light: #090909;
+  --color-muted-light: #4b4b4b;
+  --color-mid-light: #7a7a7a;
+  --color-line-light: #a6a6a6;
+  --color-shadow-light: #0d0d0d;
+  --color-paper-light: #f5f5f5;
+  --color-ink-light: #0d0d0d;
+  --color-paper-muted-light: #4b4b4b;
+  --color-band-light: #0d0d0d;
+  --color-on-band-light: #f5f5f5;
+  --color-band-muted-light: #aeaeae;
+  --color-accent-light: #e10600;
+  --color-on-accent-light: #f5f5f5;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
-  --spacing-md: 14px;
-  --spacing-lg: 18px;
-  --spacing-xl: 26px;
-  --spacing-2xl: 40px;
-  --spacing-3xl: 64px;
-  --spacing-4xl: 96px;
-  --spacing-section: 110px;
-  --spacing-container: 1180px;
-  --rounded-xs: 4px;
-  --rounded-sm: 6px;
-  --rounded-md: 8px;
-  --rounded-lg: 10px;
-  --rounded-xl: 12px;
-  --rounded-2xl: 14px;
-  --rounded-3xl: 16px;
-  --rounded-4xl: 18px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 72px;
+  --spacing-4xl: 112px;
+  --spacing-section: 150px;
+  --spacing-gutter: 40px;
+  --spacing-container: 1240px;
+  --spacing-measure: 680px;
+  --rounded-none: 0px;
   --rounded-full: 9999px;
 }
 
 :root{color-scheme:dark;}
 :root[data-theme="light"] {
   color-scheme: light;
-  --color-surface-deep: #efe4f6;
-  --color-outline: #d6bfe6;
-  --color-background: #edebf0;
-  --color-surface-media: #ffffff;
-  --color-on-surface: #1e0533;
-  --color-on-surface-variant: #4e3b5e;
+  --color-base: #ededed;
+  --color-surface: #f5f5f5;
+  --color-structure: #0d0d0d;
+  --color-structure-strong: #090909;
+  --color-muted: #4b4b4b;
+  --color-mid: #7a7a7a;
+  --color-line: #a6a6a6;
+  --color-shadow: #0d0d0d;
+  --color-paper: #f5f5f5;
+  --color-ink: #0d0d0d;
+  --color-paper-muted: #4b4b4b;
+  --color-band: #0d0d0d;
+  --color-on-band: #f5f5f5;
+  --color-band-muted: #aeaeae;
+  --color-accent: #e10600;
+  --color-on-accent: #f5f5f5;
 }
 
-.t-display{font-family:'Space Grotesk',system-ui,sans-serif;font-size:112px;font-weight:700;line-height:1.02em;letter-spacing:-0.03em;}
-.t-headline{font-family:'Space Grotesk',system-ui,sans-serif;font-size:42px;font-weight:700;letter-spacing:-0.02em;}
-.t-title-lg{font-family:'Space Grotesk',system-ui,sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.01em;}
-.t-title-md{font-family:'Space Grotesk',system-ui,sans-serif;font-size:17px;font-weight:600;letter-spacing:-0.01em;}
-.t-title-sm{font-family:'Space Grotesk',system-ui,sans-serif;font-size:16px;font-weight:600;}
-.t-brand{font-family:'Space Grotesk',system-ui,sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;}
-.t-section-label{font-family:'Space Grotesk',system-ui,sans-serif;font-size:14px;font-weight:600;letter-spacing:0.2em;}
-.t-link{font-family:'Space Grotesk',system-ui,sans-serif;font-size:14px;font-weight:600;}
-.t-eyebrow{font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:0.28em;}
-.t-label-caps{font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.16em;}
-.t-label-meta{font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;}
-.t-label-bar{font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;}
-.t-label-xs{font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;}
-.t-footer{font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px;font-weight:400;letter-spacing:0.02em;}
-.t-button-lg{font-family:'Space Grotesk',system-ui,sans-serif;font-size:16px;font-weight:700;}
-.t-button{font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:700;}
-.t-body-lg{font-family:'Manrope',system-ui,sans-serif;font-size:16px;font-weight:400;line-height:1.65em;}
-.t-body-md{font-family:'Manrope',system-ui,sans-serif;font-size:15px;font-weight:400;line-height:1.6em;}
-.t-body-sm{font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:400;line-height:1.6em;}
-.t-caption{font-family:'Manrope',system-ui,sans-serif;font-size:13px;font-weight:400;line-height:1.6em;}
-.t-label{font-family:'Manrope',system-ui,sans-serif;font-size:12px;font-weight:500;}
-.t-mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;font-weight:400;letter-spacing:0.05em;}
+:root {
+  --font-display: 'Anton','Arial Narrow',Impact,sans-serif;
+  --font-mono: 'Courier Prime','Courier New',ui-monospace,monospace;
+  --font-body: 'Manrope',system-ui,sans-serif;
+}
+
+.t-display{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:13rem;font-weight:400;line-height:0.86;letter-spacing:0.005em;}
+.t-headline{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:6.5rem;font-weight:400;line-height:0.92;letter-spacing:0.005em;}
+.t-headline-sm{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:4rem;font-weight:400;line-height:0.96;letter-spacing:0.005em;}
+.t-numeral{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:2.5rem;font-weight:400;line-height:1;letter-spacing:0.01em;}
+.t-title-lg{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:1.875rem;font-weight:400;line-height:1.1;letter-spacing:0.01em;}
+.t-title-md{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:1.5rem;font-weight:400;line-height:1.15;letter-spacing:0.01em;}
+.t-title-sm{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:1.25rem;font-weight:400;line-height:1.2;letter-spacing:0.015em;}
+.t-button-lg{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:1.625rem;font-weight:400;line-height:1;letter-spacing:0.03em;}
+.t-button{font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:1.125rem;font-weight:400;line-height:1;letter-spacing:0.04em;}
+.t-label{font-family:'Courier Prime','Courier New',ui-monospace,monospace;font-size:0.875rem;font-weight:700;line-height:1.2;letter-spacing:0.06em;}
+.t-label-sm{font-family:'Courier Prime','Courier New',ui-monospace,monospace;font-size:0.75rem;font-weight:700;line-height:1.2;letter-spacing:0.06em;}
+.t-meta{font-family:'Courier Prime','Courier New',ui-monospace,monospace;font-size:0.9375rem;font-weight:400;line-height:1.5;}
+.t-pill{font-family:'Courier Prime','Courier New',ui-monospace,monospace;font-size:0.8125rem;font-weight:400;line-height:1.3;}
+.t-body-lg{font-family:'Manrope',system-ui,sans-serif;font-size:1.125rem;font-weight:400;line-height:1.65;}
+.t-body-md{font-family:'Manrope',system-ui,sans-serif;font-size:1rem;font-weight:400;line-height:1.6;}
+.t-body-sm{font-family:'Manrope',system-ui,sans-serif;font-size:0.9375rem;font-weight:400;line-height:1.55;}
+.t-caption{font-family:'Manrope',system-ui,sans-serif;font-size:0.875rem;font-weight:400;line-height:1.5;}

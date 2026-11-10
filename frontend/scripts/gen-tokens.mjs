@@ -28,20 +28,27 @@ const lightDecls = vars.split("\n")
   .map(([, base, value]) => `  --color-${base}: ${value};`);
 const themes = `:root{color-scheme:dark;}\n:root[data-theme="light"] {\n  color-scheme: light;\n${lightDecls.join("\n")}\n}`;
 
-const STACKS = {
-  "Space Grotesk": "'Space Grotesk',system-ui,sans-serif",
-  Manrope: "'Manrope',system-ui,sans-serif",
-  "ui-monospace": "ui-monospace,SFMono-Regular,Menlo,monospace",
+// Font stacks, also exposed as `--font-<role>` for the few places that mix faces by hand (ransom letters).
+const FONTS = {
+  Anton: { role: "display", stack: "'Anton','Arial Narrow',Impact,sans-serif" },
+  "Courier Prime": { role: "mono", stack: "'Courier Prime','Courier New',ui-monospace,monospace" },
+  Manrope: { role: "body", stack: "'Manrope',system-ui,sans-serif" },
 };
+const fontVars = `:root {\n${Object.values(FONTS).map((f) => `  --font-${f.role}: ${f.stack};`).join("\n")}\n}`;
+
+// DESIGN.md needs dimensions, CSS wants better units: px font sizes become rem (so the reader's browser
+// font size applies) and `em` line-heights become unitless (so they scale with a fluid font size).
 const dim = (d) => `${d.value}${d.unit}`;
+const rem = (d) => (d.unit === "px" ? `${+(d.value / 16).toFixed(4)}rem` : dim(d));
+const unitless = (d) => (d.unit === "em" ? `${d.value}` : dim(d));
 const typeClasses = [...report.designSystem.typography.entries()].map(([name, t]) => {
-  const decls = [`font-family:${STACKS[t.fontFamily] ?? `'${t.fontFamily}'`}`];
-  if (t.fontSize) decls.push(`font-size:${dim(t.fontSize)}`);
+  const decls = [`font-family:${FONTS[t.fontFamily]?.stack ?? `'${t.fontFamily}'`}`];
+  if (t.fontSize) decls.push(`font-size:${rem(t.fontSize)}`);
   if (t.fontWeight) decls.push(`font-weight:${t.fontWeight}`);
-  if (t.lineHeight) decls.push(`line-height:${dim(t.lineHeight)}`);
+  if (t.lineHeight) decls.push(`line-height:${unitless(t.lineHeight)}`);
   if (t.letterSpacing) decls.push(`letter-spacing:${dim(t.letterSpacing)}`);
   return `.t-${name}{${decls.join(";")};}`;
 });
 
-writeFileSync(outPath, `/* GENERATED from DESIGN.md by scripts/gen-tokens.mjs — do not edit. */\n${vars.trim()}\n\n${themes}\n\n${typeClasses.join("\n")}\n`);
+writeFileSync(outPath, `/* GENERATED from DESIGN.md by scripts/gen-tokens.mjs — do not edit. */\n${vars.trim()}\n\n${themes}\n\n${fontVars}\n\n${typeClasses.join("\n")}\n`);
 console.log(`tokens.css written (${report.summary.warnings} lint warnings)`);

@@ -1,436 +1,462 @@
 ---
 version: alpha
 name: Felipe Bell Marques — Portfolio
-description: Editorial, single-page developer portfolio with a purple-dark (default) and a purple-white theme. Violet-to-crimson accents, technical display type.
+description: Punk Grunge single-page developer portfolio. A black wall with pasted paper flyers and one acid-lime accent (dark, default), or a photocopy-grey wall with one red accent (light).
 colors:
-  primary: "#D50048"
-  on-primary: "#F5F0F7"
-  secondary: "#A90072"
-  tertiary: "#800080"
-  surface-deep: "#2A0048"
-  outline: "#560072"
-  background: "#000000"
-  surface-media: "#0A0212"
-  on-surface: "#F5F0F7"
-  on-surface-variant: "#B8A8C8"
-  gradient-start: "#2A0048"
-  surface-deep-light: "#EFE4F6"
-  outline-light: "#D6BFE6"
-  background-light: "#EDEBF0"
-  surface-media-light: "#FFFFFF"
-  on-surface-light: "#1E0533"
-  on-surface-variant-light: "#4E3B5E"
+  base: "#111111"
+  surface: "#0C0C0C"
+  structure: "#F2F2F2"
+  structure-strong: "#F8F8F8"
+  muted: "#A9A9A9"
+  mid: "#7C7C7C"
+  line: "#4A4A4A"
+  shadow: "#4A4A4A"
+  paper: "#F2F2F2"
+  ink: "#111111"
+  paper-muted: "#4A4A4A"
+  band: "#F2F2F2"
+  on-band: "#111111"
+  band-muted: "#4A4A4A"
+  accent: "#C6FF00"
+  on-accent: "#111111"
+  base-light: "#EDEDED"
+  surface-light: "#F5F5F5"
+  structure-light: "#0D0D0D"
+  structure-strong-light: "#090909"
+  muted-light: "#4B4B4B"
+  mid-light: "#7A7A7A"
+  line-light: "#A6A6A6"
+  shadow-light: "#0D0D0D"
+  paper-light: "#F5F5F5"
+  ink-light: "#0D0D0D"
+  paper-muted-light: "#4B4B4B"
+  band-light: "#0D0D0D"
+  on-band-light: "#F5F5F5"
+  band-muted-light: "#AEAEAE"
+  accent-light: "#E10600"
+  on-accent-light: "#F5F5F5"
 typography:
   display:
-    fontFamily: Space Grotesk
-    fontSize: 112px
-    fontWeight: 700
-    lineHeight: 1.02em
-    letterSpacing: -0.03em
+    fontFamily: Anton
+    fontSize: 208px
+    fontWeight: 400
+    lineHeight: 0.86em
+    letterSpacing: 0.005em
   headline:
-    fontFamily: Space Grotesk
-    fontSize: 42px
-    fontWeight: 700
-    letterSpacing: -0.02em
+    fontFamily: Anton
+    fontSize: 104px
+    fontWeight: 400
+    lineHeight: 0.92em
+    letterSpacing: 0.005em
+  headline-sm:
+    fontFamily: Anton
+    fontSize: 64px
+    fontWeight: 400
+    lineHeight: 0.96em
+    letterSpacing: 0.005em
+  numeral:
+    fontFamily: Anton
+    fontSize: 40px
+    fontWeight: 400
+    lineHeight: 1em
+    letterSpacing: 0.01em
   title-lg:
-    fontFamily: Space Grotesk
-    fontSize: 20px
-    fontWeight: 700
-    letterSpacing: -0.01em
+    fontFamily: Anton
+    fontSize: 30px
+    fontWeight: 400
+    lineHeight: 1.1em
+    letterSpacing: 0.01em
   title-md:
-    fontFamily: Space Grotesk
-    fontSize: 17px
-    fontWeight: 600
-    letterSpacing: -0.01em
+    fontFamily: Anton
+    fontSize: 24px
+    fontWeight: 400
+    lineHeight: 1.15em
+    letterSpacing: 0.01em
   title-sm:
-    fontFamily: Space Grotesk
-    fontSize: 16px
-    fontWeight: 600
-  brand:
-    fontFamily: Space Grotesk
+    fontFamily: Anton
+    fontSize: 20px
+    fontWeight: 400
+    lineHeight: 1.2em
+    letterSpacing: 0.015em
+  button-lg:
+    fontFamily: Anton
+    fontSize: 26px
+    fontWeight: 400
+    lineHeight: 1em
+    letterSpacing: 0.03em
+  button:
+    fontFamily: Anton
+    fontSize: 18px
+    fontWeight: 400
+    lineHeight: 1em
+    letterSpacing: 0.04em
+  label:
+    fontFamily: Courier Prime
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: 1.2em
+    letterSpacing: 0.06em
+  label-sm:
+    fontFamily: Courier Prime
+    fontSize: 12px
+    fontWeight: 700
+    lineHeight: 1.2em
+    letterSpacing: 0.06em
+  meta:
+    fontFamily: Courier Prime
     fontSize: 15px
-    fontWeight: 700
-    letterSpacing: -0.01em
-  section-label:
-    fontFamily: Space Grotesk
-    fontSize: 14px
-    fontWeight: 600
-    letterSpacing: 0.2em
-  link:
-    fontFamily: Space Grotesk
-    fontSize: 14px
-    fontWeight: 600
-  eyebrow:
-    fontFamily: Space Grotesk
-    fontSize: 13px
-    fontWeight: 600
-    letterSpacing: 0.28em
-  label-caps:
-    fontFamily: Space Grotesk
-    fontSize: 12px
-    fontWeight: 600
-    letterSpacing: 0.16em
-  label-meta:
-    fontFamily: Space Grotesk
-    fontSize: 12px
-    fontWeight: 600
-    letterSpacing: 0.08em
-  label-bar:
-    fontFamily: Space Grotesk
-    fontSize: 11px
-    fontWeight: 700
-    letterSpacing: 0.18em
-  label-xs:
-    fontFamily: Space Grotesk
-    fontSize: 11px
-    fontWeight: 700
-    letterSpacing: 0.08em
-  footer:
-    fontFamily: Space Grotesk
+    fontWeight: 400
+    lineHeight: 1.5em
+  pill:
+    fontFamily: Courier Prime
     fontSize: 13px
     fontWeight: 400
-    letterSpacing: 0.02em
-  button-lg:
-    fontFamily: Space Grotesk
-    fontSize: 16px
-    fontWeight: 700
-  button:
-    fontFamily: Manrope
-    fontSize: 14px
-    fontWeight: 700
+    lineHeight: 1.3em
   body-lg:
     fontFamily: Manrope
-    fontSize: 16px
+    fontSize: 18px
     fontWeight: 400
     lineHeight: 1.65em
   body-md:
     fontFamily: Manrope
-    fontSize: 15px
+    fontSize: 16px
     fontWeight: 400
     lineHeight: 1.6em
   body-sm:
     fontFamily: Manrope
-    fontSize: 14px
+    fontSize: 15px
     fontWeight: 400
-    lineHeight: 1.6em
+    lineHeight: 1.55em
   caption:
     fontFamily: Manrope
-    fontSize: 13px
+    fontSize: 14px
     fontWeight: 400
-    lineHeight: 1.6em
-  label:
-    fontFamily: Manrope
-    fontSize: 12px
-    fontWeight: 500
-  mono:
-    fontFamily: ui-monospace
-    fontSize: 10px
-    fontWeight: 400
-    letterSpacing: 0.05em
+    lineHeight: 1.5em
 rounded:
-  xs: 4px
-  sm: 6px
-  md: 8px
-  lg: 10px
-  xl: 12px
-  2xl: 14px
-  3xl: 16px
-  4xl: 18px
+  none: 0px
   full: 9999px
 spacing:
   xs: 4px
   sm: 8px
-  md: 14px
-  lg: 18px
-  xl: 26px
-  2xl: 40px
-  3xl: 64px
-  4xl: 96px
-  section: 110px
-  container: 1180px
+  md: 16px
+  lg: 24px
+  xl: 32px
+  2xl: 48px
+  3xl: 72px
+  4xl: 112px
+  section: 150px
+  gutter: 40px
+  container: 1240px
+  measure: 680px
 components:
+  page:
+    backgroundColor: "{colors.base}"
+    textColor: "{colors.structure}"
+    typography: "{typography.body-md}"
+  heading:
+    backgroundColor: "{colors.base}"
+    textColor: "{colors.structure-strong}"
+    typography: "{typography.headline}"
+  secondary-text:
+    backgroundColor: "{colors.base}"
+    textColor: "{colors.muted}"
+    typography: "{typography.meta}"
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.on-accent}"
     typography: "{typography.button}"
-    rounded: "{rounded.lg}"
-    padding: 13px 24px
+    rounded: "{rounded.none}"
+    padding: 14px 22px
   button-primary-lg:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.on-accent}"
     typography: "{typography.button-lg}"
-    rounded: "{rounded.xl}"
-    padding: 16px 34px
+    rounded: "{rounded.none}"
+    padding: 18px 34px
   button-secondary:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.on-surface}"
+    backgroundColor: "{colors.base}"
+    textColor: "{colors.structure}"
     typography: "{typography.button}"
-    rounded: "{rounded.lg}"
-    padding: 13px 24px
-  lang-toggle-active:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.label-xs}"
-    rounded: "{rounded.md}"
-    padding: 5px 11px
-  lang-toggle-inactive:
-    backgroundColor: "{colors.surface-deep}"
-    textColor: "{colors.on-surface-variant}"
-    typography: "{typography.label-xs}"
-    rounded: "{rounded.md}"
-  skip-link:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    rounded: "{rounded.md}"
-    padding: 10px 18px
-  card:
-    backgroundColor: "{colors.surface-deep}"
-    textColor: "{colors.on-surface-variant}"
-    rounded: "{rounded.4xl}"
-    padding: 26px
-  card-bar:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.label-bar}"
-    padding: 8px 20px
-  pill:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.on-surface-variant}"
-    typography: "{typography.label}"
-    rounded: "{rounded.full}"
-    padding: 4px 11px
-  pill-hover:
-    backgroundColor: "{colors.tertiary}"
-    textColor: "{colors.on-surface}"
-  badge:
-    backgroundColor: "{colors.surface-deep}"
-    textColor: "{colors.on-surface}"
-    typography: "{typography.label}"
-    rounded: "{rounded.md}"
-    padding: 5px 12px
-  diagram:
-    backgroundColor: "{colors.surface-deep}"
-    textColor: "{colors.on-surface-variant}"
-    typography: "{typography.mono}"
-    rounded: "{rounded.xl}"
-  media-frame:
-    backgroundColor: "{colors.surface-media}"
-    textColor: "{colors.on-surface}"
-  nav-link:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.on-surface-variant}"
-    typography: "{typography.label-caps}"
-  nav-link-active:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.on-surface}"
-  text-link:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.primary}"
-    typography: "{typography.link}"
-  eyebrow:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.secondary}"
-    typography: "{typography.eyebrow}"
-  meta-text:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.tertiary}"
-    typography: "{typography.caption}"
-  divider:
-    backgroundColor: "{colors.outline}"
-  tower-axis:
-    backgroundColor: "{colors.outline}"
-    width: 22px
-  tower-card:
-    backgroundColor: "{colors.surface-media}"
-    textColor: "{colors.on-surface-variant}"
+    rounded: "{rounded.none}"
+    padding: 14px 22px
+  sheet:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
     typography: "{typography.body-sm}"
-    rounded: "{rounded.4xl}"
+    rounded: "{rounded.none}"
+    padding: 24px
+  sheet-secondary-text:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.paper-muted}"
+    typography: "{typography.meta}"
+  band:
+    backgroundColor: "{colors.band}"
+    textColor: "{colors.on-band}"
+    typography: "{typography.body-lg}"
+  band-secondary-text:
+    backgroundColor: "{colors.band}"
+    textColor: "{colors.band-muted}"
+  strip:
+    backgroundColor: "{colors.structure}"
+    textColor: "{colors.base}"
+    typography: "{typography.label}"
+    rounded: "{rounded.none}"
+    padding: 4px 9px
+  strip-on-sheet:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+    typography: "{typography.label-sm}"
+    padding: 4px 9px
+  pill:
+    backgroundColor: "{colors.base}"
+    textColor: "{colors.structure}"
+    typography: "{typography.pill}"
+    rounded: "{rounded.none}"
+    padding: 3px 9px
+  nav-link:
+    backgroundColor: "{colors.base}"
+    textColor: "{colors.muted}"
+    typography: "{typography.label}"
+  nav-link-active:
+    backgroundColor: "{colors.structure}"
+    textColor: "{colors.base}"
+    typography: "{typography.label}"
+  link-hover:
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.on-accent}"
+  ghost-word:
+    textColor: "{colors.line}"
+    typography: "{typography.display}"
+  divider:
+    backgroundColor: "{colors.line}"
+  hard-shadow:
+    backgroundColor: "{colors.shadow}"
+  halftone:
+    backgroundColor: "{colors.mid}"
+  panel:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.structure}"
+  tower-card:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-sm}"
+    rounded: "{rounded.none}"
     padding: 22px
-    width: 560px
+    width: 540px
     height: 560px
-  theme-toggle:
-    backgroundColor: "{colors.surface-deep}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.full}"
-    size: 26px
-  theme-toggle-knob:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
+  tower-dialog:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    width: 760px
+  vinyl-label:
+    backgroundColor: "{colors.accent}"
     rounded: "{rounded.full}"
   page-light:
-    backgroundColor: "{colors.background-light}"
-    textColor: "{colors.on-surface-variant-light}"
+    backgroundColor: "{colors.base-light}"
+    textColor: "{colors.structure-light}"
   heading-light:
-    backgroundColor: "{colors.background-light}"
-    textColor: "{colors.on-surface-light}"
-  card-light:
-    backgroundColor: "{colors.surface-media-light}"
-    textColor: "{colors.on-surface-variant-light}"
-  badge-light:
-    backgroundColor: "{colors.surface-deep-light}"
-    textColor: "{colors.on-surface-light}"
+    backgroundColor: "{colors.base-light}"
+    textColor: "{colors.structure-strong-light}"
+  secondary-text-light:
+    backgroundColor: "{colors.base-light}"
+    textColor: "{colors.muted-light}"
+  button-primary-light:
+    backgroundColor: "{colors.accent-light}"
+    textColor: "{colors.on-accent-light}"
+  sheet-light:
+    backgroundColor: "{colors.paper-light}"
+    textColor: "{colors.ink-light}"
+  sheet-secondary-text-light:
+    backgroundColor: "{colors.paper-light}"
+    textColor: "{colors.paper-muted-light}"
+  band-light:
+    backgroundColor: "{colors.band-light}"
+    textColor: "{colors.on-band-light}"
+  band-secondary-text-light:
+    backgroundColor: "{colors.band-light}"
+    textColor: "{colors.band-muted-light}"
+  panel-light:
+    backgroundColor: "{colors.surface-light}"
+    textColor: "{colors.structure-light}"
   divider-light:
-    backgroundColor: "{colors.outline-light}"
-  text-link-light:
-    backgroundColor: "{colors.background-light}"
-    textColor: "{colors.primary}"
-  eyebrow-light:
-    backgroundColor: "{colors.background-light}"
-    textColor: "{colors.secondary}"
-  meta-text-light:
-    backgroundColor: "{colors.background-light}"
-    textColor: "{colors.tertiary}"
-  button-primary-gradient:
-    backgroundColor: "{colors.gradient-start}"
-    textColor: "{colors.on-primary}"
-  tower-dialog:
-    backgroundColor: "{colors.surface-media}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.4xl}"
-    width: 720px
+    backgroundColor: "{colors.line-light}"
+  hard-shadow-light:
+    backgroundColor: "{colors.shadow-light}"
+  halftone-light:
+    backgroundColor: "{colors.mid-light}"
 ---
 
 ## Overview
 
-A dark, editorial portfolio for a full-stack engineer. The page should feel like a
-late-night terminal crossed with a gallery wall: a pure black canvas, a violet glow
-that follows the cursor, and a single hot accent (crimson) reserved for things you
-can act on. Confident and technical, not playful. Content is bilingual (EN / PT-BR)
-and every visual decision must survive both languages' string lengths.
+A Punk Grunge portfolio for a full-stack engineer who also plays in bands. The page is a
+wall: black in the dark theme, photocopy grey in the light one. Things are pasted on it
+— a xeroxed portrait, taped flyers for each project, ticket stubs for talks. The hero is
+the one loud, grid-breaking flyer. Everything below it sits on a strict grid and carries
+the style only in its display layer: headings, dividers, card frames, tape and texture.
+Body copy, pills and navigation stay plain and readable.
+
+The style and both palettes come from the **Design Reference** document in BPAgenda
+Projects (style 6, Punk Grunge; palettes 16 Acid Flyer and 15 Xerox Riot). Content is
+bilingual (EN / PT-BR), and every visual decision must survive both languages' string
+lengths.
 
 ## Colors
 
-The palette is a single hue family that runs from deep violet to crimson, set on black.
+Two palettes, one per theme. Both are black, off-white, greys and a single aggressive
+accent. Roles follow the reference: Base (about 60% of the page), Structure (30%),
+Contrast (10%) and Accent (under 5%).
 
-- **Primary (#D50048) — crimson:** the action color. Primary CTAs, text links and
-  their arrows, the active language, focus rings, the "live" status dot.
-- **Secondary (#A90072) — magenta:** the label color. Eyebrows, dates/periods,
-  bullet dots on simple cards, the middle stop of the signature gradient.
-- **Tertiary (#800080) — purple:** de-emphasised metadata (locations, notes,
-  footer) and filled states for pills and badges.
-- **Surface-deep (#2A0048):** translucent card fills and the start of the gradient.
-- **Outline (#560072):** every 1px border and divider.
-- **Background (#000000)** and **Surface-media (#0A0212)** behind images.
-- **On-surface (#F5F0F7):** headings and text on filled accents.
-- **On-surface-variant (#B8A8C8):** all body copy.
+Dark theme, the default — **16 Acid Flyer**:
 
-The **signature gradient** is `gradient-start → secondary → primary` (120° on buttons
-and the name, 90° on bars and nav underlines). It's the only gradient for filled
-surfaces. `gradient-start` (#2A0048) is the same in both themes, so the gradient never
-washes out. Translucent fills are always one of these tokens mixed with transparency,
-never a new hex.
+- **Base (#111111)** is the wall. **Surface (#0C0C0C)** is the deeper black of floating
+  panels and the vinyl record.
+- **Structure (#F2F2F2)** is body text, borders and filled label strips.
+  **Structure-strong (#F8F8F8)** is headings. **Muted (#A9A9A9)** is secondary text.
+- **Mid (#7C7C7C)**, **Line (#4A4A4A)** and **Shadow (#4A4A4A)** are the contrast greys:
+  halftone dots and tape, rules and outlined ghost words, and hard offset shadows.
+- **Accent (#C6FF00)** is acid lime, with **On-accent (#111111)** for labels on it.
 
-### Light theme (purple-white)
+Paper objects have their own pair so they stay paper in both themes: **Paper** with
+**Ink** text and **Paper-muted** secondary text. The About section sits on a torn
+**Band** with **On-band** text and **Band-muted** secondary text.
 
-The same accents (`primary`, `secondary`, `tertiary`, `on-primary`) on a lavender-white
-canvas. Tokens with a `-light` suffix replace their base token when
-`<html data-theme="light">`:
+### Light theme (15 Xerox Riot)
 
-- **Background-light (#EDEBF0):** a soft, slightly violet light grey page, so white cards lift off it.
-- **Surface-media-light (#FFFFFF):** pure white card and image surfaces.
-- **Surface-deep-light (#EFE4F6):** lavender tint fills.
-- **Outline-light (#D6BFE6):** soft lilac borders.
-- **On-surface-light (#1E0533):** deep aubergine headings.
-- **On-surface-variant-light (#4E3B5E):** muted plum body copy.
+Tokens with a `-light` suffix replace their base token when `<html data-theme="light">`.
+The wall becomes photocopy grey (**#EDEDED**), structure becomes near-black
+(**#0D0D0D**), the band flips to black with off-white text, and the accent becomes red
+(**#E10600**).
 
-On white, `secondary` and `tertiary` pass AA as text. The theme defaults to the OS
-preference, can be switched with the theme toggle, and is remembered across visits.
+The red measures 4.2:1 on the grey wall. Use it for fills, large type and marks, never
+for small text. Labels on a red fill use **On-accent-light (#F5F5F5)**, which measures
+4.6:1.
+
+The suffix `-light` always means "the light theme's value". The reference's lighter and
+darker adjacents of each colour are folded into the role tokens above (`surface`,
+`structure-strong`, `muted`, `mid`, `line`).
+
+### Where the accent goes
+
+The primary button, the scroll progress bar, the hand-drawn mark under a section
+heading, one ransom letter, the slab behind the front project flyer, the active nav
+marker, focus rings on the wall, and the highlight behind a hovered link. Nothing else.
 
 ## Typography
 
-Two families plus a system mono:
+Three families:
 
-- **Space Grotesk** for everything structural: the name, section labels, card
-  titles, nav, eyebrows, links, buttons in the contact block.
-- **Manrope** for reading text: paragraphs, descriptions, pills, hero buttons.
-- **ui-monospace** only inside the illustrative diagrams.
+- **Anton** is the display face: the name, section headings, card titles, dates and
+  buttons. It ships one weight (400). Never set it bold and never below 18px. It is
+  always uppercase through `text-transform`.
+- **Courier Prime** is the typewriter: label strips, navigation, dates, locations, pills
+  and notes. Bold for uppercase labels, regular for metadata.
+- **Manrope** is the reading face for paragraphs and descriptions.
 
-Uppercase labels (`section-label`, `eyebrow`, `label-caps`, `label-meta`,
-`label-bar`) are always tracked out. Titles are tracked slightly negative. The
-`display` and `headline` sizes are fluid (`clamp`) with the token value as the maximum.
+Hand scrawls are SVG paths, not a font. `display`, `headline` and `headline-sm` are fluid
+(`clamp`) with the token value as the maximum. Line-heights are written with an `em` unit
+here because the format requires a dimension; `gen-tokens.mjs` emits them unitless, and
+emits font sizes in `rem`.
+
+Uppercase labels are tracked 0.06em. Reading text is capped at `measure` (680px, about
+70 characters).
 
 ## Layout
 
-A single column (max `container` 1180px, 40px gutter, 22px on mobile), in this order:
+A single page, max `container` 1240px with a `gutter` of 40px (20px on mobile):
 
-1. **Hero:** full viewport. Role eyebrow, the name in `display` (fluid up to 112px), the
-   tagline, CTAs and socials, then a horizontal section nav. Clicking a nav link glides
-   to that section and moves focus to its heading.
-2. **Projects:** the full-width project tower.
-3. **About, Experience, Talks, Contact, footer:** in a centered 820px reading column.
+1. **Hero:** one full viewport. A label strip with the role, the name stacked in
+   `display` with the middle name as cut-out ransom letters, the xeroxed portrait pasted
+   to the right, the tagline, two buttons, socials and the section nav. This is the only
+   place where blocks rotate, overlap and run off the grid.
+2. **Projects:** the project tower, full width.
+3. **About:** a torn full-bleed band with paragraphs in a capped column.
+4. **Experience:** a tour-dates list. The period sits large on the left; the role,
+   company and description on the right; a 2px rule between rows.
+5. **Talks & Teaching:** ticket stubs in two columns, each with a perforated stub.
+6. **Contact:** one full-width flyer with the accent button.
 
-Once the hero scrolls away, a **floating section nav** fades in at the top left. It's
-collapsed to short lines and expands horizontally on hover, focus or tap to show the
-labels. Sections are separated by `section` (110px). Cards use `xl` (26px) inner padding
-and `md` (14px) between siblings. Wheel scrolling is smoothed (Lenis), except under
-reduced motion.
+Every section opens with its name twice: an oversized outlined ghost word that drifts
+sideways as the page scrolls, and the real heading in `headline` over it. Sections are
+separated by `section` (150px). Once the hero scrolls away, a floating section nav
+appears at the top left. On mobile everything collapses to one column; rotation is kept
+and overlap is removed.
 
 ## Elevation & Depth
 
-Depth comes from light, not shadows: a radial violet spotlight follows the cursor, and
-a soft radial wash sits at the top of the page. Cards lift 4px on hover with a magenta
-glow. Primary buttons carry a crimson glow. There are no grey drop shadows.
+Depth is paper on a wall. Sheets carry a 2px border and a hard offset shadow with no
+blur (`shadow`). There are no glows, no gradients and no soft shadows. The front project
+flyer is the one exception in colour: its slab is the accent.
+
+A static grain texture covers the page at low opacity. It is a fixed, masked layer, not
+a live filter.
 
 ### Motion
 
-All movement uses one vocabulary, built with Motion (motion.dev):
+- **Parallax** is the one big movement. In the hero, the halftone sun, the slab, the
+  portrait, the name lines and the scrawls move at different speeds as you scroll, and
+  shift slightly with the pointer on desktop. Between sections the ghost words and the
+  torn strips drift sideways.
+- **Stamp:** elements land slightly rotated and over-scaled and settle in about 0.25s,
+  once per element.
+- **Drop:** buttons and linked sheets move into their hard shadow on hover and press.
+- **Scrawls** draw themselves once when they scroll into view.
+- The project tower keeps its scroll-driven spin and snap.
 
-- **Reveal:** a 26px fade-up, 0.7s with `ease-out-expo`, once per element, with a small
-  stagger inside lists.
-- **Hover:** springs (stiffness 380, damping 30). Cards lift 4px, buttons lift 3px and
-  press to 0.96.
-- **Hero entrance:** blur-to-sharp in a stagger, and the portrait springs in. While you
-  scroll into the tower, the hero drifts up and fades.
-- **Shared indicators glide** instead of jumping: the active nav line and the language
-  pill.
-- **Ambient:** a 2px gradient progress bar at the top and a spring-trailing cursor glow.
-
-Under reduced motion only the fades remain.
+Under reduced motion there is no parallax, no stamp and no tower; only fades remain. On
+mobile the parallax is reduced to the portrait and the ghost words, with no pointer
+tracking.
 
 ## Shapes
 
-Soft rectangles. Radii scale with element size: `full` for pills and dots, `md`–`lg` for
-badges, toggles and buttons, `xl` for diagrams, `2xl`–`4xl` for cards. No sharp
-corners, and no radius above 18px except for pills.
+Square. Every radius is `none`. The only circles are the vinyl record under the project
+tower and its label (`full`). Edges are either straight or torn: torn edges are
+`clip-path` polygons generated from a seed, a different seed for every element. Tape
+strips are small translucent `mid` rectangles with a rotation of their own. Rotations
+stay between -6 and 6 degrees and neighbours never share a value.
 
 ## Components
 
-- **Buttons:** primary uses the signature gradient with `on-primary` text and a
-  crimson glow; secondary is transparent with an `outline` border.
-- **Cards:** variants `featured` / `internalFlagship` (gradient top bar, media or
-  diagram), `simple`, `compact`. All share the hover lift.
-- **Pills** are for tech stacks (outline only). **Badges** are for facts and metrics
-  (tinted fill).
-- **Text links** are crimson with a trailing arrow that nudges on hover.
-- **Nav links** pair a short line with an uppercase label; the line grows into the
-  gradient when active.
-- **Portrait:** a circular photo (`full` radius, 4px `background` gap) inside a slowly
-  rotating conic ring of the signature gradient with a soft `primary` glow. It sits right
-  of the name on desktop and above it on mobile.
+- **Buttons:** primary is an accent fill with an `on-accent` label; secondary is the
+  wall colour with a structure label. Both have a 2px border and a hard shadow in the
+  current text colour, and drop into it on hover.
+- **Sheets** are paper: project cards, the details dialog, ticket stubs, the contact
+  flyer and the portrait. Text on a sheet is `ink`.
+- **Label strips** are filled bars of uppercase Courier, like a label maker: the role,
+  card status bars, facts and metrics, the company name.
+- **Pills** are outlined Courier tags for tech stacks. They invert on hover.
+- **Text links** are the current text colour with an underline and a trailing arrow. On
+  hover the accent fills behind them.
+- **Ransom letters:** each letter of the middle name is its own tile with a different
+  face, fill and rotation. The full name is also present as plain text for assistive
+  technology.
+- **Portrait:** greyscale, high-contrast and halftoned, with a torn bottom edge, two
+  tape strips and a hard shadow.
+- **Screenshots** on a tower card are xeroxed at rest and turn full colour on hover.
+  In the details dialog and in the stacked mobile list they are always full colour.
 - **Project tower** (desktop, motion allowed): the Projects section pins a full-height
-  stage while the visitor scrolls past it. The axis is a thick shaded cylinder with
-  helical `primary` threads that slide as you scroll, so it reads like a spinning
-  parking-garage ramp. Its core fills with the signature gradient as progress advances,
-  and every project, live then internal, sits on a helix around it. Scrolling spins the tower one card per step and holds still on
-  each card (scroll-snap plus an eased hold). The front card is flat (0°, no blur) and
-  interactive. Cards turning away fade out and aren't clickable. Tower cards are a
-  uniform summary (`tower-card`: media, title, clamped description, badges, link) with a
-  "Details" button that opens the full card in a `tower-dialog`. On mobile or with
-  reduced motion it falls back to the stacked card list. The spin runs on CSS
-  scroll-driven animations where supported, with a JS-driven fallback that sets the
-  same custom property.
+  stage while the visitor scrolls past it. Every project, live then internal, is a paper
+  flyer standing on a ring above a vinyl record that turns with it. Scrolling spins the
+  ring one card per step and settles on each card. The front card is flat, interactive
+  and backed by the accent slab; its neighbours are click targets; the rest fade into
+  the wall. Tower cards are a uniform summary (`tower-card`) with a "Details" button
+  that opens the full card in a `tower-dialog`. On mobile or with reduced motion it
+  falls back to the stacked card list.
 
 ## Do's and Don'ts
 
-- **Do** use `primary` only for interactive or "live" elements.
-- **Do** keep body copy in `on-surface-variant` and headings in `on-surface`.
+- **Do** keep the chaos in the hero. Below it, only headings, dividers, frames, tape and
+  texture carry the style.
+- **Do** keep paragraphs in Manrope on a capped measure, left-aligned.
 - **Do** express translucency as a token plus alpha (`color-mix`), never a new hex.
-- **Do** honour `prefers-reduced-motion`: no spotlight, no reveal animation, no tower.
+- **Do** give every rotated or torn element its own value or seed.
+- **Do** honour `prefers-reduced-motion`: no parallax, no stamp, no tower.
 - **Do** keep the tower's front card perfectly flat so its text stays crisp.
-- **Don't** introduce new hues or greys. Only the two themes exist. Every color must come
-  from a token that has both a dark value and (if it changes) a `-light` value.
 - **Do** switch themes with a crossfade (View Transitions) where supported.
-- **Don't** use `tertiary` or `secondary` for body-length text. On black they're
-  label/metadata colors, below AA for long reading.
-- **Don't** add drop shadows that aren't tinted from `secondary`/`primary`.
-- **Don't** use Manrope for uppercase tracked labels or Space Grotesk for paragraphs.
+- **Don't** add a hue. Each theme has greys and one accent.
+- **Don't** use the light theme's red for small text, or the dark theme's lime on paper
+  without an ink border.
+- **Don't** round a corner, blur a shadow or add a gradient fill.
+- **Don't** set Anton in bold or below 18px, or use it for a paragraph.
+- **Don't** put a filter or blend mode on a large scrolling area.
+- **Don't** add a marker or handwriting font; scrawls are hand-pathed SVG.

@@ -22,6 +22,9 @@ export default function useTheme() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+    // Keep the browser chrome (mobile address bar) the colour of the wall.
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = getComputedStyle(document.documentElement).getPropertyValue("--color-base").trim();
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
