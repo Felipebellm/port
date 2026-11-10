@@ -288,7 +288,7 @@ h2:focus-visible{outline:3px solid var(--focus);outline-offset:8px;}
   background:
     radial-gradient(closest-side,${v("base")} 0 3%,${v("accent")} 3.2% 17%,transparent 17.3%),
     conic-gradient(from 10deg,transparent 0 6%,${mix("structure", 16)} 10%,transparent 14% 50%,${mix("structure", 16)} 57%,transparent 62%),
-    repeating-radial-gradient(circle closest-side,${v("surface")} 0 9px,${v("line")} 9px 11px);}
+    repeating-radial-gradient(circle closest-side,${v("surface")} 0 15px,${v("mid")} 15px 23px);}
 .fbm-tcard{position:absolute;left:calc(var(--cw) / -2);top:calc(var(--ch) / -2);width:var(--cw);height:var(--ch);
   --d:calc(var(--i) - var(--k) - var(--e));--ad:max(var(--d), var(--d) * -1);
   transform:rotateY(calc(var(--i) * var(--step))) translateZ(var(--R));
