@@ -167,6 +167,51 @@
         "badges": ["In production", "Solo full-stack", "9 feature areas", "2 external API integrations"],
         "pills": ["Laravel 12", "PHP 8.2", "React 18", "Vite", "Laravel Sanctum", "MySQL", "Redis", "Docker", "GitHub Actions", "OAuth2 + PKCE", "Web Audio API", "Vitest"],
         "link": { "label": "Visit bhelper.bell.vps-kinghost.net", "href": "https://bhelper.bell.vps-kinghost.net/" }
+      },
+      {
+        "variant": "simple",
+        "images": [
+          { "src": "/images/projects/VPSMonitor_board.png", "alt": "VPS Monitor board: service status, open incidents, deploy count and host CPU, memory and disk" },
+          { "src": "/images/projects/VPSMonitor_uptime.png", "alt": "Fourteen-day uptime grid per service, with ongoing outages marked" },
+          { "src": "/images/projects/VPSMonitor_resources.png", "alt": "Resources page with live CPU, memory, disk, swap, network and disk I/O for the VPS" },
+          { "src": "/images/projects/VPSMonitor_apps.png", "alt": "Per-application table of CPU, memory, share of RAM and seven-day peak" },
+          { "src": "/images/projects/VPSMonitor_headroom.png", "alt": "Headroom indicators rated OK, Watch or Act for memory, disk, CPU, stall time and more" },
+          { "src": "/images/projects/VPSMonitor_history.png", "alt": "Resource history charts and Docker disk usage with reclaimable space" },
+          { "src": "/images/projects/VPSMonitor_deploys.png", "alt": "Deploys page with a 30-day deploy timeline and weekly outcomes" },
+          { "src": "/images/projects/VPSMonitor_runs.png", "alt": "Recent GitHub Actions deploy runs with outcome, commit, author and duration" }
+        ],
+        "title": "VPS Monitor — Uptime, Deploy & Capacity Dashboard",
+        "description": "Built after I found out a site I host had been down for three weeks, and its database for two months, with nothing telling me. That project had no CI/CD, so no deploy hook could ever have noticed. VPS Monitor checks every service on my VPS on its own schedule, tracks every GitHub Actions deploy across my repositories, shows what each app costs in CPU, memory and disk, and sends a push notification to my phone when a deploy finishes or a service goes down. It is private and sign-in only, so it is shown here through screenshots.",
+        "bullets": [
+          "Health probes every minute on 11 services (container state plus a live HTTP check), whether or not a project has CI/CD, so a quiet service can no longer pass for a healthy one",
+          "Incident state machine: an outage opens only after consecutive failed checks, alerts once, and reminds me daily while it stays open. A three-week outage is one alert and a daily nudge, not ~30,000 pings",
+          "Deploy tracking with no workflow changes: a GitHub App on all repositories sends signed webhooks (HMAC SHA-256), each run is classed as deployed, failed, tests failed or health check failed from the job that broke, and runs that never report back are closed as unknown and announced",
+          "Least-privilege resource agent in plain Python, reading /proc and cgroups every 3s as nobody, on a read-only filesystem with no capabilities, reaching Docker only through a read-only socket proxy. Compose stacks, containers and systemd services are discovered, not configured",
+          "A disk breakdown that adds up: a sandboxed sizer (read-only root mount, no network, one capability) assigns every gigabyte to an app, Docker leftovers or the system. Anything it can't explain counts as System, so the parts can never add up to more than the disk",
+          "Capacity planning, not just graphs: OK / Watch / Act indicators for memory headroom (\"about N more apps\"), CPU p95, pressure-stall time, swap-in, CPU steal, reclaimable Docker disk, containers without memory limits and OOM kills, with 24h / 7d / 30d history",
+          "It can't report itself healthy by mistake: its own deploy fails unless a probe ran in the last five minutes, and the status endpoint is never served from the PWA cache, because a stale board of green tiles would bring back the original bug"
+        ],
+        "badges": ["In production", "11 services watched", "Push alerts to phone", "Solo full-stack"],
+        "pills": ["Laravel 13", "PHP 8.3", "React 19", "Vite", "Recharts", "MySQL 8.4", "Python", "Web Push (VAPID)", "GitHub Apps & Webhooks", "Docker Compose", "PWA (Workbox)", "GitHub Actions"]
+      },
+      {
+        "variant": "simple",
+        "images": [
+          { "src": "/images/projects/VPSMonitor_resources.png", "alt": "Resources page with live CPU, memory, disk, swap, network and disk I/O for the VPS" },
+          { "src": "/images/projects/VPSMonitor_apps.png", "alt": "Per-application table of CPU, memory, share of RAM and seven-day peak" }
+        ],
+        "title": "Self-Hosted Production VPS — DevOps & Infrastructure",
+        "description": "Instead of a separate hosting plan for every project, I run my products and client sites on one VPS that I set up and operate as a production server. A single Debian box (2 vCPU, 4 GB RAM) serves 12 HTTPS sites, this portfolio included, behind one nginx edge, and every deploy goes out through GitHub Actions. I handle provisioning, TLS, mail, CI/CD and capacity myself, and VPS Monitor tells me when something needs attention.",
+        "bullets": [
+          "nginx as the single TLS edge for 12 sites: Let's Encrypt certificates renewed automatically by Certbot, HTTP to HTTPS redirects, one shared security-headers snippet, and year-long immutable caching for static assets",
+          "Mixed runtime on one box: 20 containers across Docker Compose stacks (Laravel, WordPress and other app stacks) running beside native systemd services (PHP 8.4-FPM, MariaDB, a queue worker) and a Java game server",
+          "One deploy pattern across 8 repositories: GitHub Actions connects over SSH, resets the server to the exact commit that was pushed, stops if the SHA doesn't match, and only marks the deploy successful after a live HTTPS health check. Separate staging and production where a project needs them, and test-gated deploys for BHelper",
+          "Send-only mail server (Postfix + OpenDKIM in Docker): DKIM-signed mail relayed through Resend because the provider permanently blocks outbound port 25. Each app gets its own SMTP login, can only send as its own address, and reaches the server on an internal Docker network",
+          "A database server per Docker stack (MySQL 8.0 / 8.4, MariaDB, PostgreSQL 16), so a bad migration or a crash in one app never touches another app's data",
+          "Running a small box on measurements: swap sized for 4 GB of RAM, unattended security upgrades, log rotation, and decisions such as memory limits, Docker disk cleanup and whether the next app fits, made from VPS Monitor's numbers"
+        ],
+        "badges": ["In production", "12 HTTPS sites", "20 containers", "8 CI/CD pipelines"],
+        "pills": ["Debian 12", "Nginx", "Let's Encrypt / Certbot", "Docker", "Docker Compose", "systemd", "GitHub Actions", "SSH", "Postfix + OpenDKIM", "MySQL / MariaDB", "PostgreSQL", "Bash"]
       }
     ],
     "internal": [

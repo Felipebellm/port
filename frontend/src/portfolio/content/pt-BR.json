@@ -167,6 +167,51 @@
         "badges": ["Em produção", "Full-stack solo", "9 áreas de funcionalidades", "2 integrações com APIs externas"],
         "pills": ["Laravel 12", "PHP 8.2", "React 18", "Vite", "Laravel Sanctum", "MySQL", "Redis", "Docker", "GitHub Actions", "OAuth2 + PKCE", "Web Audio API", "Vitest"],
         "link": { "label": "Acessar bhelper.bell.vps-kinghost.net", "href": "https://bhelper.bell.vps-kinghost.net/" }
+      },
+      {
+        "variant": "simple",
+        "images": [
+          { "src": "/images/projects/VPSMonitor_board.png", "alt": "Painel do VPS Monitor: status dos serviços, incidentes abertos, deploys e CPU, memória e disco do servidor" },
+          { "src": "/images/projects/VPSMonitor_uptime.png", "alt": "Grade de disponibilidade de 14 dias por serviço, com quedas em andamento marcadas" },
+          { "src": "/images/projects/VPSMonitor_resources.png", "alt": "Página de recursos com CPU, memória, disco, swap, rede e E/S de disco do VPS ao vivo" },
+          { "src": "/images/projects/VPSMonitor_apps.png", "alt": "Tabela por aplicação com CPU, memória, fatia da RAM e pico de sete dias" },
+          { "src": "/images/projects/VPSMonitor_headroom.png", "alt": "Indicadores de folga classificados como OK, Atenção ou Agir para memória, disco, CPU, tempo de espera e mais" },
+          { "src": "/images/projects/VPSMonitor_history.png", "alt": "Gráficos de histórico de recursos e uso de disco do Docker com espaço recuperável" },
+          { "src": "/images/projects/VPSMonitor_deploys.png", "alt": "Página de deploys com linha do tempo de 30 dias e resultados por semana" },
+          { "src": "/images/projects/VPSMonitor_runs.png", "alt": "Execuções recentes de deploy no GitHub Actions com resultado, commit, autor e duração" }
+        ],
+        "title": "VPS Monitor — Painel de Disponibilidade, Deploys e Capacidade",
+        "description": "Nasceu quando descobri que um site que hospedo estava fora do ar havia três semanas, e o banco de dados dele havia dois meses, sem nada me avisar. Aquele projeto não tinha CI/CD, então nenhum gancho de deploy teria percebido. O VPS Monitor verifica cada serviço do meu VPS por conta própria, acompanha cada deploy do GitHub Actions nos meus repositórios, mostra quanto cada aplicação consome de CPU, memória e disco, e manda uma notificação para o meu celular quando um deploy termina ou um serviço cai. É privado e exige login, por isso aparece aqui em capturas de tela.",
+        "bullets": [
+          "Verificações de saúde a cada minuto em 11 serviços (estado dos containers e uma checagem HTTP real), tenha o projeto CI/CD ou não, para que um serviço em silêncio não passe mais por saudável",
+          "Máquina de estados de incidentes: uma queda só é aberta depois de falhas consecutivas, alerta uma vez e me lembra diariamente enquanto continuar aberta. Uma queda de três semanas vira um alerta e um lembrete por dia, não ~30.000 notificações",
+          "Acompanhamento de deploys sem mexer nos workflows: um GitHub App instalado em todos os repositórios envia webhooks assinados (HMAC SHA-256), cada execução é classificada como concluída, com falha, com testes falhando ou reprovada no health check a partir do job que quebrou, e execuções que nunca retornam são fechadas como desconhecidas e notificadas",
+          "Agente de recursos com privilégio mínimo em Python puro, lendo /proc e cgroups a cada 3s como nobody, com sistema de arquivos somente leitura e sem capabilities, acessando o Docker só por um proxy de socket somente leitura. Stacks Compose, containers e serviços systemd são descobertos, não configurados",
+          "Uma divisão de disco que fecha a conta: um medidor isolado (raiz montada só para leitura, sem rede, uma única capability) atribui cada gigabyte a uma aplicação, a sobras do Docker ou ao sistema. O que ele não consegue explicar conta como Sistema, então as partes nunca somam mais que o disco",
+          "Planejamento de capacidade, não só gráficos: indicadores OK / Atenção / Agir para folga de memória (\"cabem mais N apps\"), p95 de CPU, tempo de espera por recursos, swap-in, CPU steal, disco do Docker recuperável, containers sem limite de memória e mortes por falta de memória, com histórico de 24h / 7d / 30d",
+          "Ele não se declara saudável por engano: o próprio deploy falha se nenhuma verificação rodou nos últimos cinco minutos, e o endpoint de status nunca sai do cache do PWA, porque um painel antigo cheio de verde traria de volta o problema original"
+        ],
+        "badges": ["Em produção", "11 serviços monitorados", "Alertas push no celular", "Full-stack solo"],
+        "pills": ["Laravel 13", "PHP 8.3", "React 19", "Vite", "Recharts", "MySQL 8.4", "Python", "Web Push (VAPID)", "GitHub Apps e Webhooks", "Docker Compose", "PWA (Workbox)", "GitHub Actions"]
+      },
+      {
+        "variant": "simple",
+        "images": [
+          { "src": "/images/projects/VPSMonitor_resources.png", "alt": "Página de recursos com CPU, memória, disco, swap, rede e E/S de disco do VPS ao vivo" },
+          { "src": "/images/projects/VPSMonitor_apps.png", "alt": "Tabela por aplicação com CPU, memória, fatia da RAM e pico de sete dias" }
+        ],
+        "title": "VPS de Produção Próprio — DevOps e Infraestrutura",
+        "description": "Em vez de um plano de hospedagem para cada projeto, rodo meus produtos e sites de clientes em um único VPS que configurei e opero como servidor de produção. Uma máquina Debian (2 vCPU, 4 GB de RAM) serve 12 sites em HTTPS, incluindo este portfólio, atrás de um único nginx, e todo deploy sai pelo GitHub Actions. Cuido eu mesmo do provisionamento, TLS, e-mail, CI/CD e capacidade, e o VPS Monitor me avisa quando algo precisa de atenção.",
+        "bullets": [
+          "nginx como ponto único de TLS para 12 sites: certificados Let's Encrypt renovados automaticamente pelo Certbot, redirecionamento de HTTP para HTTPS, um snippet compartilhado de cabeçalhos de segurança e cache imutável de um ano para arquivos estáticos",
+          "Ambiente misto em uma só máquina: 20 containers em stacks Docker Compose (Laravel, WordPress e outras) rodando ao lado de serviços systemd nativos (PHP 8.4-FPM, MariaDB, um worker de fila) e um servidor de jogo em Java",
+          "Um padrão de deploy em 8 repositórios: o GitHub Actions conecta por SSH, coloca o servidor exatamente no commit enviado, para se o SHA não bater e só marca o deploy como concluído depois de um health check HTTPS real. Staging e produção separados quando o projeto precisa, e deploys condicionados aos testes no BHelper",
+          "Servidor de e-mail só de envio (Postfix + OpenDKIM em Docker): mensagens assinadas com DKIM e retransmitidas pelo Resend, porque o provedor bloqueia a porta 25 de saída em definitivo. Cada aplicação tem seu próprio login SMTP, só envia com o próprio endereço e acessa o servidor por uma rede Docker interna",
+          "Um servidor de banco de dados por stack Docker (MySQL 8.0 / 8.4, MariaDB, PostgreSQL 16), para que uma migração com erro ou uma queda em uma aplicação nunca afete os dados de outra",
+          "Uma máquina pequena operada com base em medições: swap dimensionado para 4 GB de RAM, atualizações de segurança automáticas, rotação de logs e decisões como limites de memória, limpeza do disco do Docker e se a próxima aplicação cabe, tomadas a partir dos números do VPS Monitor"
+        ],
+        "badges": ["Em produção", "12 sites em HTTPS", "20 containers", "8 pipelines de CI/CD"],
+        "pills": ["Debian 12", "Nginx", "Let's Encrypt / Certbot", "Docker", "Docker Compose", "systemd", "GitHub Actions", "SSH", "Postfix + OpenDKIM", "MySQL / MariaDB", "PostgreSQL", "Bash"]
       }
     ],
     "internal": [

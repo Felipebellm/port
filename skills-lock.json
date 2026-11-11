@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "skills": {
+    "linkedin-profile-optimizer": {
+      "source": "Paramchoudhary/ResumeSkills",
+      "sourceType": "github",
+      "skillPath": "skills/linkedin-profile-optimizer/SKILL.md",
+      "computedHash": "40d71f06875a53d8965479128844311839f5d87e7a4eef9c5f9a633234cf229d"
+    },
+    "portfolio-case-study-writer": {
+      "source": "Paramchoudhary/ResumeSkills",
+      "sourceType": "github",
+      "skillPath": "skills/portfolio-case-study-writer/SKILL.md",
+      "computedHash": "fc7185ce58d0a03cc753e341836fc3d4f7c71cff6fa316c893a42bf7448f9494"
+    },
+    "resume-bullet-writer": {
+      "source": "Paramchoudhary/ResumeSkills",
+      "sourceType": "github",
+      "skillPath": "skills/resume-bullet-writer/SKILL.md",
+      "computedHash": "51e277dea0f69a04de6a66b89797f3c84cf62c8d62370c2d144692e3f86c7d3b"
+    }
+  }
+}
