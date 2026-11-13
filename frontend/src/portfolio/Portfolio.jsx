@@ -174,9 +174,9 @@ h2:focus-visible{outline:3px solid var(--focus);outline-offset:8px;}
 .fbm-photo-sheet{position:absolute;inset:0;padding:10px 10px 34px;background:${v("paper")};}
 /* halftone: soft dots are screened over the blurred greyscale photo, then extreme contrast turns
    them into hard dots whose size follows the photo's tone */
-.fbm-halftone{position:relative;width:100%;height:100%;overflow:hidden;background:${v("paper")};filter:contrast(22);}
-.fbm-halftone img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 26%;filter:grayscale(1) brightness(.6) contrast(1.2) blur(.7px);}
-.fbm-halftone::after{content:"";position:absolute;inset:-50%;rotate:24deg;mix-blend-mode:screen;background:radial-gradient(circle at center,${v("ink")},${v("mid")}) 0 0/5px 5px;}
+.fbm-halftone{position:relative;width:100%;height:100%;overflow:hidden;background:${v("paper")};filter:contrast(6);}
+.fbm-halftone img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 26%;filter:grayscale(1) brightness(.72) contrast(1.15) blur(.5px);}
+.fbm-halftone::after{content:"";position:absolute;inset:-50%;rotate:24deg;mix-blend-mode:screen;background:radial-gradient(circle at center,${v("ink")},${v("mid")}) 0 0/4px 4px;}
 .fbm-initials{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:${v("ink")};color:${v("paper")};}
 .fbm-hs{color:var(--fg);}
 .fbm-hs[data-s="star"]{left:-24%;top:-9%;width:26%;color:${v("accent")};}

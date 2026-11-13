@@ -6,20 +6,14 @@ const DICTIONARIES = { en, "pt-BR": ptBR };
 const STORAGE_KEY = "locale";
 
 /**
- * Decide which locale to show a fresh visitor.
- * Any browser language that starts with "pt" (pt-BR, pt-PT, pt, ...) means the
- * visitor is in a Portuguese-speaking locale -> serve Brazilian Portuguese.
- * Everyone else gets English.
+ * Decide which locale to show a fresh visitor from the browser's primary
+ * language: Portuguese of any region (pt-BR, pt-PT, pt, ...) gets Brazilian
+ * Portuguese, every other language gets English.
  */
 function detectLocale() {
-  const langs =
-    (typeof navigator !== "undefined" &&
-      (navigator.languages || [navigator.language])) ||
-    [];
-  const speaksPortuguese = langs.some(
-    (l) => typeof l === "string" && l.toLowerCase().startsWith("pt")
-  );
-  return speaksPortuguese ? "pt-BR" : "en";
+  if (typeof navigator === "undefined") return "en";
+  const primary = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+  return primary.toLowerCase().startsWith("pt") ? "pt-BR" : "en";
 }
 
 /**
@@ -29,9 +23,11 @@ function detectLocale() {
  */
 export default function useLocale() {
   const [locale, setLocaleState] = useState(() => {
-    if (typeof window !== "undefined") {
+    try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved && DICTIONARIES[saved]) return saved;
+    } catch (e) {
+      /* storage blocked: fall back to detection */
     }
     return detectLocale();
   });
