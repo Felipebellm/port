@@ -124,6 +124,18 @@ h2:focus-visible{outline:3px solid var(--focus);outline-offset:8px;}
 .fbm-pills{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none;}
 .fbm-pill{display:inline-block;padding:3px 9px;border:1px solid var(--mut);color:var(--fg);white-space:nowrap;}
 .fbm-strips{display:flex;flex-wrap:wrap;gap:6px;}
+.fbm-kind{display:block;margin:0 0 8px;color:var(--mut);text-transform:uppercase;}
+.fbm-story{display:grid;gap:${sp("md")};margin:0 0 ${sp("lg")};}
+.fbm-story dt{margin:0 0 4px;color:var(--fg-strong);text-transform:uppercase;}
+.fbm-story dd{margin:0;}
+.fbm-sublabel{margin:0 0 10px;color:var(--fg-strong);text-transform:uppercase;}
+.fbm-under{margin:0 0 ${sp("lg")};border-top:2px solid var(--ln);padding-top:${sp("md")};}
+.fbm-under>summary{display:inline-flex;align-items:center;gap:10px;cursor:pointer;list-style:none;color:var(--fg-strong);text-transform:uppercase;}
+.fbm-under>summary::-webkit-details-marker{display:none;}
+.fbm-under>summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border:2px solid var(--fg);}
+.fbm-under[open]>summary::before{content:"\\2212";}
+.fbm-under>summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px;}
+.fbm-under>ul{margin:${sp("md")} 0 0;}
 .fbm-btn{display:inline-flex;align-items:center;justify-content:center;gap:${sp("sm")};padding:14px 22px;border:2px solid var(--fg);background:var(--bg);color:var(--fg);
   text-decoration:none;text-transform:uppercase;white-space:nowrap;cursor:pointer;touch-action:manipulation;box-shadow:5px 5px 0 var(--fg);transition:translate .12s ease-out,box-shadow .12s ease-out;}
 .fbm-btn:hover{translate:2px 2px;box-shadow:3px 3px 0 var(--fg);}
@@ -375,6 +387,8 @@ function useMedia(query) {
 // the hero's scroll, turns from rot[0] to rot[1], and shifts by `depth` px with the pointer.
 // mode: "full" (desktop) · "lite" (mobile: shorter travel, no pointer) · "off" (reduced motion).
 const HeroFx = createContext(null);
+// The active locale's `ui` strings, for project cards rendered deep in the tree (tower, dialog, list).
+const UiCtx = createContext({});
 const LITE = 0.4;
 function Layer({ as = "div", speed = 0, drift = 0, depth = 0, rot, style, children, ...rest }) {
   const { p, mx, my, mode } = useContext(HeroFx);
@@ -558,19 +572,51 @@ function ImageSlider({ images, height, xerox }) {
 }
 
 /* ---------- project cards ---------- */
+// A project told as a short case study: what it is, the problem, what I built, the result, what it does.
+// The technical detail sits in a collapsed "under the hood" section for developers.
 function CardBody({ card }) {
+  const ui = useContext(UiCtx);
+  const story = card.story
+    ? [["storyProblem", card.story.problem], ["storySolution", card.story.solution], ["storyResult", card.story.result]].filter(([, t]) => t)
+    : [];
   return (
     <>
+      {card.kind && <span className="fbm-kind t-label-sm">{card.kind}</span>}
       <h3 className="t-title-lg" style={{ ...upper, margin: "0 0 10px" }}>{card.title}</h3>
       <p className="t-body-md fbm-prose" style={{ margin: `0 0 ${sp("md")}` }}>{card.description}</p>
+      {card.badges && <div style={{ marginBottom: sp("lg") }}><Strips items={card.badges} /></div>}
+      {story.length > 0 && (
+        <dl className="fbm-story fbm-prose">
+          {story.map(([k, t]) => <div key={k}><dt className="t-label-sm">{ui[k]}</dt><dd className="t-body-sm">{t}</dd></div>)}
+        </dl>
+      )}
       {card.bullets && (
-        <ul className="fbm-prose" style={{ listStyle: "none", margin: `0 0 ${sp("lg")}`, padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
-          {card.bullets.map((b, i) => <Bullet key={i}>{b}</Bullet>)}
+        <>
+          <p className="fbm-sublabel t-label-sm">{ui.featuresLabel}</p>
+          <ul className="fbm-prose" style={{ listStyle: "none", margin: `0 0 ${sp("lg")}`, padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
+            {card.bullets.map((b, i) => <Bullet key={i}>{b}</Bullet>)}
+          </ul>
+        </>
+      )}
+      <TechDetails card={card} />
+    </>
+  );
+}
+
+// Collapsed by default: technical bullets + stack pills, for readers who want them.
+function TechDetails({ card }) {
+  const ui = useContext(UiCtx);
+  if (!card.tech && !card.pills) return null;
+  return (
+    <details className="fbm-under">
+      <summary className="t-label-sm">{ui.techLabel}</summary>
+      {card.tech && (
+        <ul className="fbm-prose" style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 9 }}>
+          {card.tech.map((b, i) => <Bullet key={i}>{b}</Bullet>)}
         </ul>
       )}
-      {card.badges && <div style={{ marginBottom: sp("md") }}><Strips items={card.badges} /></div>}
-      {card.pills && <div style={{ marginBottom: sp("lg") }}><Pills items={card.pills} /></div>}
-    </>
+      {card.pills && <div style={{ marginTop: sp("md") }}><Pills items={card.pills} /></div>}
+    </details>
   );
 }
 
@@ -612,7 +658,10 @@ function SimpleCard({ card, motionProps, flat }) {
       {card.images && card.images.length > 0 && <ImageSlider images={card.images} />}
       <div style={{ padding: sp("lg") }}>
         <CardBody card={card} />
-        {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
+        <div style={{ display: "flex", alignItems: "center", gap: `${sp("sm")} ${sp("lg")}`, flexWrap: "wrap" }}>
+          {card.link && <ExtLink href={card.link.href} label={card.link.label} arrow="↗" />}
+          {card.note && <span className="t-meta" style={{ color: "var(--mut)", fontStyle: "italic" }}>{card.note}</span>}
+        </div>
       </div>
     </m.article>
   );
@@ -627,11 +676,12 @@ function CompactCard({ card, motionProps, flat }) {
           : <div aria-hidden="true" style={{ width: 28, height: 28, background: "var(--fg)", rotate: "-6deg" }} />}
       </div>
       <div>
+        {card.kind && <span className="fbm-kind t-label-sm">{card.kind}</span>}
         <h3 className="t-title-md" style={{ ...upper, margin: "0 0 8px" }}>{card.title}</h3>
         {card.inlineBadge && <p style={{ margin: "0 0 10px" }}><span className="fbm-strip t-label-sm">{card.inlineBadge}</span></p>}
         <p className="t-body-md fbm-prose" style={{ margin: `0 0 ${sp("md")}` }}>{card.description}</p>
-        {card.pills && <Pills items={card.pills} />}
-        {card.link && <ExtLink href={card.link.href} label={card.link.label || new URL(card.link.href).hostname.replace(/^www\./, "")} arrow="↗" style={{ marginTop: sp("md") }} />}
+        <TechDetails card={card} />
+        {card.link && <ExtLink href={card.link.href} label={card.link.label || new URL(card.link.href).hostname.replace(/^www\./, "")} arrow="↗" />}
       </div>
     </m.article>
   );
@@ -687,7 +737,10 @@ function TowerCard({ card, index, front, near, ui, onDetails, onSelect }) {
       {/* the card "focuses" when it reaches the front: content settles up and darkens */}
       <m.div animate={front ? { opacity: 1, y: 0 } : { opacity: 0.55, y: 8 }} transition={{ duration: 0.3, ease: EASE }}
         style={{ padding: "18px 22px 20px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 10, flex: 1, minHeight: 0 }}>
-        {(card.barLabel || card.inlineBadge) && <span className="fbm-strip t-label-sm">{card.barLabel || card.inlineBadge}</span>}
+        <div className="fbm-strips" style={{ alignItems: "center" }}>
+          {card.kind && <span className="fbm-strip t-label-sm">{card.kind}</span>}
+          {(card.barLabel || card.inlineBadge) && <span className="fbm-pill t-pill">{card.barLabel || card.inlineBadge}</span>}
+        </div>
         <h3 className="t-title-md" style={{ ...upper, margin: 0 }}>{card.title}</h3>
         <p className="t-body-sm fbm-tdesc" style={{ margin: 0 }}>{card.description}</p>
         {card.badges ? <Strips items={card.badges} max={3} /> : card.pills && <Pills items={card.pills} max={7} />}
@@ -1190,6 +1243,7 @@ function Page() {
           </div>
         </HeroFx.Provider>
 
+        <UiCtx.Provider value={c.ui}>
         <main id="fbm-main">
 
           {/* PROJECTS — the tower */}
@@ -1306,6 +1360,7 @@ function Page() {
           </section>
 
         </main>
+        </UiCtx.Provider>
 
         {/* FOOTER */}
         <div className="fbm-container">

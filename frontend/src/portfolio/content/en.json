@@ -1,24 +1,29 @@
 {
   "meta": {
-    "title": "Felipe Bell Marques — Full Stack Developer",
-    "description": "Full Stack Developer specializing in PHP, Laravel, and WordPress — enterprise platforms, custom frameworks, multi-database integrations, and CI/CD pipelines."
+    "title": "Felipe Bell Marques — Software Developer (Full Stack)",
+    "description": "Software developer who builds websites, web apps, dashboards and internal business systems, from the screens people use to the servers they run on. PHP, Laravel, WordPress, React."
   },
   "ui": {
     "langToggleAria": "Change language",
     "towerHint": "Scroll or use the arrows",
     "prevProject": "Previous project",
     "nextProject": "Next project",
-    "projectDetails": "Details",
+    "projectDetails": "Read more",
     "close": "Close",
     "sectionsNav": "Sections",
     "toLightTheme": "Switch to light theme",
     "toDarkTheme": "Switch to dark theme",
-    "langToggleShort": "Switch language to Portuguese"
+    "langToggleShort": "Switch language to Portuguese",
+    "storyProblem": "The problem",
+    "storySolution": "What I built",
+    "storyResult": "The result",
+    "featuresLabel": "What it does",
+    "techLabel": "Under the hood (for developers)"
   },
   "hero": {
-    "role": "Full Stack Developer",
+    "role": "Software Developer",
     "name": "Felipe Bell Marques",
-    "tagline": "I build enterprise web platforms with PHP, Laravel, and WordPress — from legacy migrations to custom frameworks with full CI/CD pipelines.",
+    "tagline": "I build websites, apps and the internal systems companies run on every day, from the screen people click to the server it runs on.",
     "resumeCta": "View Résumé",
     "resumeHref": "#",
     "contactCta": "Get in touch",
@@ -34,9 +39,10 @@
   "about": {
     "heading": "About",
     "paragraphs": [
-      "I'm a Full Stack Developer based in Mogi Mirim, São Paulo, Brazil, with over a decade of experience spanning mainframe systems to modern web platforms. My core expertise is PHP — from WordPress and Drupal to Laravel and object-oriented architecture — combined with JavaScript, TypeScript, jQuery, and Angular on the frontend, plus Docker, CI/CD, and multi-database integration (MySQL, Oracle, PostgreSQL).",
-      "My career started in an unusual place: developing mainframe systems with COBOL, JCL, CICS, and DB2 at IBM for clients like AT&T and Bank Safra. That foundation taught me how large-scale, mission-critical systems work. I later spent five years at Stefanini building portals, plugins, and custom solutions for international clients like American Airlines, GSK, Edenred, and Sesc.",
-      "To truly master object-oriented PHP, I built my own MVC framework from scratch — and today it powers a full back-office operations platform I designed and built for a Brazilian supermarket chain with 8+ stores, complete with a Docker development environment, GitHub Actions CI/CD, RBAC, and real-time integrations with Oracle RMS and Senior ERP. I'm fluent in English, intermediate in Spanish, and passionate about sharing knowledge: I've given company-wide lectures on Docker and WordPress, and taught weekly English classes to colleagues."
+      "I'm a software developer in Mogi Mirim, São Paulo, Brazil, with more than ten years in technology. I build complete applications: the screens people use, the logic and data behind them, and the servers they run on. The industry calls that a full-stack developer. In practice it means you can hand me a problem and get back a working system.",
+      "I started on the systems most people never see: the mainframes behind AT&T's billing and Bank Safra's core banking, at IBM. That taught me how software has to behave when a business depends on it every second. I then spent five years at Stefanini building websites, company portals and custom tools for international clients such as American Airlines, GSK, Edenred and Sesc.",
+      "Today I build and run the internal systems of Rede Zeferino, a supermarket chain in São Paulo state. Store staff use them every day to weigh deliveries, print labels, check equipment and pull reports. I also built the chain's public website and careers page. On the side I make my own apps, such as an expense-splitting app and a tool for bands, and host them on a server I manage myself.",
+      "I speak English fluently and Spanish at an intermediate level, and I like teaching: I've given company-wide talks on Docker and WordPress and ran weekly English classes for colleagues. My main tools are PHP (Laravel and WordPress), JavaScript and React, MySQL and Oracle databases, and Docker."
     ]
   },
   "experience": {
@@ -49,15 +55,15 @@
         "title": "Systems Analyst & Full-Stack Developer",
         "company": "Rede Zeferino",
         "location": "Itapira, SP",
-        "description": "Designed and built the company's back-office operations platform end to end — architecture, infrastructure, CI/CD, and features — centralizing retail workflows across 8+ supermarket stores. Built on my own hand-rolled PHP MVC framework with a multi-database layer connecting MySQL and four Oracle connection scopes (RMS and Senior ERP), a data-driven RBAC system, and automated deployments via GitHub Actions with a self-hosted Windows runner.",
-        "pills": ["PHP 8.2", "MySQL/MariaDB", "Oracle (OCI8/PDO)", "Docker", "GitHub Actions", "Bootstrap 5", "jQuery", "SCSS", "PowerShell"]
+        "description": "I design, build and run the company's internal operations system on my own. Staff across 8+ stores use it every day to record deliveries, print labels, check that store equipment is online and pull reports, and it connects directly to the company's main business software (Oracle RMS and Senior ERP). Updates go live automatically, without interrupting anyone's work. I also built the public website and the careers page where each store posts its job openings.",
+        "pills": ["PHP 8.2", "MySQL/MariaDB", "Oracle", "Docker", "GitHub Actions", "Bootstrap 5", "jQuery", "SCSS", "PowerShell"]
       },
       {
         "period": "2018 — 2023",
         "title": "Full Stack Developer",
         "company": "Stefanini",
         "location": "Jaguariúna, SP",
-        "description": "Developed PHP web applications, WordPress plugins/themes, and Drupal solutions for international clients including American Airlines, GSK, Edenred, Sesc, EDF, and Alvarez & Marsal. Migrated legacy PHP portals to Laravel. Worked in agile teams with JavaScript and jQuery.",
+        "description": "Built websites, company portals and custom tools for international clients including American Airlines, GSK, Edenred, Sesc, EDF and Alvarez & Marsal, mostly on WordPress, Drupal and Laravel. Rebuilt older portals on a modern framework so they were easier to maintain and extend. Worked in agile teams that delivered in short cycles.",
         "pills": ["PHP", "WordPress", "Laravel", "Drupal", "JavaScript", "jQuery", "Agile"]
       },
       {
@@ -65,7 +71,7 @@
         "title": "Field Technician",
         "company": "HP / CTMM – Itaú",
         "location": "",
-        "description": "Managed Data Center infrastructure for one of Brazil's largest banks.",
+        "description": "Looked after data center infrastructure for Itaú, one of Brazil's largest banks, keeping the hardware behind its systems running.",
         "pills": ["Data Center", "Infrastructure", "Hardware"]
       },
       {
@@ -73,7 +79,7 @@
         "title": "Mainframe Systems Analyst & Developer",
         "company": "IBM",
         "location": "Hortolândia",
-        "description": "Developed and tested mission-critical systems for AT&T's billing system and Bank Safra's main system.",
+        "description": "Developed and tested software for mainframes, the large central computers banks and telecoms rely on, working on AT&T's billing system and Bank Safra's core banking system: systems that can't afford to go down.",
         "pills": ["COBOL", "JCL", "CICS", "DB2"]
       },
       {
@@ -81,24 +87,25 @@
         "title": "Computer Technician & Private Instructor",
         "company": "Independent",
         "location": "",
-        "description": "Computer maintenance, operating systems management, and teaching basic computing skills.",
+        "description": "Repaired and maintained computers, installed and set up Windows and Linux, and taught people basic computer skills one-on-one.",
         "pills": ["Hardware", "Linux", "Windows", "Teaching"]
       }
     ]
   },
   "projects": {
     "heading": "Projects",
-    "intro": "Live products you can open and explore, plus enterprise systems built inside companies where the code stays private — shown by architecture and detail instead.",
-    "liveLabel": "Live & Public",
-    "internalLabel": "Enterprise & Internal",
-    "internalIntro": "Built inside companies or as intranet systems — the live products stay private, so these are shown through architecture, sanitized detail, and code on request.",
+    "intro": "Websites, apps and dashboards I've built. The public ones you can open and try. The others are systems companies use internally, so I show them through screenshots and explain what they do.",
+    "liveLabel": "Public projects",
+    "internalLabel": "Internal company systems",
+    "internalIntro": "These run inside companies and aren't open to the public, so they're shown through screenshots and descriptions. I'm happy to walk through them in a conversation.",
     "archiveLink": "View Full Project Archive",
     "archiveHref": "#",
-    "archiveList": "Archive: Bank Safra · AT&T · GSK · Edenred · Sesc · EDF · Red Asset · AdvanSix · Alvarez & Marsal · ScalesMapApp",
+    "archiveList": "Earlier work for: Bank Safra · AT&T · GSK · Edenred · Sesc · EDF · Red Asset · AdvanSix · Alvarez & Marsal · ScalesMapApp",
     "live": [
       {
         "variant": "featured",
         "diagram": "rbac",
+        "kind": "Company website",
         "images": [
           { "src": "/images/projects/Rede_zeferino_sec1.png", "alt": "Rede Zeferino homepage hero banner and company history section" },
           { "src": "/images/projects/Rede_zeferino_sec2.png", "alt": "Rede Zeferino store units section with per-brand store listings" },
@@ -106,24 +113,39 @@
           { "src": "/images/projects/Rede_zeferino_Vagas_sec1.png", "alt": "Rede Zeferino careers page listing open store positions" },
           { "src": "/images/projects/Rede_zeferino_Vagas_sec2.png", "alt": "Rede Zeferino careers page with job pagination and résumé submission form" }
         ],
-        "barLabel": "★ Featured · Live in production",
-        "title": "Rede Zeferino — Corporate Site & Careers Platform",
-        "description": "A public corporate site that doubles as two operational tools: a store-scoped careers board where each store's HR staff manage only their own openings, and a supplier/customer contact channel that routes vendor inquiries straight to the right purchasing buyer. Built on a fully custom WordPress theme with no page-builder or form-plugin dependency.",
+        "barLabel": "★ Featured · Live",
+        "title": "Rede Zeferino — Company Website & Careers Page",
+        "description": "The public website of a supermarket chain with 19 stores. Besides presenting the company, it lets each store post its own job openings and delivers supplier messages straight to the right buyer.",
+        "story": {
+          "problem": "The chain needed a website that did real work, not just a brochure. Each store's HR staff had to post and manage their own job openings without touching another store's listings, and suppliers had no reliable way to reach the right person in purchasing.",
+          "solution": "I built the site from scratch on WordPress, without page builders or form plugins. Each HR person logs in and sees only their store's openings. Candidates apply to a specific store and role, and the application goes to that store. Supplier messages are sorted by product category and delivered to the buyer responsible for it.",
+          "result": "The site is live and in daily use: 22 HR staff manage openings for 19 stores and 2 distribution centers, and supplier messages land in the right inbox without anyone forwarding them."
+        },
         "bullets": [
+          "A careers page where each store posts and manages its own job openings",
+          "Three access levels: store HR, HR managers who see every store, and site administrators",
+          "Applications go to the right store automatically, based on city and role",
+          "A supplier contact form that delivers each message to the buyer for that product category, with spam protection",
+          "Four custom admin screens, so the team can update stores and content without a developer",
+          "Each job posting gets its Google search description written automatically",
+          "A one-click maintenance mode that hides the site from visitors while changes are made"
+        ],
+        "badges": ["Live", "19 stores + 2 distribution centers", "22 HR staff use it", "4 custom admin screens"],
+        "tech": [
           "Three-tier custom RBAC across 22 HR accounts — store-scoped \"RH\", store-agnostic \"RH Admin\", and extended Administrator caps, enforced via map_meta_cap, pre_get_posts query scoping, and admin-menu pruning",
           "Category-based vendor routing: submissions matched against a configurable category→buyer→email map, guarded by reCAPTCHA v2, a honeypot, and a submission-timing check",
           "Dynamic jobs board on a purpose-built custom post type, matching applications by city + role to the right store's contact email at submit time",
           "Four custom wp-admin dashboards built without any admin-page framework, with AJAX store editing and IBGE municipality data synced via a build-time fetch script",
           "Automated per-posting SEO metadata generation into Yoast fields, with a one-time backfill migration for existing content",
-          "Site-wide maintenance kill switch — assigning one template to the front page instantly redirects all logged-out traffic, fully reversible, no plugin required"
+          "Site-wide maintenance kill switch — assigning one template to the front page redirects all logged-out traffic, fully reversible, no plugin required"
         ],
-        "badges": ["In production", "19 stores / 2 distribution centers", "22 managed HR accounts", "4 custom admin dashboards"],
         "pills": ["WordPress (custom theme)", "PHP 8.2", "MySQL 8", "JavaScript/jQuery", "SCSS/Sass", "Bootstrap 5", "Custom Post Types", "WP AJAX", "Yoast SEO", "reCAPTCHA v2", "FluentSMTP", "Docker Compose"],
         "link": { "label": "Visit redezeferino.com.br", "href": "https://redezeferino.com.br/" },
-        "note": "Platform engineering by me · UX/UI by Leonardo Gardinali"
+        "note": "Development by me · Design by Leonardo Gardinali"
       },
       {
         "variant": "simple",
+        "kind": "Web app",
         "images": [
           { "src": "/images/projects/BPAgenda.png", "alt": "BPAgenda dashboard showing feature modules and monthly expense summary" },
           { "src": "/images/projects/BPAgenda_Kanban.png", "alt": "BPAgenda Kanban board with task columns and permissions" },
@@ -131,45 +153,74 @@
           { "src": "/images/projects/BPAgenda_praticSession.png", "alt": "BPAgenda practice session tracker for study and exercise routines" },
           { "src": "/images/projects/BPAgenda_despesas.png", "alt": "BPAgenda shared expense list with balances and settlements" }
         ],
-        "title": "BPAgenda — Shared Expense & Productivity Platform",
-        "description": "Born when I outgrew Splitwise's free tier: I wanted expense splitting that also handled installments, recurring bills, and ready-made monthly totals — so I built it. From that expenses core it grew into a personal-organization suite I share with the people around me: permission-gated collaborative kanban, a Super Pomodoro with preset or fully custom schemes, timed practice routines, and an agenda that links to all of it — in active daily use with full EN/PT-BR localization.",
+        "title": "BPAgenda — Shared Expenses & Personal Organizer",
+        "description": "An app for splitting expenses with friends and family that grew into a personal organizer: task boards, a focus timer, practice routines and a calendar. I use it every day with the people around me.",
+        "story": {
+          "problem": "I split bills with friends on Splitwise and outgrew its free plan. I also needed things it didn't do well: purchases paid in installments, bills that repeat every month, and a clear total for each month.",
+          "solution": "So I built my own. You add an expense, choose how to split it, and the app keeps a running balance with each friend. From there I added the other tools I was juggling: shared task boards, a Pomodoro focus timer, timed practice routines and a calendar that links them all.",
+          "result": "It's in daily use, works in English and Portuguese, and installs on a phone like a regular app."
+        },
         "bullets": [
+          "Split any expense equally, fully on one person, or in custom amounts",
+          "Installment purchases and monthly bills are added automatically",
+          "A live balance with each friend that stays correct even after you edit or delete an expense",
+          "Shared task boards where you decide who can view and who can edit",
+          "A focus timer with ready-made or custom work-and-break cycles",
+          "Practice routines split into timed blocks, like an hour of guitar divided into scales, harmony and improvisation",
+          "Learns your categories: correct an expense once and it remembers next time"
+        ],
+        "badges": ["In daily use", "English & Portuguese", "Installs on your phone", "Built solo"],
+        "tech": [
           "Automated balance engine nets four aggregated sums (bidirectional debts + settlements) into a live per-friend balance on every read — nothing cached or denormalized, so totals stay correct after edits or deletions",
-          "Three-mode splitting (equal / full / custom) with multi-month installments and recurring monthly expenses generated inside atomic DB transactions, plus per-month totals and a validator that cross-checks friendship, payer/participant conflicts, and split-sum overflow before persisting",
+          "Three-mode splitting (equal / full / custom) with multi-month installments and recurring monthly expenses generated inside atomic DB transactions, plus a validator that cross-checks friendship, payer/participant conflicts, and split-sum overflow before persisting",
           "Hand-rolled 4-tier permission ladder (owner/full/read-write/read) gating every kanban mutation at the controller layer, on Laravel Sanctum SPA token auth",
-          "Practice routines with custom timed segments — split an hour of guitar study into scales, harmonics, and improvisation blocks — alongside preset or custom Pomodoro schemes and agenda events that link to kanban cards and routines",
           "Collaborative lists with an append-only activity log that reconstructs every add/remove/check by diffing item arrays on each save",
-          "Self-hosted CI/CD — GitHub Actions deploys to a Docker/Nginx/MySQL VPS on every push to main; frontend ships as an installable PWA with a Workbox service worker for offline-aware API caching",
+          "Self-hosted CI/CD — GitHub Actions deploys to a Docker/Nginx/MySQL VPS on every push to main; the frontend ships as an installable PWA with a Workbox service worker for offline-aware API caching",
           "Self-learning categorization: a 21-category keyword-matching engine backed by a per-user \"learned icon\" table that remembers corrections and tracks usage"
         ],
-        "badges": ["In active use", "Bilingual (EN/PT-BR)", "5 feature modules", "Solo full-stack"],
         "pills": ["Laravel 11", "PHP 8.2", "Laravel Sanctum", "MySQL 8", "React 18", "Vite", "React Router", "Axios", "Docker", "Nginx", "GitHub Actions", "PWA (Workbox)"],
-        "link": { "label": "Open live demo", "href": "https://bpagenda.bell.vps-kinghost.net" }
+        "link": { "label": "Try the live demo", "href": "https://bpagenda.bell.vps-kinghost.net" }
       },
       {
         "variant": "simple",
+        "kind": "Web app",
         "images": [
           { "src": "/images/projects/BHelper_mainPage.png", "alt": "BHelper dashboard listing the user's bands" },
           { "src": "/images/projects/BHelper_Escalas.png", "alt": "BHelper fretboard scale visualizer with harmonic field breakdown" },
           { "src": "/images/projects/BHelper_clicleof5s.png", "alt": "BHelper circle of fifths tool with chord progression suggestions" },
           { "src": "/images/projects/BHelper_afinador.png", "alt": "BHelper real-time instrument tuner" }
         ],
-        "title": "BHelper — Band Management Platform",
-        "description": "Built to solve my own problem as a musician playing in several bands: setlists, songs I needed to focus on, and rehearsal routines were scattered everywhere. BHelper is a multi-tenant Laravel API + React SPA that gives each band an isolated workspace — Kanban boards, collaborative setlists, a song catalog auto-enriched via external music APIs, and a public band site — now used by my friends' bands too, and evolving through their feedback.",
+        "title": "BHelper — Band Management App",
+        "description": "An app for bands: setlists, the songs each member needs to practice, rehearsal plans and music tools, all in one place. Each band gets its own private space.",
+        "story": {
+          "problem": "I play in several bands, and our setlists, the songs we needed to work on and our rehearsal plans were scattered across chats, notes and spreadsheets. Nothing kept them together for the whole band.",
+          "solution": "BHelper gives each band a private workspace with task boards, shared setlists and a song library. Add a song and it fills in the tempo, key and lyrics for you. It also has a tuner, a scale chart and a public page for each band.",
+          "result": "It's live and used by my bands and by friends' bands, and new features come from their feedback."
+        },
         "bullets": [
+          "A private workspace for each band; members only see the bands they belong to",
+          "Shared setlists and task boards for rehearsals",
+          "Add a song and its tempo, key and lyrics are filled in automatically",
+          "Turn a setlist into a streaming playlist, connecting your account by scanning a QR code with your phone",
+          "A precise instrument tuner that runs in the browser with your microphone",
+          "A fretboard chart for 30+ scales and a circle of fifths with chord suggestions",
+          "A public page for each band"
+        ],
+        "badges": ["Live", "Used by several bands", "Built solo", "Connects to 2 music services"],
+        "tech": [
           "Header-verified multi-tenancy — every endpoint resolves the active band from a request header, checks it against verified membership server-side, and scopes every query; cross-band access returns 403 rather than trusting a client-supplied ID",
           "OAuth (PKCE) with cross-device handoff — connect a streaming account from your phone via QR code while the desktop session polls for completion, then export a setlist directly into a new playlist",
           "Automated metadata enrichment — new songs hydrated with BPM, key, and lyrics by orchestrating two external music APIs, with response caching to avoid redundant calls",
-          "Real-time in-browser tuner using Web Audio sampling, autocorrelation, and parabolic interpolation for sub-cent accuracy, plus a fretboard/scale visualizer covering 30+ scale types",
+          "Real-time in-browser tuner using Web Audio sampling, autocorrelation, and parabolic interpolation for sub-cent accuracy",
           "CI/CD with deploy verification — GitHub Actions deploys on every push to main, verifying the deployed commit SHA and running a live HTTP health check before marking success",
           "Unit-tested music-theory core — pitch detection and scale/transposition isolated into pure modules with ~390 lines of Vitest coverage, decoupled from the Web Audio/DOM layer"
         ],
-        "badges": ["In production", "Solo full-stack", "9 feature areas", "2 external API integrations"],
         "pills": ["Laravel 12", "PHP 8.2", "React 18", "Vite", "Laravel Sanctum", "MySQL", "Redis", "Docker", "GitHub Actions", "OAuth2 + PKCE", "Web Audio API", "Vitest"],
         "link": { "label": "Visit bhelper.bell.vps-kinghost.net", "href": "https://bhelper.bell.vps-kinghost.net/" }
       },
       {
         "variant": "simple",
+        "kind": "Dashboard",
         "images": [
           { "src": "/images/projects/VPSMonitor_board.png", "alt": "VPS Monitor board: service status, open incidents, deploy count and host CPU, memory and disk" },
           { "src": "/images/projects/VPSMonitor_uptime.png", "alt": "Fourteen-day uptime grid per service, with ongoing outages marked" },
@@ -180,37 +231,66 @@
           { "src": "/images/projects/VPSMonitor_deploys.png", "alt": "Deploys page with a 30-day deploy timeline and weekly outcomes" },
           { "src": "/images/projects/VPSMonitor_runs.png", "alt": "Recent GitHub Actions deploy runs with outcome, commit, author and duration" }
         ],
-        "title": "VPS Monitor — Uptime, Deploy & Capacity Dashboard",
-        "description": "Built after I found out a site I host had been down for three weeks, and its database for two months, with nothing telling me. That project had no CI/CD, so no deploy hook could ever have noticed. VPS Monitor checks every service on my VPS on its own schedule, tracks every GitHub Actions deploy across my repositories, shows what each app costs in CPU, memory and disk, and sends a push notification to my phone when a deploy finishes or a service goes down. It is private and sign-in only, so it is shown here through screenshots.",
+        "title": "VPS Monitor — Server Health Dashboard",
+        "description": "A private dashboard that watches every site and app I host, alerts my phone the moment something goes down, and shows how much room the server has left.",
+        "story": {
+          "problem": "I discovered that a site I host had been down for three weeks, and its database for two months, and nothing had warned me. The only checks I had ran when I published an update, and that project was never updated.",
+          "solution": "VPS Monitor checks every service on the server once a minute, on its own schedule. It records every update I publish, shows how much processing power, memory and disk each app uses, and sends a notification to my phone when an update finishes or a service goes down.",
+          "result": "11 services are watched around the clock. An outage now reaches my phone within minutes, and decisions like whether the server can take another app are made from real numbers instead of guesses."
+        },
         "bullets": [
-          "Health probes every minute on 11 services (container state plus a live HTTP check), whether or not a project has CI/CD, so a quiet service can no longer pass for a healthy one",
-          "Incident state machine: an outage opens only after consecutive failed checks, alerts once, and reminds me daily while it stays open. A three-week outage is one alert and a daily nudge, not ~30,000 pings",
-          "Deploy tracking with no workflow changes: a GitHub App on all repositories sends signed webhooks (HMAC SHA-256), each run is classed as deployed, failed, tests failed or health check failed from the job that broke, and runs that never report back are closed as unknown and announced",
-          "Least-privilege resource agent in plain Python, reading /proc and cgroups every 3s as nobody, on a read-only filesystem with no capabilities, reaching Docker only through a read-only socket proxy. Compose stacks, containers and systemd services are discovered, not configured",
-          "A disk breakdown that adds up: a sandboxed sizer (read-only root mount, no network, one capability) assigns every gigabyte to an app, Docker leftovers or the system. Anything it can't explain counts as System, so the parts can never add up to more than the disk",
-          "Capacity planning, not just graphs: OK / Watch / Act indicators for memory headroom (\"about N more apps\"), CPU p95, pressure-stall time, swap-in, CPU steal, reclaimable Docker disk, containers without memory limits and OOM kills, with 24h / 7d / 30d history",
-          "It can't report itself healthy by mistake: its own deploy fails unless a probe ran in the last five minutes, and the status endpoint is never served from the PWA cache, because a stale board of green tiles would bring back the original bug"
+          "Checks 11 services every minute, however often they're updated",
+          "One alert when something goes down, then a daily reminder until it's fixed: no flood of messages",
+          "A 14-day uptime history for each service",
+          "A record of every update published to the server and whether it succeeded",
+          "Shows what each app costs in processing power, memory and disk",
+          "Simple OK / Watch / Act signals, such as how many more apps the memory can take",
+          "Built so it can never show \"all good\" by mistake: if its own checks stop running, it says so"
         ],
-        "badges": ["In production", "11 services watched", "Push alerts to phone", "Solo full-stack"],
-        "pills": ["Laravel 13", "PHP 8.3", "React 19", "Vite", "Recharts", "MySQL 8.4", "Python", "Web Push (VAPID)", "GitHub Apps & Webhooks", "Docker Compose", "PWA (Workbox)", "GitHub Actions"]
+        "badges": ["Live", "11 services watched", "Alerts on my phone", "Built solo"],
+        "tech": [
+          "Health probes every minute on 11 services (container state plus a live HTTP check), whether or not a project has CI/CD, so a quiet service can no longer pass for a healthy one",
+          "Incident state machine: an outage opens only after consecutive failed checks, alerts once, and reminds daily while it stays open. A three-week outage is one alert and a daily nudge, not ~30,000 pings",
+          "Deploy tracking with no workflow changes: a GitHub App on all repositories sends signed webhooks (HMAC SHA-256); each run is classed as deployed, failed, tests failed or health check failed from the job that broke, and runs that never report back are closed as unknown",
+          "Least-privilege resource agent in plain Python, reading /proc and cgroups every 3s as nobody, on a read-only filesystem with no capabilities, reaching Docker only through a read-only socket proxy. Compose stacks, containers and systemd services are discovered, not configured",
+          "A disk breakdown that adds up: a sandboxed sizer (read-only root mount, no network, one capability) assigns every gigabyte to an app, Docker leftovers or the system, so the parts never add up to more than the disk",
+          "Capacity planning: OK / Watch / Act indicators for memory headroom, CPU p95, pressure-stall time, swap-in, CPU steal, reclaimable Docker disk, containers without memory limits and OOM kills, with 24h / 7d / 30d history",
+          "Its own deploy fails unless a probe ran in the last five minutes, and the status endpoint is never served from the PWA cache, because a stale board of green tiles would bring back the original bug"
+        ],
+        "pills": ["Laravel 13", "PHP 8.3", "React 19", "Vite", "Recharts", "MySQL 8.4", "Python", "Web Push (VAPID)", "GitHub Apps & Webhooks", "Docker Compose", "PWA (Workbox)", "GitHub Actions"],
+        "note": "Private and sign-in only, so it's shown here through screenshots."
       },
       {
         "variant": "simple",
+        "kind": "Server & hosting",
         "images": [
           { "src": "/images/projects/VPSMonitor_resources.png", "alt": "Resources page with live CPU, memory, disk, swap, network and disk I/O for the VPS" },
           { "src": "/images/projects/VPSMonitor_apps.png", "alt": "Per-application table of CPU, memory, share of RAM and seven-day peak" }
         ],
-        "title": "Self-Hosted Production VPS — DevOps & Infrastructure",
-        "description": "Instead of a separate hosting plan for every project, I run my products and client sites on one VPS that I set up and operate as a production server. A single Debian box (2 vCPU, 4 GB RAM) serves 12 HTTPS sites, this portfolio included, behind one nginx edge, and every deploy goes out through GitHub Actions. I handle provisioning, TLS, mail, CI/CD and capacity myself, and VPS Monitor tells me when something needs attention.",
+        "title": "My Own Production Server — Hosting & Publishing",
+        "description": "Instead of paying for separate hosting for every project, I run my apps and client sites, this portfolio included, on one server I set up and manage myself.",
+        "story": {
+          "problem": "Every project needs a home: a secure web address, email, a database and a safe way to publish updates. Paying for and managing separate hosting for each one wasn't worth it.",
+          "solution": "I set up a single Linux server (2 processors, 4 GB of memory) as a production host. It serves 12 secure sites, sends email for the apps, keeps each app's data separate, and publishes updates automatically every time I send new code, checking that the site still works before calling it done.",
+          "result": "12 sites run on one small server, 8 projects update themselves automatically, and VPS Monitor tells me when something needs attention."
+        },
         "bullets": [
-          "nginx as the single TLS edge for 12 sites: Let's Encrypt certificates renewed automatically by Certbot, HTTP to HTTPS redirects, one shared security-headers snippet, and year-long immutable caching for static assets",
-          "Mixed runtime on one box: 20 containers across Docker Compose stacks (Laravel, WordPress and other app stacks) running beside native systemd services (PHP 8.4-FPM, MariaDB, a queue worker) and a Java game server",
-          "One deploy pattern across 8 repositories: GitHub Actions connects over SSH, resets the server to the exact commit that was pushed, stops if the SHA doesn't match, and only marks the deploy successful after a live HTTPS health check. Separate staging and production where a project needs them, and test-gated deploys for BHelper",
-          "Send-only mail server (Postfix + OpenDKIM in Docker): DKIM-signed mail relayed through Resend because the provider permanently blocks outbound port 25. Each app gets its own SMTP login, can only send as its own address, and reaches the server on an internal Docker network",
-          "A database server per Docker stack (MySQL 8.0 / 8.4, MariaDB, PostgreSQL 16), so a bad migration or a crash in one app never touches another app's data",
-          "Running a small box on measurements: swap sized for 4 GB of RAM, unattended security upgrades, log rotation, and decisions such as memory limits, Docker disk cleanup and whether the next app fits, made from VPS Monitor's numbers"
+          "12 sites on secure HTTPS, with certificates that renew themselves",
+          "Automatic publishing for 8 projects: send new code and the server updates, then confirms the site is working",
+          "Separate test and live versions for projects that need them",
+          "Its own email service, so apps can send messages that reach the inbox",
+          "A separate database for each app, so a problem in one never affects another",
+          "Automatic security updates, with capacity decisions made from real usage data"
         ],
-        "badges": ["In production", "12 HTTPS sites", "20 containers", "8 CI/CD pipelines"],
+        "badges": ["Live", "12 secure sites", "8 projects auto-published", "20 containers"],
+        "tech": [
+          "nginx as the single TLS edge for 12 sites: Let's Encrypt certificates renewed by Certbot, HTTP to HTTPS redirects, one shared security-headers snippet, and year-long immutable caching for static assets",
+          "Mixed runtime on one box: 20 containers across Docker Compose stacks (Laravel, WordPress and other app stacks) beside native systemd services (PHP 8.4-FPM, MariaDB, a queue worker) and a Java game server",
+          "One deploy pattern across 8 repositories: GitHub Actions connects over SSH, resets the server to the exact pushed commit, stops if the SHA doesn't match, and only marks success after a live HTTPS health check. Separate staging and production where needed, and test-gated deploys for BHelper",
+          "Send-only mail server (Postfix + OpenDKIM in Docker): DKIM-signed mail relayed through Resend because the provider blocks outbound port 25. Each app gets its own SMTP login, can only send as its own address, and reaches the server on an internal Docker network",
+          "A database server per Docker stack (MySQL 8.0 / 8.4, MariaDB, PostgreSQL 16), so a bad migration or a crash in one app never touches another app's data",
+          "Swap sized for 4 GB of RAM, unattended security upgrades, log rotation, and memory limits, Docker disk cleanup and capacity decisions made from VPS Monitor's numbers"
+        ],
         "pills": ["Debian 12", "Nginx", "Let's Encrypt / Certbot", "Docker", "Docker Compose", "systemd", "GitHub Actions", "SSH", "Postfix + OpenDKIM", "MySQL / MariaDB", "PostgreSQL", "Bash"]
       }
     ],
@@ -218,46 +298,77 @@
       {
         "variant": "internalFlagship",
         "diagram": "arch",
+        "kind": "Internal system",
         "images": [
           { "src": "/images/projects/Zeferino_interno.png", "alt": "Rede Zeferino internal back-office system quick-access dashboard" }
         ],
-        "barLabel": "Internal platform · no public access",
-        "title": "Rede Zeferino — Back-Office Operations Platform",
-        "description": "Internal web platform for a Brazilian supermarket chain (8+ stores), centralizing retail operations: production reports, label generation, data migrations, store monitoring, and Oracle RMS/Senior ERP integrations. Built solo, end to end, on my own hand-rolled PHP MVC framework.",
+        "barLabel": "Internal system · not public",
+        "title": "Rede Zeferino — Store Operations System",
+        "description": "The internal system a supermarket chain's staff use every day to record deliveries, print labels, monitor store equipment and pull reports, connected to the company's main business software.",
+        "story": {
+          "problem": "Store operations depended on several separate systems: the inventory system (Oracle RMS), the business management system (Senior ERP) and local databases. Day-to-day tasks needed one place that could work with all of them.",
+          "solution": "I designed and built one web system that brings these tasks together, alone and from scratch, including the framework it runs on. It reads and writes directly to the company's main systems, so what staff record shows up wherever it's needed. Each person sees only the screens their role allows.",
+          "result": "In daily use across 8+ stores, handling more than 100 delivery check-ins a day, with updates published automatically and no downtime."
+        },
         "bullets": [
+          "Records the weight of incoming goods in real time and prints the delivery report",
+          "Generates product labels and production reports",
+          "Shows whether each store's scales are online, with green, yellow and red status",
+          "Moves data between the company's systems",
+          "Each user sees only the screens their role allows, adjustable person by person",
+          "Light and dark modes"
+        ],
+        "badges": ["8+ stores", "100+ operations a day", "Connected to 5 databases", "Built solo"],
+        "tech": [
           "Multi-database abstraction layer: one app talking to local MySQL, centralized Arius MySQL, Oracle RMS (read/write), and Oracle Senior ERP",
           "Data-driven RBAC: permission classes with per-user overrides, a centralized access gate in the routing layer, and a dynamic sidebar rendered from a functionality catalog",
-          "Weight management workflow (Balança CP): real-time weight recording with immediate Oracle MERGE persistence, sequential numbering, verification, and romaneio report generation — handling 100+ daily receiving operations",
-          "Real-time store monitoring: network status of scales across 8+ stores via SSH with green/yellow/red indicators",
+          "Weight management workflow (Balança CP): real-time weight recording with immediate Oracle MERGE persistence, sequential numbering, verification, and romaneio report generation",
+          "Store monitoring: network status of scales across 8+ stores via SSH",
           "CI/CD: GitHub Actions with a self-hosted Windows runner and PowerShell-automated zero-downtime deployments",
           "Docker dev environment with Oracle Instant Client, MariaDB, Apache, and one-command startup",
           "Dark/light theme system (CSS custom properties + Bootstrap 5.3 data-bs-theme, localStorage persistence, OS preference detection)"
         ],
-        "badges": ["8+ stores", "5 database connections", "100+ daily operations", "Solo full-stack + infra"],
         "pills": ["PHP 8.2", "MVC", "MySQL", "Oracle", "OCI8/PDO", "Docker", "GitHub Actions", "RBAC", "Bootstrap 5", "jQuery", "SCSS", "PowerShell", "SFTP"],
-        "link": { "label": "GitHub showcase", "href": "https://github.com/Felipebellm" },
-        "note": "Intranet system — no live demo"
+        "link": { "label": "See my GitHub", "href": "https://github.com/Felipebellm" },
+        "note": "Internal system — no public demo"
       },
       {
         "variant": "compact",
-        "title": "Custom PHP MVC Framework",
+        "kind": "Developer tool",
+        "title": "My Own PHP Framework",
         "inlineBadge": "Built from scratch · In production",
-        "description": "Object-oriented PHP MVC framework built from scratch to master OOP best practices: centralized routing, autoloading, multi-database abstraction, Ajax support, and a Dockerized environment with automated port detection. Powers the Zeferino platform in production.",
+        "description": "A framework is the foundation an application is built on. I wrote my own from scratch to master object-oriented programming, and today it runs Rede Zeferino's store operations system.",
+        "tech": [
+          "Object-oriented MVC with centralized routing, autoloading and Ajax support",
+          "Multi-database abstraction (MySQL and Oracle)",
+          "Dockerized environment with automatic port detection"
+        ],
         "pills": ["PHP", "OOP", "MVC", "Docker", "Docker Compose", "Node.js", "Sass"],
         "link": { "href": "https://github.com/Felipebellm" }
       },
       {
         "variant": "compact",
+        "kind": "Company portal",
         "title": "American Airlines Internal Portal",
         "inlineBadge": "Enterprise client",
-        "description": "Built a complete internal portal from a clean WordPress installation connected to SQL Server. Developed all plugins and the custom theme, including a flexible page builder, admin dashboard for user group control, slides, polls, and menus.",
+        "description": "An internal portal for American Airlines staff, built from a blank WordPress install. I developed the design and every feature: a flexible page editor, slideshows, polls, menus and an admin area that controls which groups see what.",
+        "tech": [
+          "Custom WordPress theme and every plugin, starting from a clean installation",
+          "Connected to SQL Server",
+          "Interface features built with AngularJS"
+        ],
         "pills": ["WordPress", "PHP", "AngularJS", "SQL Server"]
       },
       {
         "variant": "compact",
-        "title": "SourceLink Legacy Migration",
-        "inlineBadge": "Legacy → Laravel",
-        "description": "Migrated a legacy procedural PHP portal to Laravel MVC, restructuring the codebase with object-oriented principles.",
+        "kind": "System upgrade",
+        "title": "SourceLink Portal Modernization",
+        "inlineBadge": "Old code → modern framework",
+        "description": "Rebuilt an aging company portal on a modern framework (Laravel), reorganizing the code so it's easier to maintain, fix and extend.",
+        "tech": [
+          "Migrated a legacy procedural PHP portal to Laravel MVC",
+          "Restructured the codebase with object-oriented principles"
+        ],
         "pills": ["PHP", "Laravel", "MVC", "OOP"]
       }
     ]
@@ -265,16 +376,16 @@
   "talks": {
     "heading": "Talks & Teaching",
     "items": [
-      { "kind": "Lecture", "title": "Docker & Docker Compose", "org": "Stefanini", "description": "Company-wide presentation for developers and testers on building automated environments with Docker." },
-      { "kind": "Lecture", "title": "WordPress Development", "org": "Stefanini", "description": "Presentation on why WordPress remains the largest CMS and how to develop plugins and themes with PHP." },
-      { "kind": "Teaching", "title": "English Teacher", "org": "Stefanini", "description": "Weekly one-hour sessions helping colleagues improve their English." },
-      { "kind": "Teaching", "title": "Computing Instructor", "org": "Independent", "description": "Taught basic computing skills privately." }
+      { "kind": "Talk", "title": "Docker & Docker Compose", "org": "Stefanini", "description": "Company-wide talk for developers and testers on Docker, a tool that packages software so it runs the same on any computer, and how to use it to set up work environments automatically." },
+      { "kind": "Talk", "title": "WordPress Development", "org": "Stefanini", "description": "Why WordPress still powers more websites than any other platform, and how to build custom plugins and themes for it." },
+      { "kind": "Teaching", "title": "English Teacher", "org": "Stefanini", "description": "Weekly one-hour classes helping colleagues improve their English." },
+      { "kind": "Teaching", "title": "Computing Instructor", "org": "Independent", "description": "Taught people basic computer skills, one-on-one." }
     ]
   },
   "contact": {
     "eyebrow": "Contact",
     "heading": "Have a project in mind?",
-    "line": "I'm open to challenging full-stack opportunities — let's talk.",
+    "line": "Need a website, an app, a dashboard or a system for your team? Or a developer to join yours? Let's talk.",
     "cta": "Say hello",
     "email": "felipe.bell@hotmail.com",
     "location": "Mogi Mirim, São Paulo, Brazil · +55 19 99597-8967"

@@ -1,24 +1,29 @@
 {
   "meta": {
-    "title": "Felipe Bell Marques — Desenvolvedor Full Stack",
-    "description": "Desenvolvedor Full Stack especializado em PHP, Laravel e WordPress — plataformas corporativas, frameworks sob medida, integrações multi-banco e pipelines de CI/CD."
+    "title": "Felipe Bell Marques — Desenvolvedor de Software (Full Stack)",
+    "description": "Desenvolvedor de software que cria sites, aplicativos web, dashboards e sistemas internos para empresas, das telas que as pessoas usam aos servidores onde tudo roda. PHP, Laravel, WordPress, React."
   },
   "ui": {
     "langToggleAria": "Mudar idioma",
     "towerHint": "Role ou use as setas",
     "prevProject": "Projeto anterior",
     "nextProject": "Próximo projeto",
-    "projectDetails": "Detalhes",
+    "projectDetails": "Saiba mais",
     "close": "Fechar",
     "sectionsNav": "Seções",
     "toLightTheme": "Mudar para o tema claro",
     "toDarkTheme": "Mudar para o tema escuro",
-    "langToggleShort": "Mudar idioma para inglês"
+    "langToggleShort": "Mudar idioma para inglês",
+    "storyProblem": "O problema",
+    "storySolution": "O que eu construí",
+    "storyResult": "O resultado",
+    "featuresLabel": "O que ele faz",
+    "techLabel": "Por dentro (para desenvolvedores)"
   },
   "hero": {
-    "role": "Desenvolvedor Full Stack",
+    "role": "Desenvolvedor de Software",
     "name": "Felipe Bell Marques",
-    "tagline": "Construo plataformas web corporativas com PHP, Laravel e WordPress — de migrações de sistemas legados a frameworks sob medida com pipelines completos de CI/CD.",
+    "tagline": "Crio sites, aplicativos e os sistemas internos que as empresas usam todos os dias, da tela em que as pessoas clicam ao servidor onde tudo roda.",
     "resumeCta": "Ver Currículo",
     "resumeHref": "#",
     "contactCta": "Entre em contato",
@@ -34,9 +39,10 @@
   "about": {
     "heading": "Sobre",
     "paragraphs": [
-      "Sou Desenvolvedor Full Stack, morando em Mogi Mirim, São Paulo, Brasil, com mais de uma década de experiência que vai de sistemas mainframe a plataformas web modernas. Minha principal especialidade é PHP — de WordPress e Drupal a Laravel e arquitetura orientada a objetos — combinada com JavaScript, TypeScript, jQuery e Angular no frontend, além de Docker, CI/CD e integração multi-banco (MySQL, Oracle, PostgreSQL).",
-      "Minha carreira começou em um lugar incomum: desenvolvendo sistemas mainframe com COBOL, JCL, CICS e DB2 na IBM para clientes como AT&T e Banco Safra. Essa base me ensinou como funcionam sistemas críticos em larga escala. Depois passei cinco anos na Stefanini construindo portais, plugins e soluções sob medida para clientes internacionais como American Airlines, GSK, Edenred e Sesc.",
-      "Para dominar de verdade o PHP orientado a objetos, criei meu próprio framework MVC do zero — e hoje ele sustenta uma plataforma completa de operações de back-office que projetei e desenvolvi para uma rede de supermercados brasileira com mais de 8 lojas, com ambiente de desenvolvimento em Docker, CI/CD com GitHub Actions, RBAC e integrações em tempo real com Oracle RMS e Senior ERP. Sou fluente em inglês, tenho espanhol intermediário e gosto de compartilhar conhecimento: já dei palestras para toda a empresa sobre Docker e WordPress e ensinei aulas semanais de inglês para colegas."
+      "Sou desenvolvedor de software em Mogi Mirim, São Paulo, com mais de dez anos de experiência em tecnologia. Construo aplicações completas: as telas que as pessoas usam, a lógica e os dados por trás delas e os servidores onde elas rodam. No mercado isso se chama desenvolvedor full stack. Na prática, significa que você pode me entregar um problema e receber de volta um sistema funcionando.",
+      "Comecei nos sistemas que quase ninguém vê: os mainframes por trás do faturamento da AT&T e do sistema bancário do Banco Safra, na IBM. Ali aprendi como um software precisa se comportar quando uma empresa depende dele a cada segundo. Depois passei cinco anos na Stefanini criando sites, portais corporativos e ferramentas sob medida para clientes internacionais como American Airlines, GSK, Edenred e Sesc.",
+      "Hoje construo e mantenho os sistemas internos da Rede Zeferino, uma rede de supermercados do interior de São Paulo. A equipe das lojas usa esses sistemas todos os dias para pesar recebimentos, imprimir etiquetas, verificar equipamentos e tirar relatórios. Também criei o site público e a página de vagas da rede. Por conta própria, desenvolvo meus próprios aplicativos, como um app para dividir despesas e uma ferramenta para bandas, e hospedo tudo em um servidor que eu mesmo administro.",
+      "Falo inglês fluente e espanhol intermediário, e gosto de ensinar: dei palestras para toda a empresa sobre Docker e WordPress e conduzi aulas semanais de inglês para colegas. Minhas principais ferramentas são PHP (Laravel e WordPress), JavaScript e React, bancos de dados MySQL e Oracle, e Docker."
     ]
   },
   "experience": {
@@ -49,15 +55,15 @@
         "title": "Analista de Sistemas & Desenvolvedor Full Stack",
         "company": "Rede Zeferino",
         "location": "Itapira, SP",
-        "description": "Projetei e construí a plataforma de operações de back-office da empresa de ponta a ponta — arquitetura, infraestrutura, CI/CD e funcionalidades — centralizando os fluxos de varejo em mais de 8 lojas de supermercado. Construída sobre meu próprio framework PHP MVC, criado do zero, com uma camada multi-banco conectando MySQL e quatro escopos de conexão Oracle (RMS e Senior ERP), um sistema de RBAC orientado a dados e deploys automatizados via GitHub Actions com um runner Windows self-hosted.",
-        "pills": ["PHP 8.2", "MySQL/MariaDB", "Oracle (OCI8/PDO)", "Docker", "GitHub Actions", "Bootstrap 5", "jQuery", "SCSS", "PowerShell"]
+        "description": "Projeto, construo e mantenho sozinho o sistema interno de operações da empresa. Funcionários de mais de 8 lojas o usam todos os dias para registrar recebimentos, imprimir etiquetas, verificar se os equipamentos das lojas estão online e tirar relatórios, e ele se conecta diretamente aos principais sistemas da empresa (Oracle RMS e Senior ERP). As atualizações entram no ar automaticamente, sem interromper o trabalho de ninguém. Também criei o site público e a página de vagas em que cada loja publica suas oportunidades.",
+        "pills": ["PHP 8.2", "MySQL/MariaDB", "Oracle", "Docker", "GitHub Actions", "Bootstrap 5", "jQuery", "SCSS", "PowerShell"]
       },
       {
         "period": "2018 — 2023",
         "title": "Desenvolvedor Full Stack",
         "company": "Stefanini",
         "location": "Jaguariúna, SP",
-        "description": "Desenvolvi aplicações web em PHP, plugins/temas WordPress e soluções Drupal para clientes internacionais como American Airlines, GSK, Edenred, Sesc, EDF e Alvarez & Marsal. Migrei portais PHP legados para Laravel. Atuei em times ágeis com JavaScript e jQuery.",
+        "description": "Criei sites, portais corporativos e ferramentas sob medida para clientes internacionais como American Airlines, GSK, Edenred, Sesc, EDF e Alvarez & Marsal, principalmente em WordPress, Drupal e Laravel. Reconstruí portais antigos sobre um framework moderno, deixando-os mais fáceis de manter e evoluir. Trabalhei em times ágeis com entregas em ciclos curtos.",
         "pills": ["PHP", "WordPress", "Laravel", "Drupal", "JavaScript", "jQuery", "Agile"]
       },
       {
@@ -65,7 +71,7 @@
         "title": "Técnico de Campo",
         "company": "HP / CTMM – Itaú",
         "location": "",
-        "description": "Gerenciei a infraestrutura de Data Center de um dos maiores bancos do Brasil.",
+        "description": "Cuidei da infraestrutura de data center do Itaú, um dos maiores bancos do Brasil, mantendo funcionando o hardware por trás dos sistemas do banco.",
         "pills": ["Data Center", "Infraestrutura", "Hardware"]
       },
       {
@@ -73,7 +79,7 @@
         "title": "Analista e Desenvolvedor de Sistemas Mainframe",
         "company": "IBM",
         "location": "Hortolândia",
-        "description": "Desenvolvi e testei sistemas críticos para o sistema de faturamento da AT&T e o sistema principal do Banco Safra.",
+        "description": "Desenvolvi e testei software para mainframes, os grandes computadores centrais de que bancos e operadoras dependem, atuando no sistema de faturamento da AT&T e no sistema principal do Banco Safra: sistemas que não podem parar.",
         "pills": ["COBOL", "JCL", "CICS", "DB2"]
       },
       {
@@ -81,24 +87,25 @@
         "title": "Técnico de Informática & Instrutor Particular",
         "company": "Autônomo",
         "location": "",
-        "description": "Manutenção de computadores, gerenciamento de sistemas operacionais e ensino de informática básica.",
+        "description": "Consertei e fiz manutenção de computadores, instalei e configurei Windows e Linux, e ensinei informática básica em aulas particulares.",
         "pills": ["Hardware", "Linux", "Windows", "Ensino"]
       }
     ]
   },
   "projects": {
     "heading": "Projetos",
-    "intro": "Produtos online que você pode abrir e explorar, além de sistemas corporativos construídos dentro de empresas onde o código permanece privado — apresentados aqui pela arquitetura e pelos detalhes técnicos.",
-    "liveLabel": "Online & Público",
-    "internalLabel": "Corporativo & Interno",
-    "internalIntro": "Construídos dentro de empresas ou como sistemas de intranet — os produtos em produção permanecem privados, então são apresentados pela arquitetura, por detalhes sem dados sensíveis e com código disponível mediante solicitação.",
+    "intro": "Sites, aplicativos e dashboards que construí. Os públicos você pode abrir e testar. Os outros são sistemas de uso interno das empresas, então mostro por capturas de tela e explico o que eles fazem.",
+    "liveLabel": "Projetos públicos",
+    "internalLabel": "Sistemas internos de empresas",
+    "internalIntro": "Estes rodam dentro de empresas e não são abertos ao público, por isso aparecem em capturas de tela e descrições. Posso apresentar cada um com calma em uma conversa.",
     "archiveLink": "Ver arquivo completo de projetos",
     "archiveHref": "#",
-    "archiveList": "Arquivo: Banco Safra · AT&T · GSK · Edenred · Sesc · EDF · Red Asset · AdvanSix · Alvarez & Marsal · ScalesMapApp",
+    "archiveList": "Trabalhos anteriores para: Banco Safra · AT&T · GSK · Edenred · Sesc · EDF · Red Asset · AdvanSix · Alvarez & Marsal · ScalesMapApp",
     "live": [
       {
         "variant": "featured",
         "diagram": "rbac",
+        "kind": "Site institucional",
         "images": [
           { "src": "/images/projects/Rede_zeferino_sec1.png", "alt": "Página inicial da Rede Zeferino com banner principal e seção de história da empresa" },
           { "src": "/images/projects/Rede_zeferino_sec2.png", "alt": "Seção de unidades da Rede Zeferino com lojas listadas por bandeira" },
@@ -106,10 +113,25 @@
           { "src": "/images/projects/Rede_zeferino_Vagas_sec1.png", "alt": "Página de vagas da Rede Zeferino listando posições abertas nas lojas" },
           { "src": "/images/projects/Rede_zeferino_Vagas_sec2.png", "alt": "Página de vagas da Rede Zeferino com paginação e formulário de envio de currículo" }
         ],
-        "barLabel": "★ Destaque · Em produção",
-        "title": "Rede Zeferino — Site Corporativo & Plataforma de Carreiras",
-        "description": "Um site corporativo público que também funciona como duas ferramentas operacionais: um mural de vagas com escopo por loja, onde a equipe de RH de cada loja gerencia apenas as próprias vagas, e um canal de contato de fornecedores/clientes que direciona as solicitações direto ao comprador correto. Construído sobre um tema WordPress totalmente sob medida, sem dependência de page-builder ou plugin de formulário.",
+        "barLabel": "★ Destaque · No ar",
+        "title": "Rede Zeferino — Site Institucional & Página de Vagas",
+        "description": "O site público de uma rede de supermercados com 19 lojas. Além de apresentar a empresa, permite que cada loja publique as próprias vagas e entrega as mensagens de fornecedores direto ao comprador certo.",
+        "story": {
+          "problem": "A rede precisava de um site que trabalhasse de verdade, não só um cartão de visitas. O RH de cada loja tinha que publicar e gerenciar as próprias vagas sem mexer nas vagas das outras lojas, e os fornecedores não tinham um jeito confiável de falar com a pessoa certa em compras.",
+          "solution": "Construí o site do zero em WordPress, sem construtores de página nem plugins de formulário. Cada pessoa do RH entra e vê só as vagas da sua loja. O candidato se inscreve para uma loja e um cargo específicos, e a candidatura vai para aquela loja. As mensagens de fornecedores são separadas por categoria de produto e entregues ao comprador responsável.",
+          "result": "O site está no ar e em uso diário: 22 pessoas do RH gerenciam as vagas de 19 lojas e 2 centros de distribuição, e as mensagens de fornecedores chegam à caixa de entrada certa sem que ninguém precise encaminhar."
+        },
         "bullets": [
+          "Uma página de vagas em que cada loja publica e gerencia as próprias oportunidades",
+          "Três níveis de acesso: RH da loja, gestores de RH que veem todas as lojas e administradores do site",
+          "As candidaturas vão automaticamente para a loja certa, de acordo com a cidade e o cargo",
+          "Um formulário de contato que entrega cada mensagem de fornecedor ao comprador daquela categoria de produto, com proteção contra spam",
+          "Quatro telas administrativas sob medida, para a equipe atualizar lojas e conteúdo sem precisar de um desenvolvedor",
+          "Cada vaga ganha automaticamente sua descrição para a busca do Google",
+          "Um modo de manutenção de um clique que esconde o site dos visitantes enquanto algo é ajustado"
+        ],
+        "badges": ["No ar", "19 lojas + 2 centros de distribuição", "Usado por 22 pessoas do RH", "4 telas administrativas sob medida"],
+        "tech": [
           "RBAC de três níveis sob medida para 22 contas de RH — perfil \"RH\" com escopo por loja, perfil \"RH Admin\" sem escopo de loja e permissões estendidas de Administrador, aplicados via map_meta_cap, filtragem de queries com pre_get_posts e ocultação de itens do menu admin",
           "Direcionamento de fornecedores por categoria: cada envio é comparado com um mapa configurável categoria→comprador→e-mail, com proteção por reCAPTCHA v2, honeypot e verificação do tempo de envio",
           "Mural de vagas dinâmico sobre um custom post type dedicado, associando candidaturas por cidade + cargo ao e-mail de contato da loja certa no momento do envio",
@@ -117,13 +139,13 @@
           "Geração automática de metadados de SEO por vaga nos campos do Yoast, com backfill único para o conteúdo já existente",
           "Modo de manutenção instantâneo — basta atribuir um template à página inicial para redirecionar todos os visitantes não autenticados; totalmente reversível e sem depender de plugin"
         ],
-        "badges": ["Em produção", "19 lojas / 2 centros de distribuição", "22 contas de RH gerenciadas", "4 painéis administrativos sob medida"],
         "pills": ["WordPress (tema sob medida)", "PHP 8.2", "MySQL 8", "JavaScript/jQuery", "SCSS/Sass", "Bootstrap 5", "Custom Post Types", "WP AJAX", "Yoast SEO", "reCAPTCHA v2", "FluentSMTP", "Docker Compose"],
         "link": { "label": "Acessar redezeferino.com.br", "href": "https://redezeferino.com.br/" },
-        "note": "Engenharia da plataforma por mim · UX/UI por Leonardo Gardinali"
+        "note": "Desenvolvimento por mim · Design por Leonardo Gardinali"
       },
       {
         "variant": "simple",
+        "kind": "Aplicativo web",
         "images": [
           { "src": "/images/projects/BPAgenda.png", "alt": "Dashboard do BPAgenda com os módulos do app e o resumo de despesas do mês" },
           { "src": "/images/projects/BPAgenda_Kanban.png", "alt": "Quadro Kanban do BPAgenda com colunas de tarefas e permissões" },
@@ -131,45 +153,74 @@
           { "src": "/images/projects/BPAgenda_praticSession.png", "alt": "Sessões de prática do BPAgenda para rotinas de estudo e exercício" },
           { "src": "/images/projects/BPAgenda_despesas.png", "alt": "Lista de despesas compartilhadas do BPAgenda com saldos e acertos" }
         ],
-        "title": "BPAgenda — Plataforma de Despesas Compartilhadas & Produtividade",
-        "description": "Nasceu quando a versão gratuita do Splitwise ficou pequena para mim: eu queria divisão de despesas que também suportasse parcelamento, contas recorrentes e o total do mês já calculado — então construí o meu. Do módulo de despesas, cresceu e virou um app completo de organização pessoal que compartilho com as pessoas ao meu redor: kanban colaborativo com permissões, um Super Pomodoro com presets prontos ou ciclos totalmente personalizados, rotinas de prática cronometradas e uma agenda que se conecta a tudo isso — em uso diário e totalmente bilíngue (EN/PT-BR).",
+        "title": "BPAgenda — Despesas Compartilhadas & Organizador Pessoal",
+        "description": "Um app para dividir despesas com amigos e família que virou um organizador pessoal: quadros de tarefas, timer de foco, rotinas de prática e agenda. Uso todos os dias com as pessoas ao meu redor.",
+        "story": {
+          "problem": "Eu dividia contas com amigos no Splitwise e a versão gratuita ficou pequena. Eu também precisava de coisas que ele não fazia bem: compras parceladas, contas que se repetem todo mês e um total claro de cada mês.",
+          "solution": "Então construí o meu. Você lança uma despesa, escolhe como dividir, e o app mantém um saldo atualizado com cada amigo. Depois juntei as outras ferramentas que eu usava espalhadas: quadros de tarefas compartilhados, um timer Pomodoro, rotinas de prática cronometradas e uma agenda que liga tudo.",
+          "result": "Está em uso diário, funciona em português e inglês e pode ser instalado no celular como um aplicativo comum."
+        },
         "bullets": [
+          "Divida qualquer despesa em partes iguais, toda para uma pessoa ou em valores personalizados",
+          "Compras parceladas e contas mensais são lançadas automaticamente",
+          "Um saldo atualizado com cada amigo, que continua certo mesmo depois de editar ou apagar uma despesa",
+          "Quadros de tarefas compartilhados em que você decide quem pode ver e quem pode editar",
+          "Um timer de foco com ciclos de trabalho e pausa prontos ou personalizados",
+          "Rotinas de prática divididas em blocos cronometrados, como uma hora de guitarra dividida em escalas, harmonia e improvisação",
+          "Aprende suas categorias: corrija uma despesa uma vez e ele lembra na próxima"
+        ],
+        "badges": ["Em uso diário", "Português & inglês", "Instala no celular", "Feito sozinho"],
+        "tech": [
           "Cálculo automático de saldos que combina quatro agregações (dívidas nos dois sentidos + acertos) em um saldo por amigo gerado a cada leitura — nada em cache ou desnormalizado, então os totais continuam corretos após edições ou exclusões",
-          "Divisão em três modos (igual / valor total / personalizada) com parcelamento em vários meses e despesas recorrentes, tudo em transações atômicas, além do total por mês e de uma validação que checa amizade, conflitos entre pagador/participantes e impede que a soma da divisão ultrapasse o valor total",
+          "Divisão em três modos (igual / valor total / personalizada) com parcelamento em vários meses e despesas recorrentes, tudo em transações atômicas, além de uma validação que checa amizade, conflitos entre pagador/participantes e impede que a soma da divisão ultrapasse o valor total",
           "Sistema próprio de permissões em 4 níveis (owner/full/read-write/read) protegendo todas as operações de escrita do kanban na camada de controller, sobre autenticação por token SPA do Laravel Sanctum",
-          "Rotinas de prática com segmentos cronometrados personalizados — dá para dividir uma hora de estudo de guitarra em blocos de escalas, harmonia e improvisação — junto de presets de Pomodoro prontos ou personalizados e eventos de agenda que se conectam a cartões do kanban e rotinas",
           "Listas colaborativas com log de atividades append-only que reconstrói cada adição/remoção/marcação comparando os arrays de itens a cada salvamento",
           "CI/CD em servidor próprio — GitHub Actions faz deploy em um VPS com Docker/Nginx/MySQL a cada push na main; o frontend é entregue como PWA instalável, com service worker Workbox para cache de API com suporte offline",
           "Categorização que aprende com o uso: correspondência por palavras-chave em 21 categorias, apoiada por uma tabela de ícones aprendidos por usuário, que memoriza correções e registra a frequência de uso"
         ],
-        "badges": ["Em uso ativo", "Bilíngue (EN/PT-BR)", "5 módulos", "Full-stack solo"],
         "pills": ["Laravel 11", "PHP 8.2", "Laravel Sanctum", "MySQL 8", "React 18", "Vite", "React Router", "Axios", "Docker", "Nginx", "GitHub Actions", "PWA (Workbox)"],
-        "link": { "label": "Abrir demo online", "href": "https://bpagenda.bell.vps-kinghost.net" }
+        "link": { "label": "Testar a demo online", "href": "https://bpagenda.bell.vps-kinghost.net" }
       },
       {
         "variant": "simple",
+        "kind": "Aplicativo web",
         "images": [
           { "src": "/images/projects/BHelper_mainPage.png", "alt": "Dashboard do BHelper listando as bandas do usuário" },
           { "src": "/images/projects/BHelper_Escalas.png", "alt": "Visualizador de escalas no braço do instrumento do BHelper, com campo harmônico detalhado" },
           { "src": "/images/projects/BHelper_clicleof5s.png", "alt": "Ferramenta de ciclo de quintas do BHelper com sugestões de progressão de acordes" },
           { "src": "/images/projects/BHelper_afinador.png", "alt": "Afinador de instrumentos em tempo real do BHelper" }
         ],
-        "title": "BHelper — Plataforma de Gestão de Bandas",
-        "description": "Criado para resolver um problema meu como músico que toca em várias bandas: setlists, as músicas que eu precisava estudar e as rotinas de ensaio estavam espalhadas por todo lado. O BHelper é uma API Laravel + SPA React multi-tenant que dá a cada banda um espaço isolado — quadros Kanban, setlists colaborativas, um catálogo de músicas preenchido automaticamente via APIs externas e um site público da banda — hoje usado também pelas bandas dos meus amigos e evoluindo com o feedback deles.",
+        "title": "BHelper — App de Gestão de Bandas",
+        "description": "Um app para bandas: setlists, as músicas que cada integrante precisa estudar, planos de ensaio e ferramentas musicais, tudo em um só lugar. Cada banda tem seu próprio espaço privado.",
+        "story": {
+          "problem": "Toco em várias bandas, e nossas setlists, as músicas que precisávamos estudar e os planos de ensaio ficavam espalhados entre conversas, anotações e planilhas. Nada reunia tudo isso para a banda inteira.",
+          "solution": "O BHelper dá a cada banda um espaço privado com quadros de tarefas, setlists compartilhadas e uma biblioteca de músicas. Ao adicionar uma música, ele preenche sozinho o andamento, o tom e a letra. Também tem afinador, mapa de escalas e uma página pública para cada banda.",
+          "result": "Está no ar e é usado pelas minhas bandas e pelas bandas de amigos, e as novas funções nascem do retorno deles."
+        },
         "bullets": [
+          "Um espaço privado para cada banda; cada integrante só vê as bandas de que faz parte",
+          "Setlists e quadros de tarefas compartilhados para os ensaios",
+          "Adicione uma música e o andamento, o tom e a letra são preenchidos automaticamente",
+          "Transforme uma setlist em playlist de streaming, conectando sua conta pelo celular com um QR code",
+          "Um afinador preciso que funciona no navegador usando o microfone",
+          "Um mapa de mais de 30 escalas no braço do instrumento e um ciclo de quintas com sugestões de acordes",
+          "Uma página pública para cada banda"
+        ],
+        "badges": ["No ar", "Usado por várias bandas", "Feito sozinho", "Conecta a 2 serviços de música"],
+        "tech": [
           "Multi-tenancy verificado por header — cada endpoint identifica a banda ativa a partir de um header da requisição, valida no servidor se o usuário realmente é membro dela e restringe todas as queries a essa banda; acesso entre bandas retorna 403 em vez de confiar em um ID enviado pelo cliente",
           "OAuth (PKCE) com transferência entre dispositivos — conecte uma conta de streaming pelo celular via QR code enquanto a sessão do desktop faz polling até concluir, e depois exporte uma setlist direto para uma nova playlist",
           "Enriquecimento automático de metadados — novas músicas recebem BPM, tom e letra orquestrando duas APIs externas de música, com cache de respostas para evitar chamadas redundantes",
-          "Afinador em tempo real no navegador usando amostragem via Web Audio, autocorrelação e interpolação parabólica com precisão abaixo de um cent, além de um visualizador de escalas no braço do instrumento cobrindo mais de 30 tipos de escala",
+          "Afinador em tempo real no navegador usando amostragem via Web Audio, autocorrelação e interpolação parabólica com precisão abaixo de um cent",
           "CI/CD com verificação de deploy — GitHub Actions faz deploy a cada push na main, verificando o SHA do commit implantado e rodando um health check HTTP ao vivo antes de considerar o deploy bem-sucedido",
           "Núcleo de teoria musical com testes — detecção de pitch e escalas/transposição isolados em módulos puros, com cerca de 390 linhas de testes em Vitest, desacoplados da camada Web Audio/DOM"
         ],
-        "badges": ["Em produção", "Full-stack solo", "9 áreas de funcionalidades", "2 integrações com APIs externas"],
         "pills": ["Laravel 12", "PHP 8.2", "React 18", "Vite", "Laravel Sanctum", "MySQL", "Redis", "Docker", "GitHub Actions", "OAuth2 + PKCE", "Web Audio API", "Vitest"],
         "link": { "label": "Acessar bhelper.bell.vps-kinghost.net", "href": "https://bhelper.bell.vps-kinghost.net/" }
       },
       {
         "variant": "simple",
+        "kind": "Dashboard",
         "images": [
           { "src": "/images/projects/VPSMonitor_board.png", "alt": "Painel do VPS Monitor: status dos serviços, incidentes abertos, deploys e CPU, memória e disco do servidor" },
           { "src": "/images/projects/VPSMonitor_uptime.png", "alt": "Grade de disponibilidade de 14 dias por serviço, com quedas em andamento marcadas" },
@@ -180,37 +231,66 @@
           { "src": "/images/projects/VPSMonitor_deploys.png", "alt": "Página de deploys com linha do tempo de 30 dias e resultados por semana" },
           { "src": "/images/projects/VPSMonitor_runs.png", "alt": "Execuções recentes de deploy no GitHub Actions com resultado, commit, autor e duração" }
         ],
-        "title": "VPS Monitor — Painel de Disponibilidade, Deploys e Capacidade",
-        "description": "Nasceu quando descobri que um site que hospedo estava fora do ar havia três semanas, e o banco de dados dele havia dois meses, sem nada me avisar. Aquele projeto não tinha CI/CD, então nenhum gancho de deploy teria percebido. O VPS Monitor verifica cada serviço do meu VPS por conta própria, acompanha cada deploy do GitHub Actions nos meus repositórios, mostra quanto cada aplicação consome de CPU, memória e disco, e manda uma notificação para o meu celular quando um deploy termina ou um serviço cai. É privado e exige login, por isso aparece aqui em capturas de tela.",
+        "title": "VPS Monitor — Painel de Saúde do Servidor",
+        "description": "Um painel privado que vigia todos os sites e apps que hospedo, avisa no meu celular assim que algo cai e mostra quanto espaço ainda sobra no servidor.",
+        "story": {
+          "problem": "Descobri que um site que hospedo estava fora do ar havia três semanas, e o banco de dados dele havia dois meses, sem nada me avisar. As únicas verificações que eu tinha rodavam quando eu publicava uma atualização, e aquele projeto nunca era atualizado.",
+          "solution": "O VPS Monitor verifica cada serviço do servidor uma vez por minuto, por conta própria. Ele registra cada atualização que publico, mostra quanto processamento, memória e disco cada app usa, e manda uma notificação para o meu celular quando uma atualização termina ou um serviço cai.",
+          "result": "11 serviços são vigiados o tempo todo. Uma queda agora chega ao meu celular em minutos, e decisões como se o servidor aguenta mais um app são tomadas com números reais, não no chute."
+        },
         "bullets": [
-          "Verificações de saúde a cada minuto em 11 serviços (estado dos containers e uma checagem HTTP real), tenha o projeto CI/CD ou não, para que um serviço em silêncio não passe mais por saudável",
-          "Máquina de estados de incidentes: uma queda só é aberta depois de falhas consecutivas, alerta uma vez e me lembra diariamente enquanto continuar aberta. Uma queda de três semanas vira um alerta e um lembrete por dia, não ~30.000 notificações",
-          "Acompanhamento de deploys sem mexer nos workflows: um GitHub App instalado em todos os repositórios envia webhooks assinados (HMAC SHA-256), cada execução é classificada como concluída, com falha, com testes falhando ou reprovada no health check a partir do job que quebrou, e execuções que nunca retornam são fechadas como desconhecidas e notificadas",
-          "Agente de recursos com privilégio mínimo em Python puro, lendo /proc e cgroups a cada 3s como nobody, com sistema de arquivos somente leitura e sem capabilities, acessando o Docker só por um proxy de socket somente leitura. Stacks Compose, containers e serviços systemd são descobertos, não configurados",
-          "Uma divisão de disco que fecha a conta: um medidor isolado (raiz montada só para leitura, sem rede, uma única capability) atribui cada gigabyte a uma aplicação, a sobras do Docker ou ao sistema. O que ele não consegue explicar conta como Sistema, então as partes nunca somam mais que o disco",
-          "Planejamento de capacidade, não só gráficos: indicadores OK / Atenção / Agir para folga de memória (\"cabem mais N apps\"), p95 de CPU, tempo de espera por recursos, swap-in, CPU steal, disco do Docker recuperável, containers sem limite de memória e mortes por falta de memória, com histórico de 24h / 7d / 30d",
-          "Ele não se declara saudável por engano: o próprio deploy falha se nenhuma verificação rodou nos últimos cinco minutos, e o endpoint de status nunca sai do cache do PWA, porque um painel antigo cheio de verde traria de volta o problema original"
+          "Verifica 11 serviços a cada minuto, não importa com que frequência eles são atualizados",
+          "Um alerta quando algo cai e depois um lembrete por dia até resolver: nada de enxurrada de mensagens",
+          "Histórico de disponibilidade de 14 dias para cada serviço",
+          "Registro de cada atualização publicada no servidor e se ela deu certo",
+          "Mostra quanto cada app consome de processamento, memória e disco",
+          "Sinais simples de OK / Atenção / Agir, como quantos apps ainda cabem na memória",
+          "Feito para nunca mostrar \"tudo certo\" por engano: se as próprias verificações pararem, ele avisa"
         ],
-        "badges": ["Em produção", "11 serviços monitorados", "Alertas push no celular", "Full-stack solo"],
-        "pills": ["Laravel 13", "PHP 8.3", "React 19", "Vite", "Recharts", "MySQL 8.4", "Python", "Web Push (VAPID)", "GitHub Apps e Webhooks", "Docker Compose", "PWA (Workbox)", "GitHub Actions"]
+        "badges": ["No ar", "11 serviços vigiados", "Alertas no celular", "Feito sozinho"],
+        "tech": [
+          "Verificações de saúde a cada minuto em 11 serviços (estado dos containers e uma checagem HTTP real), tenha o projeto CI/CD ou não, para que um serviço em silêncio não passe mais por saudável",
+          "Máquina de estados de incidentes: uma queda só é aberta depois de falhas consecutivas, alerta uma vez e lembra diariamente enquanto continuar aberta. Uma queda de três semanas vira um alerta e um lembrete por dia, não ~30.000 notificações",
+          "Acompanhamento de deploys sem mexer nos workflows: um GitHub App instalado em todos os repositórios envia webhooks assinados (HMAC SHA-256); cada execução é classificada como concluída, com falha, com testes falhando ou reprovada no health check a partir do job que quebrou, e execuções que nunca retornam são fechadas como desconhecidas",
+          "Agente de recursos com privilégio mínimo em Python puro, lendo /proc e cgroups a cada 3s como nobody, com sistema de arquivos somente leitura e sem capabilities, acessando o Docker só por um proxy de socket somente leitura. Stacks Compose, containers e serviços systemd são descobertos, não configurados",
+          "Uma divisão de disco que fecha a conta: um medidor isolado (raiz montada só para leitura, sem rede, uma única capability) atribui cada gigabyte a uma aplicação, a sobras do Docker ou ao sistema, então as partes nunca somam mais que o disco",
+          "Planejamento de capacidade: indicadores OK / Atenção / Agir para folga de memória, p95 de CPU, tempo de espera por recursos, swap-in, CPU steal, disco do Docker recuperável, containers sem limite de memória e mortes por falta de memória, com histórico de 24h / 7d / 30d",
+          "O próprio deploy falha se nenhuma verificação rodou nos últimos cinco minutos, e o endpoint de status nunca sai do cache do PWA, porque um painel antigo cheio de verde traria de volta o problema original"
+        ],
+        "pills": ["Laravel 13", "PHP 8.3", "React 19", "Vite", "Recharts", "MySQL 8.4", "Python", "Web Push (VAPID)", "GitHub Apps e Webhooks", "Docker Compose", "PWA (Workbox)", "GitHub Actions"],
+        "note": "É privado e exige login, por isso aparece aqui em capturas de tela."
       },
       {
         "variant": "simple",
+        "kind": "Servidor & hospedagem",
         "images": [
           { "src": "/images/projects/VPSMonitor_resources.png", "alt": "Página de recursos com CPU, memória, disco, swap, rede e E/S de disco do VPS ao vivo" },
           { "src": "/images/projects/VPSMonitor_apps.png", "alt": "Tabela por aplicação com CPU, memória, fatia da RAM e pico de sete dias" }
         ],
-        "title": "VPS de Produção Próprio — DevOps e Infraestrutura",
-        "description": "Em vez de um plano de hospedagem para cada projeto, rodo meus produtos e sites de clientes em um único VPS que configurei e opero como servidor de produção. Uma máquina Debian (2 vCPU, 4 GB de RAM) serve 12 sites em HTTPS, incluindo este portfólio, atrás de um único nginx, e todo deploy sai pelo GitHub Actions. Cuido eu mesmo do provisionamento, TLS, e-mail, CI/CD e capacidade, e o VPS Monitor me avisa quando algo precisa de atenção.",
+        "title": "Meu Próprio Servidor de Produção — Hospedagem & Publicação",
+        "description": "Em vez de pagar uma hospedagem para cada projeto, rodo meus apps e os sites de clientes, incluindo este portfólio, em um único servidor que eu mesmo configurei e administro.",
+        "story": {
+          "problem": "Todo projeto precisa de um lugar para morar: um endereço seguro, e-mail, banco de dados e um jeito seguro de publicar atualizações. Pagar e administrar uma hospedagem separada para cada um não valia a pena.",
+          "solution": "Configurei um único servidor Linux (2 processadores, 4 GB de memória) como servidor de produção. Ele serve 12 sites seguros, envia e-mails pelos apps, mantém os dados de cada app separados e publica atualizações automaticamente sempre que envio código novo, conferindo se o site continua funcionando antes de dar como concluído.",
+          "result": "12 sites rodam em um servidor pequeno, 8 projetos se atualizam sozinhos e o VPS Monitor me avisa quando algo precisa de atenção."
+        },
         "bullets": [
-          "nginx como ponto único de TLS para 12 sites: certificados Let's Encrypt renovados automaticamente pelo Certbot, redirecionamento de HTTP para HTTPS, um snippet compartilhado de cabeçalhos de segurança e cache imutável de um ano para arquivos estáticos",
-          "Ambiente misto em uma só máquina: 20 containers em stacks Docker Compose (Laravel, WordPress e outras) rodando ao lado de serviços systemd nativos (PHP 8.4-FPM, MariaDB, um worker de fila) e um servidor de jogo em Java",
-          "Um padrão de deploy em 8 repositórios: o GitHub Actions conecta por SSH, coloca o servidor exatamente no commit enviado, para se o SHA não bater e só marca o deploy como concluído depois de um health check HTTPS real. Staging e produção separados quando o projeto precisa, e deploys condicionados aos testes no BHelper",
-          "Servidor de e-mail só de envio (Postfix + OpenDKIM em Docker): mensagens assinadas com DKIM e retransmitidas pelo Resend, porque o provedor bloqueia a porta 25 de saída em definitivo. Cada aplicação tem seu próprio login SMTP, só envia com o próprio endereço e acessa o servidor por uma rede Docker interna",
-          "Um servidor de banco de dados por stack Docker (MySQL 8.0 / 8.4, MariaDB, PostgreSQL 16), para que uma migração com erro ou uma queda em uma aplicação nunca afete os dados de outra",
-          "Uma máquina pequena operada com base em medições: swap dimensionado para 4 GB de RAM, atualizações de segurança automáticas, rotação de logs e decisões como limites de memória, limpeza do disco do Docker e se a próxima aplicação cabe, tomadas a partir dos números do VPS Monitor"
+          "12 sites com HTTPS seguro e certificados que se renovam sozinhos",
+          "Publicação automática para 8 projetos: envio código novo, o servidor se atualiza e confirma que o site está funcionando",
+          "Versões de teste e de produção separadas para os projetos que precisam",
+          "Serviço de e-mail próprio, para que os apps enviem mensagens que chegam na caixa de entrada",
+          "Um banco de dados separado para cada app, para que um problema em um nunca afete outro",
+          "Atualizações de segurança automáticas e decisões de capacidade tomadas com dados reais de uso"
         ],
-        "badges": ["Em produção", "12 sites em HTTPS", "20 containers", "8 pipelines de CI/CD"],
+        "badges": ["No ar", "12 sites seguros", "8 projetos com publicação automática", "20 containers"],
+        "tech": [
+          "nginx como ponto único de TLS para 12 sites: certificados Let's Encrypt renovados pelo Certbot, redirecionamento de HTTP para HTTPS, um snippet compartilhado de cabeçalhos de segurança e cache imutável de um ano para arquivos estáticos",
+          "Ambiente misto em uma só máquina: 20 containers em stacks Docker Compose (Laravel, WordPress e outras) ao lado de serviços systemd nativos (PHP 8.4-FPM, MariaDB, um worker de fila) e um servidor de jogo em Java",
+          "Um padrão de deploy em 8 repositórios: o GitHub Actions conecta por SSH, coloca o servidor exatamente no commit enviado, para se o SHA não bater e só marca sucesso depois de um health check HTTPS real. Staging e produção separados quando necessário, e deploys condicionados aos testes no BHelper",
+          "Servidor de e-mail só de envio (Postfix + OpenDKIM em Docker): mensagens assinadas com DKIM e retransmitidas pelo Resend, porque o provedor bloqueia a porta 25 de saída. Cada aplicação tem seu próprio login SMTP, só envia com o próprio endereço e acessa o servidor por uma rede Docker interna",
+          "Um servidor de banco de dados por stack Docker (MySQL 8.0 / 8.4, MariaDB, PostgreSQL 16), para que uma migração com erro ou uma queda em uma aplicação nunca afete os dados de outra",
+          "Swap dimensionado para 4 GB de RAM, atualizações de segurança automáticas, rotação de logs, e limites de memória, limpeza do disco do Docker e decisões de capacidade tomadas a partir dos números do VPS Monitor"
+        ],
         "pills": ["Debian 12", "Nginx", "Let's Encrypt / Certbot", "Docker", "Docker Compose", "systemd", "GitHub Actions", "SSH", "Postfix + OpenDKIM", "MySQL / MariaDB", "PostgreSQL", "Bash"]
       }
     ],
@@ -218,46 +298,77 @@
       {
         "variant": "internalFlagship",
         "diagram": "arch",
+        "kind": "Sistema interno",
         "images": [
           { "src": "/images/projects/Zeferino_interno.png", "alt": "Painel de acesso rápido do sistema interno de back-office da Rede Zeferino" }
         ],
-        "barLabel": "Plataforma interna · sem acesso público",
-        "title": "Rede Zeferino — Plataforma de Operações de Back-Office",
-        "description": "Plataforma web interna para uma rede de supermercados brasileira (mais de 8 lojas), centralizando as operações de varejo: relatórios de produção, geração de etiquetas, migrações de dados, monitoramento de lojas e integrações com Oracle RMS/Senior ERP. Construída inteiramente por mim, de ponta a ponta, sobre meu próprio framework PHP MVC criado do zero.",
+        "barLabel": "Sistema interno · não público",
+        "title": "Rede Zeferino — Sistema de Operações das Lojas",
+        "description": "O sistema interno que a equipe de uma rede de supermercados usa todos os dias para registrar recebimentos, imprimir etiquetas, monitorar equipamentos das lojas e tirar relatórios, conectado aos principais sistemas da empresa.",
+        "story": {
+          "problem": "As operações das lojas dependiam de vários sistemas separados: o sistema de estoque (Oracle RMS), o sistema de gestão (Senior ERP) e bancos de dados locais. As tarefas do dia a dia precisavam de um único lugar que conversasse com todos eles.",
+          "solution": "Projetei e construí, sozinho e do zero, um sistema web que reúne essas tarefas, incluindo o framework sobre o qual ele roda. Ele lê e grava diretamente nos sistemas principais da empresa, então o que a equipe registra aparece onde precisa aparecer. Cada pessoa vê só as telas que o seu cargo permite.",
+          "result": "Em uso diário em mais de 8 lojas, com mais de 100 recebimentos registrados por dia e atualizações publicadas automaticamente, sem tirar o sistema do ar."
+        },
         "bullets": [
+          "Registra o peso das mercadorias recebidas em tempo real e imprime o romaneio",
+          "Gera etiquetas de produtos e relatórios de produção",
+          "Mostra se as balanças de cada loja estão online, com status verde, amarelo e vermelho",
+          "Transfere dados entre os sistemas da empresa",
+          "Cada usuário vê só as telas que o seu cargo permite, com ajuste pessoa a pessoa",
+          "Modos claro e escuro"
+        ],
+        "badges": ["8+ lojas", "100+ operações por dia", "Conectado a 5 bancos de dados", "Feito sozinho"],
+        "tech": [
           "Camada de abstração multi-banco: um app conversando com MySQL local, MySQL centralizado Arius, Oracle RMS (leitura/escrita) e Oracle Senior ERP",
           "RBAC orientado a dados: classes de permissão com overrides por usuário, controle de acesso centralizado na camada de rotas e uma sidebar dinâmica renderizada a partir de um catálogo de funcionalidades",
-          "Fluxo de gestão de pesagem (Balança CP): registro de peso em tempo real com persistência imediata via MERGE no Oracle, numeração sequencial, verificação e geração de romaneio — suportando mais de 100 operações de recebimento por dia",
-          "Monitoramento de lojas em tempo real: status de rede das balanças em mais de 8 lojas via SSH, com indicadores verde/amarelo/vermelho",
+          "Fluxo de gestão de pesagem (Balança CP): registro de peso em tempo real com persistência imediata via MERGE no Oracle, numeração sequencial, verificação e geração de romaneio",
+          "Monitoramento das lojas: status de rede das balanças em mais de 8 lojas via SSH",
           "CI/CD: GitHub Actions com runner Windows self-hosted e deploys sem downtime automatizados com PowerShell",
           "Ambiente de desenvolvimento em Docker com Oracle Instant Client, MariaDB, Apache e inicialização com um único comando",
           "Sistema de tema claro/escuro (CSS custom properties + data-bs-theme do Bootstrap 5.3, persistência via localStorage e detecção automática da preferência do sistema)"
         ],
-        "badges": ["8+ lojas", "5 conexões de banco", "100+ operações diárias", "Full-stack solo + infra"],
         "pills": ["PHP 8.2", "MVC", "MySQL", "Oracle", "OCI8/PDO", "Docker", "GitHub Actions", "RBAC", "Bootstrap 5", "jQuery", "SCSS", "PowerShell", "SFTP"],
-        "link": { "label": "Repositório no GitHub", "href": "https://github.com/Felipebellm" },
-        "note": "Sistema de intranet — sem demo online"
+        "link": { "label": "Ver meu GitHub", "href": "https://github.com/Felipebellm" },
+        "note": "Sistema interno — sem demo pública"
       },
       {
         "variant": "compact",
-        "title": "Framework PHP MVC Próprio",
+        "kind": "Ferramenta de desenvolvimento",
+        "title": "Meu Próprio Framework PHP",
         "inlineBadge": "Feito do zero · Em produção",
-        "description": "Framework PHP MVC orientado a objetos, construído do zero para dominar boas práticas de OOP: roteamento centralizado, autoloading, abstração multi-banco, suporte a Ajax e um ambiente Dockerizado com detecção automática de portas. Sustenta a plataforma Zeferino em produção.",
+        "description": "Um framework é a base sobre a qual uma aplicação é construída. Escrevi o meu do zero para dominar programação orientada a objetos, e hoje ele roda o sistema de operações das lojas da Rede Zeferino.",
+        "tech": [
+          "MVC orientado a objetos com roteamento centralizado, autoloading e suporte a Ajax",
+          "Abstração multi-banco (MySQL e Oracle)",
+          "Ambiente Dockerizado com detecção automática de portas"
+        ],
         "pills": ["PHP", "OOP", "MVC", "Docker", "Docker Compose", "Node.js", "Sass"],
         "link": { "href": "https://github.com/Felipebellm" }
       },
       {
         "variant": "compact",
+        "kind": "Portal corporativo",
         "title": "Portal Interno da American Airlines",
         "inlineBadge": "Cliente corporativo",
-        "description": "Construí um portal interno completo a partir de uma instalação limpa do WordPress conectada ao SQL Server. Desenvolvi todos os plugins e o tema sob medida, incluindo um page builder flexível, painel administrativo para controle de grupos de usuários, slides, enquetes e menus.",
+        "description": "Um portal interno para os funcionários da American Airlines, construído a partir de um WordPress em branco. Desenvolvi o design e todas as funções: um editor de páginas flexível, slides, enquetes, menus e uma área administrativa que controla o que cada grupo vê.",
+        "tech": [
+          "Tema WordPress e todos os plugins sob medida, a partir de uma instalação limpa",
+          "Conectado ao SQL Server",
+          "Recursos de interface construídos com AngularJS"
+        ],
         "pills": ["WordPress", "PHP", "AngularJS", "SQL Server"]
       },
       {
         "variant": "compact",
-        "title": "Migração do Portal Legado SourceLink",
-        "inlineBadge": "Legado → Laravel",
-        "description": "Migrei um portal PHP procedural legado para Laravel MVC, reestruturando a base de código com princípios de orientação a objetos.",
+        "kind": "Modernização de sistema",
+        "title": "Modernização do Portal SourceLink",
+        "inlineBadge": "Código antigo → framework moderno",
+        "description": "Reconstruí um portal corporativo antigo sobre um framework moderno (Laravel), reorganizando o código para que fique mais fácil de manter, corrigir e evoluir.",
+        "tech": [
+          "Migração de um portal PHP procedural legado para Laravel MVC",
+          "Reestruturação da base de código com princípios de orientação a objetos"
+        ],
         "pills": ["PHP", "Laravel", "MVC", "OOP"]
       }
     ]
@@ -265,16 +376,16 @@
   "talks": {
     "heading": "Palestras & Ensino",
     "items": [
-      { "kind": "Palestra", "title": "Docker & Docker Compose", "org": "Stefanini", "description": "Apresentação para toda a empresa, voltada a desenvolvedores e testers, sobre a criação de ambientes automatizados com Docker." },
-      { "kind": "Palestra", "title": "Desenvolvimento WordPress", "org": "Stefanini", "description": "Apresentação sobre por que o WordPress continua sendo o maior CMS e como desenvolver plugins e temas com PHP." },
-      { "kind": "Ensino", "title": "Professor de Inglês", "org": "Stefanini", "description": "Sessões semanais de uma hora ajudando colegas a melhorar o inglês." },
-      { "kind": "Ensino", "title": "Instrutor de Informática", "org": "Autônomo", "description": "Ensino de informática básica de forma particular." }
+      { "kind": "Palestra", "title": "Docker & Docker Compose", "org": "Stefanini", "description": "Palestra para toda a empresa, voltada a desenvolvedores e testers, sobre o Docker, uma ferramenta que empacota o software para que ele rode igual em qualquer computador, e como usá-lo para montar ambientes de trabalho automaticamente." },
+      { "kind": "Palestra", "title": "Desenvolvimento WordPress", "org": "Stefanini", "description": "Por que o WordPress ainda é a plataforma por trás de mais sites do que qualquer outra, e como criar plugins e temas sob medida para ele." },
+      { "kind": "Ensino", "title": "Professor de Inglês", "org": "Stefanini", "description": "Aulas semanais de uma hora ajudando colegas a melhorar o inglês." },
+      { "kind": "Ensino", "title": "Instrutor de Informática", "org": "Autônomo", "description": "Ensinei informática básica em aulas particulares." }
     ]
   },
   "contact": {
     "eyebrow": "Contato",
     "heading": "Tem um projeto em mente?",
-    "line": "Estou aberto a oportunidades desafiadoras como desenvolvedor full stack — vamos conversar.",
+    "line": "Precisa de um site, um aplicativo, um dashboard ou um sistema para a sua equipe? Ou de um desenvolvedor para o seu time? Vamos conversar.",
     "cta": "Fale comigo",
     "email": "felipe.bell@hotmail.com",
     "location": "Mogi Mirim, São Paulo, Brasil · +55 19 99597-8967"

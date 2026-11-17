@@ -50,7 +50,14 @@ Everything lives in [frontend/](frontend/):
 Each locale JSON has: `meta`, `ui`, `hero`, `nav`, `about`, `experience.roles[]`,
 `projects.live[]` / `projects.internal[]` (project cards, each with a `variant`:
 `featured` | `internalFlagship` | `simple` | `compact`, driving which card layout
-`Portfolio.jsx` renders), `talks.items[]`, `contact`, `social`, `footer`. Keep both
+`Portfolio.jsx` renders), `talks.items[]`, `contact`, `social`, `footer`.
+
+Project copy is written for **non-technical readers first** (recruiters, clients): say "website",
+"app", "dashboard", "internal system", not "full-stack SPA" or "RBAC". Each card has a plain `kind`
+label, a plain `description`, an optional `story` (`problem` / `solution` / `result`, rendered as
+"The problem / What I built / The result"), plain `bullets` ("What it does") and plain `badges`.
+Jargon lives only in `tech[]` + `pills`, rendered inside a collapsed "Under the hood (for developers)"
+`<details>`. Card section labels come from `ui.*` via the `UiCtx` context. Keep both
 locale files structurally identical — `Portfolio.jsx` indexes into them positionally
 (e.g. `c.experience.roles.map(...)`).
 
